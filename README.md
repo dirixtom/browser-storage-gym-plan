@@ -7,7 +7,7 @@ It's a single, self-contained HTML file — no build step, no dependencies.
 
 ## Usage
 
-Open `kiloplan.html` in any browser. To use it on your phone/tablet, open it from a hosted
+Open `index.html` in any browser. To use it on your phone/tablet, open it from a hosted
 copy (e.g. GitHub Pages) or sync the file to the device.
 
 - Switch between phases with the tabs at the top.
