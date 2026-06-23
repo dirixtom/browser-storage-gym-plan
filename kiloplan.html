@@ -1,0 +1,2547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Kilo — 1 Year Training Plan</title>
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/favicon.png">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&family=Russo+One&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --orange: #D4882A;
+    --orange-dim: #e0a84a;
+    --bg: #10131a;
+    --surface: #181d28;
+    --surface2: #1e2433;
+    --border: #2a3045;
+    --text: #e8eaf2;
+    --muted: #6b7494;
+    --green: #4ade80;
+    --mono: 'DM Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  /* Phase tabs (under header) */
+  .phase-tabs {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 2rem 0;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .phase-tab {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .phase-tab:hover {
+    color: var(--text);
+    background: var(--surface);
+    border-color: var(--muted);
+  }
+  .phase-tab.active {
+    background: var(--orange);
+    color: #1a1a1a;
+    border-color: var(--orange);
+  }
+  .phase-tab-num {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+  .phase-tab.active .phase-tab-num { color: #1a1a1a; font-weight: 600; }
+  .phase-tab-name {
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  @media (max-width: 600px) {
+    .phase-tabs {
+      padding: 2rem 1rem 0;
+      gap: 4px;
+    }
+    .phase-tab {
+      padding: 7px 10px;
+      flex: 1 1 auto;
+      justify-content: center;
+    }
+    .phase-tab-name { display: none; }
+    .phase-tab-num { font-size: 0.85rem; color: var(--text); }
+    .phase-tab.active .phase-tab-num { color: #1a1a1a; font-weight: 600; }
+  }
+
+
+  /* Page header */
+  .page-header {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 0.5rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .page-header-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .page-logo {
+    font-family: 'Russo One', sans-serif;
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--orange);
+    line-height: 1;
+  }
+  .page-tagline {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .page-header-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .page-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .page-action-btn:hover {
+    border-color: var(--orange);
+    color: var(--orange-dim);
+  }
+  .page-action-icon { font-size: 1rem; line-height: 1; color: var(--orange); }
+
+  @media (max-width: 600px) {
+    .page-header { padding: 1.5rem 1rem 0.75rem; }
+    .page-header-brand { width: 100%; }
+    .page-header-actions { width: 100%; }
+    .page-action-btn { flex: 1; justify-content: center; }
+  }
+
+  /* Phases drawer (slides in from left) */
+  .phases-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 99;
+  }
+  .phases-backdrop.open { display: block; }
+
+  .phases-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 320px;
+    max-width: 85vw;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(-100%);
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }
+  .phases-drawer.open { transform: translateX(0); }
+
+  .phases-drawer-header {
+    padding: 1.25rem 1.5rem 1rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+  .phases-drawer-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .phases-drawer-subtitle {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+  }
+
+  .phases-drawer-list {
+    padding: 1rem 0.75rem;
+    overflow-y: auto;
+  }
+
+  .phases-drawer-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 6px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s;
+  }
+  .phases-drawer-item:hover {
+    background: var(--surface2);
+    color: var(--text);
+  }
+  .phases-drawer-item.active {
+    background: var(--surface2);
+    border-color: var(--orange);
+    color: var(--text);
+  }
+  .phases-drawer-num {
+    font-family: var(--mono);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--muted);
+    flex-shrink: 0;
+    width: 28px;
+    text-align: center;
+  }
+  .phases-drawer-item.active .phases-drawer-num { color: var(--orange); }
+  .phases-drawer-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+  }
+  .phases-drawer-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+  .phases-drawer-months {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+
+
+
+
+
+
+  /* Restored header rules (recovered after broad regex damage) */
+  .phase-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .workout-card-header {
+    padding: 14px 16px 10px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+    min-height: 60px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .workout-card-header:hover { background: var(--surface2); }
+
+  .core-card-header {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .slideout-header {
+    padding: 1.25rem 1.5rem 1rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+
+  .library-header {
+    padding: 1.25rem 1.5rem 1rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+
+  .fs-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .lib-item-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 4px;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.12s;
+  }
+  .lib-item-header:hover .lib-item-name { color: var(--orange-dim); }
+
+    
+    
+    
+    
+    
+    
+    
+    
+  }
+
+
+  html { scroll-behavior: smooth; background: var(--bg); }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* Header */
+  
+
+  
+
+  
+
+  
+
+  /* Phase nav */
+  
+
+  
+
+  
+  
+
+  /* Main layout */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .phase-section { display: none; }
+  .phase-section.visible { display: block; }
+
+  /* Phase header */
+  .phase-
+
+  .phase-title {
+    font-size: 1.9rem;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+
+  .phase-months {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--orange);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 6px;
+  }
+
+  .phase-goal {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-top: 10px;
+    max-width: 540px;
+    line-height: 1.7;
+  }
+
+  /* Stats grid */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 8px;
+    margin-bottom: 2rem;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 4px;
+    min-height: 64px;
+  }
+
+  .stat-card .stat-label { flex: 0 0 auto; }
+  .stat-card .stat-value { flex: 0 0 auto; margin-top: auto; }
+
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .stat-value {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  /* Session structure */
+  .session-structure {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 0;
+  }
+
+  .session-step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    position: relative;
+  }
+
+  .session-step + .session-step::before {
+    content: '→';
+    color: var(--border);
+    margin-right: 10px;
+    font-size: 0.9rem;
+  }
+
+  .step-time {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--orange);
+    white-space: nowrap;
+    font-weight: 500;
+  }
+
+  .step-desc {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* Workouts */
+  .workouts-label {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .workouts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 12px;
+    margin-bottom: 2rem;
+  }
+
+  .workout-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color 0.15s;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .workout-card:hover { border-color: #3e3e3a; }
+
+  .workout-card-
+
+  .workout-card-header > div:first-of-type,
+  .workout-card-header .workout-name {
+    flex: 1 1 auto;
+  }
+
+  .workout-badge {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--orange);
+    background: rgba(232,93,47,0.1);
+    padding: 2px 7px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  .workout-name {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .exercise-list {
+    list-style: none;
+    padding: 8px 0;
+  }
+
+  .exercise-item {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 7px 16px;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.1s;
+  }
+
+  .exercise-item:last-child { border-bottom: none; }
+  .exercise-item:hover { background: var(--surface2); }
+
+  .ex-num {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    width: 14px;
+    flex-shrink: 0;
+  }
+
+  .ex-name {
+    font-size: 0.82rem;
+    color: var(--text);
+    flex: 1;
+  }
+
+  .ex-sets {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--orange-dim);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+
+  /* Rotation note */
+  .rotation-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 6px 12px;
+    margin-bottom: 14px;
+  }
+
+  .rotation-note span { color: var(--orange); }
+
+  /* Divider */
+  hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+
+  /* Footer */
+  footer {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem 3rem;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* Core section */
+  .core-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .core-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .core-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .core-card-
+
+  .core-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    flex-shrink: 0;
+  }
+
+
+  /* Weight badge */
+  .ex-weight {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--green);
+    white-space: nowrap;
+    flex-shrink: 0;
+    cursor: pointer;
+    border: 1px solid rgba(74,222,128,0.25);
+    border-radius: 3px;
+    padding: 1px 6px;
+    transition: background 0.15s;
+  }
+  .ex-weight:hover { background: rgba(74,222,128,0.1); }
+  .ex-weight.bodyweight { color: var(--muted); border-color: var(--border); }
+
+  /* Clickable exercise row */
+  .exercise-item.clickable { cursor: pointer; }
+  .exercise-item.clickable:hover .ex-name { color: var(--orange-dim); }
+  .ex-info-icon {
+    font-size: 0.65rem;
+    color: var(--border);
+    margin-left: 4px;
+    transition: color 0.15s;
+  }
+  .exercise-item.clickable:hover .ex-info-icon { color: var(--orange); }
+
+  /* Slide-out panel */
+  .slideout-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 99;
+  }
+  .slideout-backdrop.open { display: block; }
+
+  /* Desktop: slide in from right */
+  .slideout {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 420px;
+    max-width: 45vw;
+    background: var(--surface);
+    border-left: 1px solid var(--border);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }
+  .slideout.open { transform: translateX(0); }
+
+  /* Mobile: slide up from bottom, height = content only */
+  @media (max-width: 768px) {
+    .slideout {
+      top: auto;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      max-height: 85vh;
+      border-left: none;
+      border-top: 1px solid var(--border);
+      border-radius: 16px 16px 0 0;
+      transform: translateY(100%);
+    }
+    .slideout.open { transform: translateY(0); }
+  }
+
+  .slideout-
+
+  .modal-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .modal-muscles {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--orange);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+  }
+
+  .slideout-close {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .slideout-close:hover { color: var(--text); border-color: var(--muted); }
+
+  .slideout-body {
+    padding: 1.25rem 1.5rem;
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  .modal-section-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 6px;
+    margin-top: 1rem;
+  }
+  .modal-section-label:first-child { margin-top: 0; }
+
+  .modal-desc {
+    font-size: 0.88rem;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .modal-tip {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.7;
+    background: var(--surface2);
+    border-radius: 6px;
+    padding: 10px 12px;
+  }
+
+  .modal-weight-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 0.25rem;
+  }
+
+  .weight-input {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    padding: 6px 10px;
+    width: 90px;
+    text-align: center;
+  }
+  .weight-input:focus { outline: none; border-color: var(--orange); }
+
+  .weight-save-btn {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    background: var(--orange);
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .weight-save-btn:hover { opacity: 0.85; }
+
+  .weight-saved-msg {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--green);
+    display: none;
+  }
+
+  .weight-phases {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin-top: 0.25rem;
+  }
+
+  .weight-phase-cell {
+    background: var(--surface2);
+    border-radius: 4px;
+    padding: 6px 8px;
+    text-align: center;
+  }
+
+  .wpc-label {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .wpc-value {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--text);
+    font-weight: 500;
+    margin-top: 2px;
+  }
+
+  .wpc-value.current { color: var(--green); }
+
+  .wpc-input {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    font-weight: 500;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    color: var(--text);
+    padding: 2px 4px;
+    width: 100%;
+    text-align: center;
+    margin-top: 2px;
+    transition: background 0.12s, border-color 0.12s;
+  }
+  .wpc-input:hover:not(:disabled) {
+    background: var(--bg);
+    border-color: var(--border);
+  }
+  .wpc-input:focus {
+    outline: none;
+    background: var(--bg);
+    border-color: var(--orange);
+  }
+  .wpc-input.current { color: var(--green); }
+  .wpc-input.custom { color: var(--orange-dim); }
+  .wpc-input.bodyweight { color: var(--muted); }
+  .wpc-input:disabled { cursor: default; opacity: 0.6; }
+  /* Hide spinner buttons on number inputs */
+  .wpc-input::-webkit-outer-spin-button,
+  .wpc-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .wpc-input[type=number] { -moz-appearance: textfield; }
+
+
+
+  /* Fullscreen workout view */
+  .workout-card-
+  .workout-card-header:hover { background: var(--surface2); }
+
+  .fs-hint {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-left: auto;
+    opacity: 0.5;
+  }
+
+  body.fs-active {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+  }
+
+  .fs-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    height: 100%;
+    height: -webkit-fill-available;
+    height: 100dvh;
+    background: var(--bg);
+    z-index: 200;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 2rem 1.5rem;
+    padding-bottom: calc(2rem + env(safe-area-inset-bottom));
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .fs-overlay.open { display: block; opacity: 1; }
+
+  .fs-container {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .fs-
+
+  .fs-title-block { flex: 1; }
+
+  .fs-phase-label {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--orange);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+
+  .fs-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .fs-close {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    width: 44px;
+    height: 44px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .fs-close:hover { color: var(--text); border-color: var(--muted); }
+
+  .fs-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .fs-row {
+    display: grid;
+    grid-template-columns: 36px 1fr auto auto;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.25rem 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .fs-row:last-child { border-bottom: none; }
+
+  .fs-num {
+    font-family: var(--mono);
+    font-size: 1.1rem;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .fs-name {
+    font-size: 1.6rem;
+    color: var(--text);
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  .fs-weight {
+    font-family: var(--mono);
+    font-size: 1.15rem;
+    color: var(--green);
+    background: rgba(74,222,128,0.08);
+    border: 1px solid rgba(74,222,128,0.25);
+    border-radius: 5px;
+    padding: 7px 14px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    user-select: none;
+  }
+  .fs-weight:hover { background: rgba(74,222,128,0.18); border-color: rgba(74,222,128,0.45); }
+  .fs-weight.bodyweight { color: var(--muted); border-color: var(--border); background: var(--surface); cursor: default; }
+  .fs-weight.bodyweight:hover { background: var(--surface); border-color: var(--border); }
+  .fs-weight.custom { color: var(--orange-dim); border-color: rgba(224,168,74,0.25); background: rgba(224,168,74,0.08); }
+  .fs-weight.custom:hover { background: rgba(224,168,74,0.18); border-color: rgba(224,168,74,0.45); }
+
+  .fs-sets {
+    font-family: var(--mono);
+    font-size: 1.15rem;
+    color: var(--orange-dim);
+    white-space: nowrap;
+    min-width: 90px;
+    text-align: right;
+  }
+
+  /* Inline weight editor */
+  .fs-weight-input {
+    font-family: var(--mono);
+    font-size: 1.15rem;
+    background: var(--surface2);
+    border: 1px solid var(--orange);
+    border-radius: 5px;
+    color: var(--text);
+    padding: 6px 10px;
+    width: 110px;
+    text-align: center;
+  }
+  .fs-weight-input:focus { outline: none; }
+
+  @media (max-width: 768px) {
+    .fs-weight-input { font-size: 1.15rem; width: 110px; }
+  }
+
+  @media (max-width: 768px) {
+    .fs-overlay { padding: 1.5rem 1.25rem; padding-bottom: calc(1.5rem + env(safe-area-inset-bottom)); }
+    .fs-title { font-size: 2rem; }
+    .fs-phase-label { font-size: 0.85rem; }
+    .fs-row {
+      grid-template-columns: 36px 1fr;
+      grid-template-rows: auto auto;
+      gap: 0.6rem 1rem;
+      padding: 1.1rem 0.25rem;
+    }
+    .fs-num { grid-row: 1; font-size: 1.2rem; }
+    .fs-name { font-size: 1.5rem; grid-column: 2; grid-row: 1; line-height: 1.25; }
+    .fs-weight { grid-column: 2; grid-row: 2; justify-self: start; font-size: 1.15rem; padding: 6px 12px; }
+    .fs-sets { grid-column: 2; grid-row: 2; justify-self: end; font-size: 1.2rem; min-width: 0; }
+  }
+
+
+  /* Library panel — same pattern as exerciseSlideout */
+  .library-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 99;
+  }
+  .library-backdrop.open { display: block; }
+
+  .library-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 480px;
+    max-width: 50vw;
+    background: var(--surface);
+    border-left: 1px solid var(--border);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }
+  .library-panel.open { transform: translateX(0); }
+
+  @media (max-width: 768px) {
+    .library-panel {
+      top: auto;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      max-height: 85vh;
+      border-left: none;
+      border-top: 1px solid var(--border);
+      border-radius: 16px 16px 0 0;
+      transform: translateY(100%);
+    }
+    .library-panel.open { transform: translateY(0); }
+  }
+
+  .library-
+
+  .library-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .library-subtitle {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+  }
+
+  .library-search-wrap {
+    padding: 0.75rem 1.5rem 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .library-search {
+    width: 100%;
+    padding: 8px 12px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 0.85rem;
+  }
+  .library-search:focus { outline: none; border-color: var(--orange); }
+  .library-search::placeholder { color: var(--muted); }
+
+  .library-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 0 1.5rem 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .library-chip {
+    padding: 5px 11px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.12s;
+  }
+  .library-chip:hover { color: var(--text); border-color: var(--muted); }
+  .library-chip.active {
+    background: var(--orange);
+    border-color: var(--orange);
+    color: #fff;
+    font-weight: 500;
+  }
+
+  .library-body {
+    overflow-y: auto;
+    flex: 1;
+    padding: 0 1.5rem 1.5rem;
+  }
+
+  .library-empty {
+    padding: 2rem 0;
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  .lib-item {
+    border-bottom: 1px solid var(--border);
+  }
+  .lib-item:last-child { border-bottom: none; }
+
+  .lib-item-
+  .lib-item-header:hover .lib-item-name { color: var(--orange-dim); }
+
+  .lib-item-name {
+    font-size: 0.92rem;
+    color: var(--text);
+    flex: 1;
+    transition: color 0.12s;
+  }
+
+  .lib-item-muscle {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-right: 10px;
+    text-align: right;
+  }
+
+  .lib-item-chevron {
+    color: var(--muted);
+    transition: transform 0.2s;
+    flex-shrink: 0;
+    display: inline-block;
+    width: 14px;
+    text-align: center;
+  }
+
+  .lib-item.expanded .lib-item-chevron {
+    transform: rotate(90deg);
+    color: var(--orange);
+  }
+
+  .lib-item-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .lib-item.expanded .lib-item-body {
+    max-height: 1200px;
+  }
+
+  .lib-item-content {
+    padding: 4px 4px 18px;
+  }
+
+  .lib-section-label {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin: 12px 0 6px;
+  }
+  .lib-section-label:first-child { margin-top: 0; }
+
+  .lib-desc {
+    font-size: 0.85rem;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .lib-tip {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.6;
+    background: var(--surface2);
+    border-radius: 6px;
+    padding: 9px 11px;
+  }
+
+  .lib-weight-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin-top: 4px;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    
+    main { padding: 1.5rem 1.25rem; }
+    
+    .phase-
+    .session-structure { flex-direction: column; gap: 10px; }
+    .session-step + .session-step::before { content: '↓'; }
+    footer { padding: 1.5rem 1.25rem 2.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <div class="page-header-brand">
+    <div class="page-logo">Kilo</div>
+    <div class="page-tagline">1-year programme</div>
+  </div>
+  <div class="page-header-actions">
+    <button class="page-action-btn" onclick="openLibrary()" aria-label="Open exercise library">
+      <span class="page-action-icon">≡</span>
+      <span class="page-action-label">Library</span>
+    </button>
+  </div>
+</header>
+
+<nav class="phase-tabs" aria-label="Phase navigation">
+  <button class="phase-tab active" onclick="showPhase(0)" data-phase="0">
+    <span class="phase-tab-num">P1</span>
+    <span class="phase-tab-name">Foundation</span>
+  </button>
+  <button class="phase-tab" onclick="showPhase(1)" data-phase="1">
+    <span class="phase-tab-num">P2</span>
+    <span class="phase-tab-name">Building</span>
+  </button>
+  <button class="phase-tab" onclick="showPhase(2)" data-phase="2">
+    <span class="phase-tab-num">P3</span>
+    <span class="phase-tab-name">Intensity</span>
+  </button>
+  <button class="phase-tab" onclick="showPhase(3)" data-phase="3">
+    <span class="phase-tab-num">P4</span>
+    <span class="phase-tab-name">Mastery</span>
+  </button>
+</nav>
+
+<!-- Phase picker drawer (slides in from left) -->
+<div class="phases-backdrop" id="phasesBackdrop" onclick="togglePhases()"></div>
+<aside class="phases-drawer" id="phasesDrawer" aria-label="Select phase">
+  <div class="phases-drawer-header">
+    <div>
+      <div class="phases-drawer-title">Phases</div>
+      <div class="phases-drawer-subtitle">Pick a phase to view</div>
+    </div>
+    <button class="slideout-close" onclick="togglePhases()" aria-label="Close">✕</button>
+  </div>
+  <nav class="phases-drawer-list">
+    <button class="phases-drawer-item active" onclick="pickPhase(0)" data-phase="0">
+      <span class="phases-drawer-num">P1</span>
+      <span class="phases-drawer-info">
+        <span class="phases-drawer-name">Foundation</span>
+        <span class="phases-drawer-months">Months 1–3</span>
+      </span>
+    </button>
+    <button class="phases-drawer-item" onclick="pickPhase(1)" data-phase="1">
+      <span class="phases-drawer-num">P2</span>
+      <span class="phases-drawer-info">
+        <span class="phases-drawer-name">Building</span>
+        <span class="phases-drawer-months">Months 4–6</span>
+      </span>
+    </button>
+    <button class="phases-drawer-item" onclick="pickPhase(2)" data-phase="2">
+      <span class="phases-drawer-num">P3</span>
+      <span class="phases-drawer-info">
+        <span class="phases-drawer-name">Intensity</span>
+        <span class="phases-drawer-months">Months 7–9</span>
+      </span>
+    </button>
+    <button class="phases-drawer-item" onclick="pickPhase(3)" data-phase="3">
+      <span class="phases-drawer-num">P4</span>
+      <span class="phases-drawer-info">
+        <span class="phases-drawer-name">Mastery</span>
+        <span class="phases-drawer-months">Months 10–12</span>
+      </span>
+    </button>
+  </nav>
+</aside>
+
+
+
+<main>
+
+  <!-- PHASE 1 -->
+  <section class="phase-section visible" id="phase-0">
+    <div class="phase-header">
+      <div>
+        <div class="phase-months">Months 1–3</div>
+        <div class="phase-title">Foundation</div>
+        <div class="phase-goal">Learn the movements and build the habit. Each session is 7 exercises × 3 sets — light enough to focus on form but enough volume to start adapting. Lower body and back take a beating; upper body stays controlled and conservative.</div>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-label">Session length</div><div class="stat-value">40–45 min</div></div>
+      <div class="stat-card"><div class="stat-label">Rest between sets</div><div class="stat-value">90 sec</div></div>
+      <div class="stat-card"><div class="stat-label">Rest between exercises</div><div class="stat-value">90 sec</div></div>
+      <div class="stat-card"><div class="stat-label">Tempo</div><div class="stat-value">Slow & controlled</div></div>
+      <div class="stat-card"><div class="stat-label">Workouts / week</div><div class="stat-value">3</div></div>
+    </div>
+
+    <div class="session-structure">
+      <div class="session-step"><div class="step-time">5 min</div><div class="step-desc">Warm-up — arm circles, hip circles, bodyweight squats, jumping jacks</div></div>
+      <div class="session-step"><div class="step-time">30–35 min</div><div class="step-desc">Main workout — 7 exercises, 2 sets each</div></div>
+      <div class="session-step"><div class="step-time">5 min</div><div class="step-desc">Cool-down — hold each stretch 20–30 sec</div></div>
+    </div>
+
+    <div class="workouts-label">Workouts — alternate A → B → A each week, then B → A → B the next</div>
+
+    <div class="rotation-note">Rotation: <span>Week 1: A–B–A</span> &nbsp;·&nbsp; <span>Week 2: B–A–B</span> &nbsp;·&nbsp; repeat</div>
+
+    <div class="workouts-grid">
+      <div class="workout-card">
+        <div class="workout-card-header" onclick="openFullscreen(this)" data-workout-name="Full body — push focus">
+          <div class="workout-badge">Workout A</div>
+          <div class="workout-name">Full body — push focus</div><span class="fs-hint">tap to expand</span>
+        </div>
+        <ul class="exercise-list">
+          <li class="exercise-item clickable" data-exercise="goblet-squat" data-phase="0" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">Goblet squat<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="goblet-squat">20.5kg × 1</span><span class="ex-sets">3 × 10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-romanian-deadlift" data-phase="0" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB Romanian deadlift<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-romanian-deadlift">18kg × 2</span><span class="ex-sets">3 × 10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-floor-press" data-phase="0" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB floor press<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-floor-press">11.5kg × 2</span><span class="ex-sets">3 × 8</span></li>
+          <li class="exercise-item clickable" data-exercise="db-bent-over-row" data-phase="0" onclick="openModal(this)"><span class="ex-num">4</span><span class="ex-name">DB bent-over row<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-bent-over-row">13.5kg × 2</span><span class="ex-sets">3 × 8</span></li>
+          <li class="exercise-item clickable" data-exercise="db-lateral-raise" data-phase="0" onclick="openModal(this)"><span class="ex-num">5</span><span class="ex-name">DB lateral raise<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-lateral-raise">4.5kg × 2</span><span class="ex-sets">3 × 10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-curl" data-phase="0" onclick="openModal(this)"><span class="ex-num">6</span><span class="ex-name">DB curl<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-curl">8kg × 2</span><span class="ex-sets">3 × 8</span></li>
+          <li class="exercise-item clickable" data-exercise="db-tricep-overhead-extension" data-phase="0" onclick="openModal(this)"><span class="ex-num">7</span><span class="ex-name">DB tricep overhead extension<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-tricep-overhead-extension">6.5kg × 1</span><span class="ex-sets">3 × 8</span></li>
+        </ul>
+      </div>
+      <div class="workout-card">
+        <div class="workout-card-header" onclick="openFullscreen(this)" data-workout-name="Full body — pull focus">
+          <div class="workout-badge">Workout B</div>
+          <div class="workout-name">Full body — pull focus</div><span class="fs-hint">tap to expand</span>
+        </div>
+        <ul class="exercise-list">
+          <li class="exercise-item clickable" data-exercise="goblet-squat" data-phase="0" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">Goblet squat<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="goblet-squat">20.5kg × 1</span><span class="ex-sets">3 × 10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-romanian-deadlift" data-phase="0" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB Romanian deadlift<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-romanian-deadlift">18kg × 2</span><span class="ex-sets">3 × 10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-overhead-press" data-phase="0" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB overhead press<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-overhead-press">8kg × 2</span><span class="ex-sets">3 × 8</span></li>
+          <li class="exercise-item clickable" data-exercise="db-front-raise" data-phase="0" onclick="openModal(this)"><span class="ex-num">4</span><span class="ex-name">DB front raise<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-front-raise">4.5kg × 2</span><span class="ex-sets">3 × 10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-shrug" data-phase="0" onclick="openModal(this)"><span class="ex-num">5</span><span class="ex-name">DB shrug<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-shrug">13.5kg × 2</span><span class="ex-sets">3 × 12</span></li>
+          <li class="exercise-item clickable" data-exercise="hammer-curl" data-phase="0" onclick="openModal(this)"><span class="ex-num">6</span><span class="ex-name">Hammer curl<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="hammer-curl">9kg × 2</span><span class="ex-sets">3 × 8</span></li>
+          <li class="exercise-item clickable" data-exercise="db-bent-over-row" data-phase="0" onclick="openModal(this)"><span class="ex-num">7</span><span class="ex-name">DB bent-over row<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-bent-over-row">13.5kg × 2</span><span class="ex-sets">3 × 8</span></li>
+        </ul>
+      </div>
+    </div>
+
+<div class="core-section">
+      <div class="workouts-label">Core — add 3 of these at the end of each session, rotate through them</div>
+      <div class="core-grid">
+        <div class="core-card">
+          <div class="core-card-header"><div class="core-dot"></div>Dead bug</div>
+          <ul class="exercise-list">
+            <li class="exercise-item"><span class="ex-name">Lie on back, arms up, knees at 90°. Lower opposite arm and leg slowly, return.</span></li>
+            <li class="exercise-item"><span class="ex-name">Sets &amp; reps</span><span class="ex-sets">3 × 8 each side</span></li>
+          </ul>
+        </div>
+        <div class="core-card">
+          <div class="core-card-header"><div class="core-dot"></div>DB crunch</div>
+          <ul class="exercise-list">
+            <li class="exercise-item"><span class="ex-name">Lie on back, hold one dumbbell on chest. Crunch shoulders off floor. No neck pulling.</span></li>
+            <li class="exercise-item"><span class="ex-name">Sets &amp; reps</span><span class="ex-sets">3 × 12</span></li>
+          </ul>
+        </div>
+        <div class="core-card">
+          <div class="core-card-header"><div class="core-dot"></div>Leg raise</div>
+          <ul class="exercise-list">
+            <li class="exercise-item"><span class="ex-name">Lie flat, legs straight, lower back pressed to floor. Raise legs to 90°, lower slowly.</span></li>
+            <li class="exercise-item"><span class="ex-name">Sets &amp; reps</span><span class="ex-sets">3 × 10</span></li>
+          </ul>
+        </div>
+        <div class="core-card">
+          <div class="core-card-header"><div class="core-dot"></div>Bird dog</div>
+          <ul class="exercise-list">
+            <li class="exercise-item"><span class="ex-name">On all fours, extend opposite arm and leg simultaneously. Hold 2 sec.</span></li>
+            <li class="exercise-item"><span class="ex-name">Sets &amp; reps</span><span class="ex-sets">3 × 8 each side</span></li>
+          </ul>
+        </div>
+        <div class="core-card">
+          <div class="core-card-header"><div class="core-dot"></div>Heel tap</div>
+          <ul class="exercise-list">
+            <li class="exercise-item"><span class="ex-name">Lie on back, knees bent. Crunch sideways to tap each heel alternately.</span></li>
+            <li class="exercise-item"><span class="ex-name">Sets &amp; reps</span><span class="ex-sets">3 × 15 each side</span></li>
+          </ul>
+        </div>
+        <div class="core-card">
+          <div class="core-card-header"><div class="core-dot"></div>Seated knee tuck</div>
+          <ul class="exercise-list">
+            <li class="exercise-item"><span class="ex-name">Lean back slightly, hands behind you. Draw both knees to chest, extend out. Lower abs.</span></li>
+            <li class="exercise-item"><span class="ex-name">Sets &amp; reps</span><span class="ex-sets">3 × 12</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHASE 2 -->
+  <section class="phase-section" id="phase-1">
+    <div class="phase-header">
+      <div>
+        <div class="phase-months">Months 4–6</div>
+        <div class="phase-title">Building</div>
+        <div class="phase-goal">The split widens to three workouts (legs+biceps / push / pull) and weights step up meaningfully. Bulgarian split squats enter, plus rear delt fly and face pulls to balance shoulder development. Volume drops slightly per exercise; intensity rises.</div>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-label">Session length</div><div class="stat-value">45–55 min</div></div>
+      <div class="stat-card"><div class="stat-label">Rest between sets</div><div class="stat-value">90 sec</div></div>
+      <div class="stat-card"><div class="stat-label">Rest between exercises</div><div class="stat-value">90 sec</div></div>
+      <div class="stat-card"><div class="stat-label">Tempo</div><div class="stat-value">2 sec down</div></div>
+      <div class="stat-card"><div class="stat-label">Workouts / week</div><div class="stat-value">3</div></div>
+    </div>
+
+    <div class="session-structure">
+      <div class="session-step"><div class="step-time">5 min</div><div class="step-desc">Warm-up — include 1 light set of first exercise at 50% weight</div></div>
+      <div class="session-step"><div class="step-time">35–45 min</div><div class="step-desc">Main workout — 7 exercises, 2–3 sets each</div></div>
+      <div class="session-step"><div class="step-time">5 min</div><div class="step-desc">Cool-down — stretch muscles trained that session</div></div>
+    </div>
+
+    <div class="workouts-label">Workouts — 3-way rotation A → B → C → A → B → C</div>
+
+    <div class="rotation-note">Rotation: <span>A → B → C</span> &nbsp;·&nbsp; repeating cycle</div>
+
+    <div class="workouts-grid">
+      <div class="workout-card">
+        <div class="workout-card-header" onclick="openFullscreen(this)" data-workout-name="Lower + biceps">
+          <div class="workout-badge">Workout A</div>
+          <div class="workout-name">Lower + biceps</div><span class="fs-hint">tap to expand</span>
+        </div>
+        <ul class="exercise-list">
+          <li class="exercise-item clickable" data-exercise="db-sumo-squat" data-phase="1" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">DB sumo squat<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-sumo-squat">33kg × 1</span><span class="ex-sets">3 × 10–12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-bulgarian-split-squat" data-phase="1" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB Bulgarian split squat ★<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-bulgarian-split-squat">18.5kg × 2</span><span class="ex-sets">3 × 8 each</span></li>
+          <li class="exercise-item clickable" data-exercise="db-romanian-deadlift" data-phase="1" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB Romanian deadlift<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-romanian-deadlift">27kg × 2</span><span class="ex-sets">3 × 10–12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-glute-bridge" data-phase="1" onclick="openModal(this)"><span class="ex-num">4</span><span class="ex-name">DB glute bridge<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-glute-bridge">40.5kg × 1</span><span class="ex-sets">3 × 12</span></li>
+          <li class="exercise-item clickable" data-exercise="standing-db-curl" data-phase="1" onclick="openModal(this)"><span class="ex-num">5</span><span class="ex-name">Standing DB curl<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="standing-db-curl">10kg × 2</span><span class="ex-sets">3 × 10</span></li>
+          <li class="exercise-item clickable" data-exercise="concentration-curl" data-phase="1" onclick="openModal(this)"><span class="ex-num">6</span><span class="ex-name">Concentration curl<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="concentration-curl">10kg × 2</span><span class="ex-sets">2 × 10</span></li>
+        </ul>
+      </div>
+      <div class="workout-card">
+        <div class="workout-card-header" onclick="openFullscreen(this)" data-workout-name="Push — chest & shoulders">
+          <div class="workout-badge">Workout B</div>
+          <div class="workout-name">Push — chest & shoulders</div><span class="fs-hint">tap to expand</span>
+        </div>
+        <ul class="exercise-list">
+          <li class="exercise-item clickable" data-exercise="db-goblet-squat" data-phase="1" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">DB goblet squat<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-goblet-squat">28.5kg × 1</span><span class="ex-sets">3 × 10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-glute-bridge" data-phase="1" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB glute bridge<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-glute-bridge">40.5kg × 1</span><span class="ex-sets">3 × 12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-floor-press" data-phase="1" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB floor press<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-floor-press">16kg × 2</span><span class="ex-sets">3 × 10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-overhead-press" data-phase="1" onclick="openModal(this)"><span class="ex-num">4</span><span class="ex-name">DB overhead press<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-overhead-press">11kg × 2</span><span class="ex-sets">3 × 10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-lateral-raise" data-phase="1" onclick="openModal(this)"><span class="ex-num">5</span><span class="ex-name">DB lateral raise<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-lateral-raise">6kg × 2</span><span class="ex-sets">3 × 12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-rear-delt-fly" data-phase="1" onclick="openModal(this)"><span class="ex-num">6</span><span class="ex-name">DB rear delt fly<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-rear-delt-fly">4kg × 2</span><span class="ex-sets">2 × 12</span></li>
+          <li class="exercise-item clickable" data-exercise="tricep-kickback" data-phase="1" onclick="openModal(this)"><span class="ex-num">7</span><span class="ex-name">Tricep kickback<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="tricep-kickback">8.5kg × 2</span><span class="ex-sets">3 × 10</span></li>
+        </ul>
+      </div>
+      <div class="workout-card">
+        <div class="workout-card-header" onclick="openFullscreen(this)" data-workout-name="Pull — back & biceps">
+          <div class="workout-badge">Workout C</div>
+          <div class="workout-name">Pull — back & biceps</div><span class="fs-hint">tap to expand</span>
+        </div>
+        <ul class="exercise-list">
+          <li class="exercise-item clickable" data-exercise="db-sumo-squat" data-phase="1" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">DB sumo squat<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-sumo-squat">33kg × 1</span><span class="ex-sets">3 × 10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-romanian-deadlift" data-phase="1" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB Romanian deadlift<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-romanian-deadlift">27kg × 2</span><span class="ex-sets">3 × 10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-bent-over-row" data-phase="1" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB bent-over row<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-bent-over-row">18.5kg × 2</span><span class="ex-sets">3 × 10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-single-arm-row" data-phase="1" onclick="openModal(this)"><span class="ex-num">4</span><span class="ex-name">DB single-arm row<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-single-arm-row">23kg × 2</span><span class="ex-sets">3 × 10 each</span></li>
+          <li class="exercise-item clickable" data-exercise="db-face-pull-floor" data-phase="1" onclick="openModal(this)"><span class="ex-num">5</span><span class="ex-name">DB face pull (floor)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-face-pull-floor">4kg × 2</span><span class="ex-sets">3 × 12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-shrug" data-phase="1" onclick="openModal(this)"><span class="ex-num">6</span><span class="ex-name">DB shrug<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-shrug">18.5kg × 2</span><span class="ex-sets">3 × 12</span></li>
+          <li class="exercise-item clickable" data-exercise="hammer-curl" data-phase="1" onclick="openModal(this)"><span class="ex-num">7</span><span class="ex-name">Hammer curl<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="hammer-curl">11kg × 2</span><span class="ex-sets">3 × 10</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="core-section">
+      <div class="workouts-label">Core — pick 3 per session, rotate. More variety than Phase 1.</div>
+      <div class="core-grid">
+        <div class="core-card">
+          <div class="core-card-header"><div class="core-dot"></div>DB crunch</div>
+          <ul class="exercise-list">
+            <li class="exercise-item"><span class="ex-name">Dumbbell on chest. Controlled crunch, don't use momentum.</span></li>
+            <li class="exercise-item"><span class="ex-name">Sets &amp; reps</span><span class="ex-sets">3 × 15</span></li>
+          </ul>
+        </div>
+        <div class="core-card">
+          <div class="core-card-header"><div class="core-dot"></div>DB Russian twist</div>
+          <ul class="exercise-list">
+            <li class="exercise-item"><span class="ex-name">Sit at 45°, hold one dumbbell, rotate side to side. Feet on floor. Oblique focus.</span></li>
+            <li class="exercise-item"><span class="ex-name">Sets &amp; reps</span><span class="ex-sets">3 × 12 each side</span></li>
+          </ul>
+        </div>
+        <div class="core-card">
+          <div class="core-card-header"><div class="core-dot"></div>Leg raise</div>
+          <ul class="exercise-list">
+            <li class="exercise-item"><span class="ex-name">Lower back flat, raise straight legs to 90° and lower slowly.</span></li>
+            <li class="exercise-item"><span class="ex-name">Sets &amp; reps</span><span class="ex-sets">3 × 12</span></li>
+          </ul>
+        </div>
+        <div class="core-card">
+          <div class="core-card-header"><div class="core-dot"></div>Seated knee tuck</div>
+          <ul class="exercise-list">
+            <li class="exercise-item"><span class="ex-name">Lean back slightly, hands behind you. Draw both knees to chest. Keep feet off floor the whole set.</span></li>
+            <li class="exercise-item"><span class="ex-name">Sets &amp; reps</span><span class="ex-sets">3 × 15</span></li>
+          </ul>
+        </div>
+        <div class="core-card">
+          <div class="core-card-header"><div class="core-dot"></div>Dead bug</div>
+          <ul class="exercise-list">
+            <li class="exercise-item"><span class="ex-name">Arms up, knees at 90°. Lower opposite arm and leg simultaneously. Lower back stays on floor.</span></li>
+            <li class="exercise-item"><span class="ex-name">Sets &amp; reps</span><span class="ex-sets">3 × 10 each side</span></li>
+          </ul>
+        </div>
+        <div class="core-card">
+          <div class="core-card-header"><div class="core-dot"></div>DB woodchop</div>
+          <ul class="exercise-list">
+            <li class="exercise-item"><span class="ex-name">Hold one dumbbell with both hands. Rotate and chop diagonally from high to low.</span></li>
+            <li class="exercise-item"><span class="ex-name">Sets &amp; reps</span><span class="ex-sets">3 × 10 each side</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+</section>
+
+  <!-- PHASE 3 -->
+  <section class="phase-section" id="phase-2">
+    <div class="phase-header">
+      <div>
+        <div class="phase-months">Months 7–9</div>
+        <div class="phase-title">Intensity</div>
+        <div class="phase-goal">Heavier straight sets with full 2-minute rests. Same 3-workout split, fewer working sets per exercise but considerably more load. This is where strength gains start showing visibly. Sessions are longer (60–75 min) — that's the trade-off for the heavier work.</div>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-label">Session length</div><div class="stat-value">60–70 min</div></div>
+      <div class="stat-card"><div class="stat-label">Rest between sets</div><div class="stat-value">2 min</div></div>
+      <div class="stat-card"><div class="stat-label">Rest between exercises</div><div class="stat-value">2 min</div></div>
+      <div class="stat-card"><div class="stat-label">Tempo</div><div class="stat-value">2 sec down</div></div>
+      <div class="stat-card"><div class="stat-label">Workouts / week</div><div class="stat-value">3</div></div>
+    </div>
+
+    <div class="session-structure">
+      <div class="session-step"><div class="step-time">5 min</div><div class="step-desc">Warm-up — light movement + 1 warm-up set of first exercise</div></div>
+      <div class="session-step"><div class="step-time">50–60 min</div><div class="step-desc">Main workout — 7 exercises, 3 straight sets, 2 min rest</div></div>
+      <div class="session-step"><div class="step-time">5 min</div><div class="step-desc">Cool-down — stretch every major muscle group worked</div></div>
+    </div>
+
+    <div class="workouts-label">Workouts — A → B → C rotation, straight sets</div>
+
+    <div class="rotation-note">Rotation: <span>A → B → C</span> &nbsp;·&nbsp; straight sets, heavier weight, 2 min rest between sets</div>
+
+    <div class="workouts-grid">
+      <div class="workout-card">
+        <div class="workout-card-header" onclick="openFullscreen(this)" data-workout-name="Lower body — heavy sets">
+          <div class="workout-badge">Workout A</div>
+          <div class="workout-name">Lower body — heavy sets</div><span class="fs-hint">tap to expand</span>
+        </div>
+        <ul class="exercise-list">
+          <li class="exercise-item clickable" data-exercise="db-goblet-squat" data-phase="2" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">DB goblet squat<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-goblet-squat">41kg × 1</span><span class="ex-sets">3 × 12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-romanian-deadlift" data-phase="2" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB Romanian deadlift<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-romanian-deadlift">36kg × 2</span><span class="ex-sets">3 × 12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-bulgarian-split-squat" data-phase="2" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB Bulgarian split squat<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-bulgarian-split-squat">28.5kg × 2</span><span class="ex-sets">3 × 10 each</span></li>
+          <li class="exercise-item clickable" data-exercise="db-glute-bridge" data-phase="2" onclick="openModal(this)"><span class="ex-num">4</span><span class="ex-name">DB glute bridge<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-glute-bridge">54kg × 1</span><span class="ex-sets">3 × 15</span></li>
+          <li class="exercise-item clickable" data-exercise="db-calf-raise" data-phase="2" onclick="openModal(this)"><span class="ex-num">5</span><span class="ex-name">DB calf raise<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-calf-raise">45kg × 1</span><span class="ex-sets">3 × 20</span></li>
+          <li class="exercise-item clickable" data-exercise="db-shrug" data-phase="2" onclick="openModal(this)"><span class="ex-num">6</span><span class="ex-name">DB shrug<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-shrug">27kg × 2</span><span class="ex-sets">3 × 15</span></li>
+        </ul>
+      </div>
+      <div class="workout-card">
+        <div class="workout-card-header" onclick="openFullscreen(this)" data-workout-name="Push — heavy sets">
+          <div class="workout-badge">Workout B</div>
+          <div class="workout-name">Push — heavy sets</div><span class="fs-hint">tap to expand</span>
+        </div>
+        <ul class="exercise-list">
+          <li class="exercise-item clickable" data-exercise="db-sumo-squat" data-phase="2" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">DB sumo squat<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-sumo-squat">45kg × 1</span><span class="ex-sets">3 × 12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-glute-bridge" data-phase="2" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB glute bridge<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-glute-bridge">54kg × 1</span><span class="ex-sets">3 × 15</span></li>
+          <li class="exercise-item clickable" data-exercise="db-floor-press" data-phase="2" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB floor press<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-floor-press">21kg × 2</span><span class="ex-sets">3 × 10–12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-overhead-press" data-phase="2" onclick="openModal(this)"><span class="ex-num">4</span><span class="ex-name">DB overhead press<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-overhead-press">14.5kg × 2</span><span class="ex-sets">3 × 10–12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-lateral-raise" data-phase="2" onclick="openModal(this)"><span class="ex-num">5</span><span class="ex-name">DB lateral raise<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-lateral-raise">8kg × 2</span><span class="ex-sets">3 × 15</span></li>
+          <li class="exercise-item clickable" data-exercise="db-rear-delt-fly" data-phase="2" onclick="openModal(this)"><span class="ex-num">6</span><span class="ex-name">DB rear delt fly<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-rear-delt-fly">6.5kg × 2</span><span class="ex-sets">3 × 12</span></li>
+          <li class="exercise-item clickable" data-exercise="tricep-kickback" data-phase="2" onclick="openModal(this)"><span class="ex-num">7</span><span class="ex-name">Tricep kickback<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="tricep-kickback">10.5kg × 2</span><span class="ex-sets">3 × 12</span></li>
+        </ul>
+      </div>
+      <div class="workout-card">
+        <div class="workout-card-header" onclick="openFullscreen(this)" data-workout-name="Pull — heavy sets">
+          <div class="workout-badge">Workout C</div>
+          <div class="workout-name">Pull — heavy sets</div><span class="fs-hint">tap to expand</span>
+        </div>
+        <ul class="exercise-list">
+          <li class="exercise-item clickable" data-exercise="db-bulgarian-split-squat" data-phase="2" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">DB Bulgarian split squat<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-bulgarian-split-squat">28.5kg × 2</span><span class="ex-sets">3 × 10 each</span></li>
+          <li class="exercise-item clickable" data-exercise="db-sumo-squat" data-phase="2" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB sumo squat<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-sumo-squat">45kg × 1</span><span class="ex-sets">3 × 12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-bent-over-row" data-phase="2" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB bent-over row<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-bent-over-row">25kg × 2</span><span class="ex-sets">3 × 10–12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-single-arm-row" data-phase="2" onclick="openModal(this)"><span class="ex-num">4</span><span class="ex-name">DB single-arm row<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-single-arm-row">33kg × 2</span><span class="ex-sets">3 × 10 each</span></li>
+          <li class="exercise-item clickable" data-exercise="db-shrug" data-phase="2" onclick="openModal(this)"><span class="ex-num">5</span><span class="ex-name">DB shrug<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-shrug">27kg × 2</span><span class="ex-sets">3 × 15</span></li>
+          <li class="exercise-item clickable" data-exercise="db-face-pull-floor" data-phase="2" onclick="openModal(this)"><span class="ex-num">6</span><span class="ex-name">DB face pull (floor)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-face-pull-floor">6.5kg × 2</span><span class="ex-sets">3 × 15</span></li>
+          <li class="exercise-item clickable" data-exercise="hammer-curl" data-phase="2" onclick="openModal(this)"><span class="ex-num">7</span><span class="ex-name">Hammer curl<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="hammer-curl">14kg × 2</span><span class="ex-sets">3 × 12</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="core-section">
+      <div class="workouts-label">Core — add as a finisher after the main workout. Superset core pairs for efficiency.</div>
+      <div class="core-grid">
+        <div class="core-card">
+          <div class="core-card-header"><div class="core-dot"></div>DB Russian twist</div>
+          <ul class="exercise-list">
+            <li class="exercise-item"><span class="ex-name">Feet raised off floor. Heavier dumbbell. Rotate fully each side.</span></li>
+            <li class="exercise-item"><span class="ex-name">Sets &amp; reps</span><span class="ex-sets">3 × 15 each side</span></li>
+          </ul>
+        </div>
+        <div class="core-card">
+          <div class="core-card-header"><div class="core-dot"></div>Hollow body hold</div>
+          <ul class="exercise-list">
+            <li class="exercise-item"><span class="ex-name">Lie flat, arms overhead, lower back on floor. Raise shoulders and legs slightly. Hold.</span></li>
+            <li class="exercise-item"><span class="ex-name">Sets &amp; hold</span><span class="ex-sets">3 × 25–30 sec</span></li>
+          </ul>
+        </div>
+        <div class="core-card">
+          <div class="core-card-header"><div class="core-dot"></div>DB suitcase carry</div>
+          <ul class="exercise-list">
+            <li class="exercise-item"><span class="ex-name">One dumbbell at your side. Walk 15 steps keeping shoulders level. Core fights to stay upright.</span></li>
+            <li class="exercise-item"><span class="ex-name">Sets &amp; reps</span><span class="ex-sets">3 × 15 steps each side</span></li>
+          </ul>
+        </div>
+        <div class="core-card">
+          <div class="core-card-header"><div class="core-dot"></div>DB woodchop</div>
+          <ul class="exercise-list">
+            <li class="exercise-item"><span class="ex-name">Both hands on one dumbbell. Chop diagonally high to low. Rotation comes from core.</span></li>
+            <li class="exercise-item"><span class="ex-name">Sets &amp; reps</span><span class="ex-sets">3 × 10 each side</span></li>
+          </ul>
+        </div>
+        <div class="core-card">
+          <div class="core-card-header"><div class="core-dot"></div>V-up</div>
+          <ul class="exercise-list">
+            <li class="exercise-item"><span class="ex-name">Lie flat, raise arms and legs simultaneously to form a V. Lower slowly.</span></li>
+            <li class="exercise-item"><span class="ex-name">Sets &amp; reps</span><span class="ex-sets">3 × 10</span></li>
+          </ul>
+        </div>
+        <div class="core-card">
+          <div class="core-card-header"><div class="core-dot"></div>Seated knee tuck (weighted)</div>
+          <ul class="exercise-list">
+            <li class="exercise-item"><span class="ex-name">Feet off floor. Hold dumbbell between knees. Draw knees to chest, extend.</span></li>
+            <li class="exercise-item"><span class="ex-name">Sets &amp; reps</span><span class="ex-sets">3 × 15</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+</section>
+
+  <!-- PHASE 4 -->
+  <section class="phase-section" id="phase-3">
+    <div class="phase-header">
+      <div>
+        <div class="phase-months">Months 10–12</div>
+        <div class="phase-title">Mastery</div>
+        <div class="phase-goal">Strict tempo on every rep — 3 seconds lowering, 1-second pause, controlled lift. Same exercises as Phase 3 but the slower lowering phase makes lighter weights feel heavy and dramatically increases time under tension. Sessions run 70–85 min. Take a deload week (50% weight, 2 sets) every 6 weeks.</div>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-label">Session length</div><div class="stat-value">70–75 min</div></div>
+      <div class="stat-card"><div class="stat-label">Rest between sets</div><div class="stat-value">2 min</div></div>
+      <div class="stat-card"><div class="stat-label">Rest between exercises</div><div class="stat-value">2 min</div></div>
+      <div class="stat-card"><div class="stat-label">Tempo</div><div class="stat-value">3s down · 1s pause · lift</div></div>
+      <div class="stat-card"><div class="stat-label">Workouts / week</div><div class="stat-value">3</div></div>
+    </div>
+
+    <div class="session-structure">
+      <div class="session-step"><div class="step-time">5–8 min</div><div class="step-desc">Warm-up — include hip flexor stretch, shoulder circles, thoracic rotation</div></div>
+      <div class="session-step"><div class="step-time">60–65 min</div><div class="step-desc">Main workout — 7 exercises, 3 sets with strict tempo</div></div>
+      <div class="session-step"><div class="step-time">5 min</div><div class="step-desc">Cool-down — hold each stretch 30–45 sec</div></div>
+    </div>
+
+    <div class="workouts-label">Workouts — A → B → C rotation, strict tempo</div>
+
+    <div class="rotation-note">Tempo: <span>3 sec lowering</span> · <span>1 sec pause at bottom</span> · lift normally</div>
+
+    <div class="workouts-grid">
+      <div class="workout-card">
+        <div class="workout-card-header" onclick="openFullscreen(this)" data-workout-name="Legs + core — tempo">
+          <div class="workout-badge">Workout A</div>
+          <div class="workout-name">Legs + core — tempo</div><span class="fs-hint">tap to expand</span>
+        </div>
+        <ul class="exercise-list">
+          <li class="exercise-item clickable" data-exercise="db-bulgarian-split-squat" data-phase="3" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">DB Bulgarian split squat (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-bulgarian-split-squat">33kg × 2</span><span class="ex-sets">3 × 10 each</span></li>
+          <li class="exercise-item clickable" data-exercise="db-sumo-deadlift" data-phase="3" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB sumo deadlift (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-sumo-deadlift">54kg × 2</span><span class="ex-sets">3 × 10–12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-glute-bridge" data-phase="3" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB glute bridge (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-glute-bridge">63kg × 1</span><span class="ex-sets">3 × 12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-step-up-onto-step" data-phase="3" onclick="openModal(this)"><span class="ex-num">4</span><span class="ex-name">DB step-up (onto step)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-step-up-onto-step">33kg × 2</span><span class="ex-sets">3 × 12 each</span></li>
+          <li class="exercise-item clickable" data-exercise="db-calf-raise-single-leg" data-phase="3" onclick="openModal(this)"><span class="ex-num">5</span><span class="ex-name">DB calf raise — single leg<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-calf-raise-single-leg">37kg × 2</span><span class="ex-sets">3 × 15 each</span></li>
+          <li class="exercise-item clickable" data-exercise="db-shrug" data-phase="3" onclick="openModal(this)"><span class="ex-num">6</span><span class="ex-name">DB shrug (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-shrug">30.5kg × 2</span><span class="ex-sets">3 × 15</span></li>
+          <li class="exercise-item clickable" data-exercise="renegade-row" data-phase="3" onclick="openModal(this)"><span class="ex-num">7</span><span class="ex-name">Renegade row<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="renegade-row">29kg × 2</span><span class="ex-sets">3 × 8 each</span></li>
+        </ul>
+      </div>
+      <div class="workout-card">
+        <div class="workout-card-header" onclick="openFullscreen(this)" data-workout-name="Push — tempo + volume">
+          <div class="workout-badge">Workout B</div>
+          <div class="workout-name">Push — tempo + volume</div><span class="fs-hint">tap to expand</span>
+        </div>
+        <ul class="exercise-list">
+          <li class="exercise-item clickable" data-exercise="db-step-up-onto-step" data-phase="3" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">DB step-up (onto step)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-step-up-onto-step">33kg × 2</span><span class="ex-sets">3 × 12 each</span></li>
+          <li class="exercise-item clickable" data-exercise="db-glute-bridge" data-phase="3" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB glute bridge (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-glute-bridge">63kg × 1</span><span class="ex-sets">3 × 15</span></li>
+          <li class="exercise-item clickable" data-exercise="db-floor-press" data-phase="3" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB floor press (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-floor-press">25kg × 2</span><span class="ex-sets">3 × 10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-overhead-press" data-phase="3" onclick="openModal(this)"><span class="ex-num">4</span><span class="ex-name">DB overhead press (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-overhead-press">17.5kg × 2</span><span class="ex-sets">3 × 10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-rear-delt-fly" data-phase="3" onclick="openModal(this)"><span class="ex-num">5</span><span class="ex-name">DB rear delt fly<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-rear-delt-fly">8kg × 2</span><span class="ex-sets">3 × 12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-lateral-raise" data-phase="3" onclick="openModal(this)"><span class="ex-num">6</span><span class="ex-name">DB lateral raise (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-lateral-raise">9kg × 2</span><span class="ex-sets">3 × 15</span></li>
+          <li class="exercise-item clickable" data-exercise="db-tricep-overhead-extension" data-phase="3" onclick="openModal(this)"><span class="ex-num">7</span><span class="ex-name">DB tricep overhead extension (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-tricep-overhead-extension">15.5kg × 1</span><span class="ex-sets">3 × 12</span></li>
+        </ul>
+      </div>
+      <div class="workout-card">
+        <div class="workout-card-header" onclick="openFullscreen(this)" data-workout-name="Pull — tempo + volume">
+          <div class="workout-badge">Workout C</div>
+          <div class="workout-name">Pull — tempo + volume</div><span class="fs-hint">tap to expand</span>
+        </div>
+        <ul class="exercise-list">
+          <li class="exercise-item clickable" data-exercise="db-bulgarian-split-squat" data-phase="3" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">DB Bulgarian split squat (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-bulgarian-split-squat">33kg × 2</span><span class="ex-sets">3 × 10 each</span></li>
+          <li class="exercise-item clickable" data-exercise="db-romanian-deadlift" data-phase="3" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB Romanian deadlift (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-romanian-deadlift">40.5kg × 2</span><span class="ex-sets">3 × 10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-bent-over-row" data-phase="3" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB bent-over row (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-bent-over-row">29kg × 2</span><span class="ex-sets">3 × 10</span></li>
+          <li class="exercise-item clickable" data-exercise="single-arm-row" data-phase="3" onclick="openModal(this)"><span class="ex-num">4</span><span class="ex-name">Single-arm row (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="single-arm-row">25kg × 2</span><span class="ex-sets">3 × 10 each</span></li>
+          <li class="exercise-item clickable" data-exercise="db-shrug" data-phase="3" onclick="openModal(this)"><span class="ex-num">5</span><span class="ex-name">DB shrug (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-shrug">30.5kg × 2</span><span class="ex-sets">3 × 15</span></li>
+          <li class="exercise-item clickable" data-exercise="db-curl" data-phase="3" onclick="openModal(this)"><span class="ex-num">6</span><span class="ex-name">DB curl (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-curl">13.5kg × 2</span><span class="ex-sets">3 × 10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-face-pull-floor" data-phase="3" onclick="openModal(this)"><span class="ex-num">7</span><span class="ex-name">DB face pull (floor)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-face-pull-floor">8kg × 2</span><span class="ex-sets">3 × 15</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="core-section">
+      <div class="workouts-label">Core — tempo applies here too. Every movement slow and deliberate.</div>
+      <div class="core-grid">
+        <div class="core-card">
+          <div class="core-card-header"><div class="core-dot"></div>DB ab rollout (floor)</div>
+          <ul class="exercise-list">
+            <li class="exercise-item"><span class="ex-name">Kneel, roll dumbbell out slowly as body extends. Pull back before hips touch floor.</span></li>
+            <li class="exercise-item"><span class="ex-name">Sets &amp; reps</span><span class="ex-sets">3 × 8</span></li>
+          </ul>
+        </div>
+        <div class="core-card">
+          <div class="core-card-header"><div class="core-dot"></div>Hollow body hold</div>
+          <ul class="exercise-list">
+            <li class="exercise-item"><span class="ex-name">30 seconds minimum. Arms overhead, shoulders and legs raised, lower back on floor.</span></li>
+            <li class="exercise-item"><span class="ex-name">Sets &amp; hold</span><span class="ex-sets">3 × 30–40 sec</span></li>
+          </ul>
+        </div>
+        <div class="core-card">
+          <div class="core-card-header"><div class="core-dot"></div>DB woodchop (heavy)</div>
+          <ul class="exercise-list">
+            <li class="exercise-item"><span class="ex-name">Heavier dumbbell. Controlled rotation high-to-low and low-to-high each side.</span></li>
+            <li class="exercise-item"><span class="ex-name">Sets &amp; reps</span><span class="ex-sets">3 × 12 each side</span></li>
+          </ul>
+        </div>
+        <div class="core-card">
+          <div class="core-card-header"><div class="core-dot"></div>DB suitcase carry</div>
+          <ul class="exercise-list">
+            <li class="exercise-item"><span class="ex-name">Heavier than Phase 3. Walk slow, shoulders level, core braced the whole time.</span></li>
+            <li class="exercise-item"><span class="ex-name">Sets &amp; reps</span><span class="ex-sets">3 × 20 steps each side</span></li>
+          </ul>
+        </div>
+        <div class="core-card">
+          <div class="core-card-header"><div class="core-dot"></div>DB windmill</div>
+          <ul class="exercise-list">
+            <li class="exercise-item"><span class="ex-name">One dumbbell overhead, feet wide. Hinge sideways, reach other hand to floor. Eyes on the weight.</span></li>
+            <li class="exercise-item"><span class="ex-name">Sets &amp; reps</span><span class="ex-sets">3 × 8 each side</span></li>
+          </ul>
+        </div>
+        <div class="core-card">
+          <div class="core-card-header"><div class="core-dot"></div>V-up with DB pass</div>
+          <ul class="exercise-list">
+            <li class="exercise-item"><span class="ex-name">V-up while passing a dumbbell from hands to feet and back. Coordination + full core.</span></li>
+            <li class="exercise-item"><span class="ex-name">Sets &amp; reps</span><span class="ex-sets">3 × 10</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+</section>
+
+</main>
+
+<footer>
+  <span>Kilo — 1 year dumbbell programme</span>
+  <span>3 sessions / week · floor + 2 dumbbells · no bench</span>
+</footer>
+<script>
+  // ── EXERCISE DATA ──
+  const EXERCISE_DATA = {
+    "goblet-squat": { name: "Goblet squat", muscles: "Quads, glutes, core", desc: "Hold one dumbbell vertically at chest height with both hands cupped around the top. Feet shoulder-width, toes slightly out. Squat down keeping the dumbbell close to your chest, elbows tracking inside your knees. Drive through your heels to stand.", tips: "Keep your chest up the whole way down. If your heels lift, go lighter or widen your stance.", defaultWeights: [20.5, 28.5, 41, 49] },
+    "db-romanian-deadlift": { name: "DB Romanian deadlift", muscles: "Hamstrings, glutes, lower back", desc: "Stand holding dumbbells in front of your thighs. Hinge at the hips — push your hips back, not down — lowering the dumbbells along your legs until you feel a stretch in your hamstrings. Drive hips forward to return.", tips: "This is a hinge, not a squat. Keep your back flat and the dumbbells close to your legs throughout.", defaultWeights: [18, 27, 36, 40.5] },
+    "db-floor-press": { name: "DB floor press", muscles: "Chest (pectorals), triceps, front shoulders", desc: "Lie on your back, knees bent, feet flat. Hold dumbbells at chest level, elbows at about 45° from your body. Press up until arms are extended, then lower until your upper arms touch the floor — that's the natural range stop.", tips: "The floor limits range of motion vs a bench, so focus on squeezing the chest at the top. Don't bounce off the floor at the bottom.", defaultWeights: [11.5, 16, 21, 25] },
+    "db-bent-over-row": { name: "DB bent-over row", muscles: "Upper back (lats, rhomboids), rear shoulders, biceps", desc: "Hinge forward to roughly 45°, back flat, dumbbells hanging below you. Row both dumbbells toward your hips — not your chest — squeezing your shoulder blades together at the top. Lower with control.", tips: "Lead with your elbows, not your hands. Don't let your back round to pull heavier weight.", defaultWeights: [13.5, 18.5, 25, 29] },
+    "db-lateral-raise": { name: "DB lateral raise", muscles: "Side (medial) deltoids, upper traps", desc: "Stand holding dumbbells at your sides. With a slight bend in the elbow, raise both arms out to the sides until they reach shoulder height — no higher. Lower slowly.", tips: "Go lighter than you think. Tilting your thumbs down slightly (like pouring a jug) isolates the side delt better. Never shrug at the top.", defaultWeights: [4.5, 6, 8, 9] },
+    "db-curl": { name: "DB curl", muscles: "Biceps, brachialis", desc: "Stand with dumbbells at your sides, palms facing forward. Curl both dumbbells up toward your shoulders, keeping your elbows pinned to your sides. Lower slowly — the lowering phase is where most of the growth happens.", tips: "Don't swing your body to get the weight up. If you have to lean back, the weight is too heavy.", defaultWeights: [8, 10, 12.5, 13.5] },
+    "db-tricep-overhead-extension": { name: "DB tricep overhead extension", muscles: "Triceps (long head)", desc: "Hold one dumbbell with both hands overhead, arms extended. Keeping your upper arms still and close to your head, bend at the elbows to lower the dumbbell behind your head. Extend back up.", tips: "Keep your core tight — it's easy to arch your back under a heavy load. This is the safest tricep movement for beginners.", defaultWeights: [6.5, 9.5, 13, 15.5] },
+    "db-tricep-overhead-extension-tempo": { name: "DB tricep overhead extension (tempo)", muscles: "Triceps (long head)", desc: "Hold one dumbbell with both hands overhead, arms extended. Lower in 3 seconds, 1-second pause behind your head, extend back up in 1 second. Keeping your upper arms still and close to your head, bend at the elbows to lower the dumbbell behind your head. Extend back up.", tips: "Keep your core tight — it's easy to arch your back under a heavy load. This is the safest tricep movement for beginners.", defaultWeights: [6.5, 9.5, 13, 15.5] },
+    "db-overhead-press": { name: "DB overhead press", muscles: "Shoulders (anterior and medial deltoids), triceps, upper chest", desc: "Hold dumbbells at shoulder height, palms facing forward. Press directly overhead until arms are fully extended, then lower with control back to shoulder height.", tips: "Go light to start — shoulder pressing is one of the most common beginner injury points. Avoid flaring your elbows excessively outward.", defaultWeights: [8, 11, 14.5, 17.5] },
+    "db-front-raise": { name: "DB front raise", muscles: "Front (anterior) deltoids, upper chest", desc: "Stand with dumbbells in front of your thighs. With a slight elbow bend, raise both arms in front of you to shoulder height. Lower slowly.", tips: "Don't swing the weight up. Use a weight light enough that you can feel the front of your shoulders working, not your traps.", defaultWeights: [4.5, 6, 8, 9] },
+    "db-shrug": { name: "DB shrug", muscles: "Upper trapezius, neck", desc: "Stand holding dumbbells at your sides. Shrug your shoulders straight up toward your ears as high as possible, hold for a second, then lower slowly. No rolling — straight up and down.", tips: "Don't roll your shoulders. The movement is purely vertical. Hold at the top for a full second to get the most out of it.", defaultWeights: [13.5, 18.5, 27, 30.5] },
+    "hammer-curl": { name: "Hammer curl", muscles: "Biceps, brachialis, brachioradialis (forearm)", desc: "Like a regular curl, but your palms face each other throughout (neutral grip — like holding a hammer). Curl up, lower slowly. This hits the brachialis muscle under the bicep, which pushes the bicep up.", tips: "Keep your elbows still at your sides. The neutral grip is easier on the wrists than supinated curls.", defaultWeights: [9, 11, 14, 15] },
+    "db-sumo-squat": { name: "DB sumo squat", muscles: "Quads, glutes, inner thighs (adductors)", desc: "Stand with feet wider than shoulder-width, toes pointed out at 45°. Hold one dumbbell vertically between your legs with both hands. Squat down, keeping your knees tracking over your toes, then drive up.", tips: "The wide stance shifts more emphasis to the inner thighs and glutes. Keep your chest up and don't let your knees cave inward.", defaultWeights: [24.5, 33, 45, 49] },
+    "db-bulgarian-split-squat": { name: "DB Bulgarian split squat", muscles: "Quads, glutes, hamstrings, core (stabilisation)", desc: "Stand a metre in front of a chair or sofa. Place your rear foot on it, laces down. Hold dumbbells at your sides. Lower your body straight down until your front thigh is parallel to the floor, then drive through your front heel to return.", tips: "Go much lighter than you think for the first few sessions — these are brutally effective. Your front knee should stay roughly above your ankle. If you feel it in your back knee, step your front foot further forward.", defaultWeights: [12.5, 18.5, 28.5, 33] },
+    "db-calf-raise": { name: "DB calf raise", muscles: "Calves (gastrocnemius, soleus)", desc: "Stand holding dumbbells at your sides. Rise up onto the balls of both feet as high as possible. Hold for a moment at the top, then lower slowly.", tips: "Do these slowly — calves respond well to time under tension. A slight pause at the bottom (full stretch) and top (full contraction) makes a big difference.", defaultWeights: [24.5, 33, 45, 49] },
+    "standing-db-curl": { name: "Standing DB curl", muscles: "Biceps, brachialis", desc: "Same as the DB curl but explicitly done standing. Hold dumbbells at sides, palms forward, curl up together. Lower fully between reps to get the full stretch.", tips: "Full range of motion matters here. Don't stop the rep short at the bottom.", defaultWeights: [8, 10, 12.5, 13.5] },
+    "concentration-curl": { name: "Concentration curl", muscles: "Biceps (peak contraction focus)", desc: "Sit on a chair or floor with your legs apart. Rest the back of your upper arm against the inside of your thigh for support. Curl the dumbbell up toward your shoulder, squeeze at the top, lower slowly. One arm at a time.", tips: "The braced position isolates the bicep and removes cheating. Go lighter than a standing curl — you'll feel it more.", defaultWeights: [8, 10, 12.5, 13.5] },
+    "db-glute-bridge": { name: "DB glute bridge", muscles: "Glutes (maximus), hamstrings, lower back", desc: "Lie on your back, knees bent, feet flat on the floor. Place a dumbbell across your hips and hold it in place. Drive through your heels to lift your hips until your body forms a straight line from knees to shoulders. Squeeze hard at the top, lower slowly.", tips: "Push your knees outward slightly as you bridge up. Don't arch your lower back — the movement should stop when your hips are fully extended.", defaultWeights: [27, 40.5, 54, 63] },
+    "db-goblet-squat": { name: "DB goblet squat", muscles: "Quads, glutes, core", desc: "Same as the goblet squat. Hold one dumbbell vertically at chest height with both hands. Squat down keeping the dumbbell close, elbows inside knees. Drive through heels to stand.", tips: "If you feel it more in your back than your legs, you're leaning too far forward. Keep the chest up.", defaultWeights: [20.5, 28.5, 41, 49] },
+    "db-close-grip-floor-press": { name: "DB close-grip floor press", muscles: "Triceps, inner chest", desc: "Same position as the floor press but with elbows tucked close to your body throughout. Hold dumbbells closer together. This shifts the load from chest to triceps.", tips: "Keep elbows within about 15° of your torso. The movement is shorter range than the standard floor press.", defaultWeights: [11.5, 16, 21, 25] },
+    "tricep-kickback": { name: "Tricep kickback", muscles: "Triceps", desc: "Hinge forward to roughly 45°. Pin your upper arm against your side parallel to the floor. Extend the dumbbell straight back until your arm is fully extended. Lower slowly — don't let your elbow drop.", tips: "Keep your upper arm completely still. Only the forearm moves. Going too heavy will break this form immediately.", defaultWeights: [6.5, 8.5, 10.5, 12] },
+    "db-reverse-lunge": { name: "DB reverse lunge", muscles: "Quads, glutes, hamstrings, balance", desc: "Stand holding dumbbells at sides. Step one foot back and lower your back knee toward the floor. Front thigh should reach parallel. Drive through the front heel to return to standing. Alternate legs.", tips: "Stepping back (vs forward) is easier on the knees. Keep your torso upright throughout.", defaultWeights: [13.5, 18.5, 24.5, 28.5] },
+    "db-single-arm-row": { name: "DB single-arm row", muscles: "Lats, rhomboids, rear shoulders, biceps", desc: "Place one hand and the same-side knee on a sturdy surface for support. Hold a dumbbell in the other hand, hanging straight down. Row the dumbbell toward your hip — not your shoulder — keeping the elbow close to your body.", tips: "Think 'elbow to hip', not 'hand to armpit'. Driving the elbow back engages the lats more than pulling up.", defaultWeights: [16.5, 23, 33, 37.5] },
+    "db-renegade-row": { name: "DB renegade row", muscles: "Lats, core (anti-rotation), shoulders, triceps", desc: "Start in a high plank position with both hands gripping dumbbells on the floor, shoulder-width apart. Keeping your hips level, row one dumbbell to your hip while the other arm supports your weight. Lower, repeat other side.", tips: "Widen your feet for more stability. Go much lighter than your normal row — your core is doing half the work. If your hips rotate, you need a lighter weight.", defaultWeights: [13.5, 18.5, 25, 29] },
+    "db-reverse-curl": { name: "DB reverse curl", muscles: "Brachioradialis, forearm extensors, brachialis", desc: "Hold dumbbells with palms facing down. Curl up toward shoulders, keeping the pronated grip throughout. Lower slowly.", tips: "Much lighter than a normal curl. These build serious forearm strength over time.", defaultWeights: [5.5, 7.5, 10, 11] },
+    "db-arnold-press": { name: "DB Arnold press", muscles: "All three deltoid heads, triceps", desc: "Start with dumbbells at shoulder height, palms facing you. As you press overhead, rotate your palms outward so they face forward at the top. Reverse the rotation on the way down.", tips: "Named after Arnold Schwarzenegger. The rotation hits all three heads of the deltoid. Keep the movement fluid, not jerky.", defaultWeights: [8, 11, 14.5, 17.5] },
+    "diamond-push-up": { name: "Diamond push-up", muscles: "Triceps, inner chest", desc: "Place hands on the floor in a diamond shape (thumbs and index fingers touching) under your chest. Lower your chest to your hands, keeping elbows tucked. Push back up.", tips: "No weight needed. If this is too hard at first, do them from your knees. These get surprisingly difficult by Phase 4.", defaultWeights: [0, 0, 0, 0] },
+    "db-upright-row": { name: "DB upright row", muscles: "Upper traps, medial deltoids, biceps", desc: "Hold dumbbells in front of your thighs, palms facing you. Pull the dumbbells straight up to chin height, leading with your elbows which should be higher than your wrists throughout. Lower slowly.", tips: "Don't go too heavy — the elbows-above-wrists position can stress the shoulder joint. Keep the dumbbells close to your body.", defaultWeights: [9.5, 13, 17.5, 20.5] },
+    "db-split-squat": { name: "DB split squat", muscles: "Quads, glutes, hamstrings", desc: "Stand in a split stance — one foot forward, one back — with dumbbells at your sides. Lower your back knee toward the floor (it stays stationary, no stepping). Drive up through both feet to return.", tips: "This is a stationary lunge. Easier to balance than a Bulgarian split squat because your rear foot stays on the floor.", defaultWeights: [12.5, 18.5, 28.5, 33] },
+    "db-sumo-deadlift": { name: "DB sumo deadlift", muscles: "Glutes, inner thighs, hamstrings, lower back", desc: "Wide stance, toes out, one dumbbell held vertically between your legs. Hinge at hips and bend knees to lower the dumbbell, keeping your back flat. Drive hips forward and stand tall.", tips: "Let the dumbbells path be straight down. Don't let your chest collapse forward at the bottom.", defaultWeights: [27, 36, 49.5, 54] },
+    "db-step-up": { name: "DB step-up", muscles: "Quads, glutes, calves", desc: "Hold dumbbells at sides. Place one foot fully on a step or sturdy box. Drive through that heel to step up, bringing the other foot up beside it. Step back down, same foot leading. Complete all reps on one side then switch.", tips: "Drive through the heel of the raised foot, not the toes. The higher the step, the more glute involvement.", defaultWeights: [16.5, 22.5, 28.5, 33] },
+    "db-calf-raise-single-leg": { name: "DB calf raise — single leg", muscles: "Calves (gastrocnemius, soleus)", desc: "Hold one dumbbell in the corresponding hand. Balance on one foot. Rise onto the ball of your foot as high as possible, hold, lower. Complete all reps then switch.", tips: "Single-leg calf raises are dramatically harder than both-leg. Start light and hold something for balance if needed.", defaultWeights: [16.5, 24.5, 33, 37] },
+    "renegade-row": { name: "Renegade row", muscles: "Lats, core, shoulders, triceps", desc: "High plank on dumbbells. Row one dumbbell to your hip while balancing on the other arm. Hips stay level throughout. Lower and repeat the other side.", tips: "By Phase 4, you should be able to do these with heavier weight than Phase 2. Still prioritise non-rotation over weight.", defaultWeights: [13.5, 18.5, 25, 29] },
+    "db-hammer-curl-tempo": { name: "DB hammer curl (tempo)", muscles: "Biceps, brachialis, forearm", desc: "Neutral grip (palms facing each other). Curl up in 1 second, lower in 3 seconds with a 1-second pause at the bottom. The tempo dramatically increases the difficulty without needing more weight.", tips: "The 3-second lowering phase is the work. Don't rush it. Full extension at the bottom on every rep.", defaultWeights: [9, 11, 14, 15] },
+    "db-floor-press-tempo": { name: "DB floor press (tempo)", muscles: "Chest, triceps, front shoulders", desc: "Standard floor press but with 3-second lowering. Press up in 1 second, lower in 3 seconds, 1-second pause when arms touch the floor. The floor still acts as the range stop.", tips: "You'll need to go lighter than your standard floor press — the tempo makes it significantly harder.", defaultWeights: [11.5, 16, 21, 25] },
+    "db-overhead-press-tempo": { name: "DB overhead press (tempo)", muscles: "Shoulders, triceps, upper chest", desc: "Standard overhead press with 3-second lowering phase. Press up in 1 second, lower in 3. Feel the shoulder control throughout the full range.", tips: "The slow lowering exposes any shoulder instability. If it feels unstable, drop the weight.", defaultWeights: [8, 11, 14.5, 17.5] },
+    "db-lateral-raise-tempo": { name: "DB lateral raise (tempo)", muscles: "Side (medial) deltoids", desc: "Raise arms to shoulder height in 1 second. Lower in 3 seconds. This turns what was previously a lighter accessory movement into a serious shoulder burner.", tips: "You'll need even lighter weight than the standard lateral raise. The 3-second lower is very hard on the side delts.", defaultWeights: [4.5, 6, 8, 9] },
+    "db-reverse-lunge-tempo": { name: "DB reverse lunge (tempo)", muscles: "Quads, glutes, hamstrings", desc: "Step back and lower over 3 seconds. Pause briefly at the bottom. Drive up in 1 second. The slow eccentric phase crushes the quads.", tips: "This will make your quads extremely sore the next day if it's new to you. Start lighter than your standard reverse lunge.", defaultWeights: [13.5, 18.5, 24.5, 28.5] },
+    "db-glute-bridge-tempo": { name: "DB glute bridge (tempo)", muscles: "Glutes, hamstrings", desc: "Dumbbell across hips. Rise in 1 second. Lower in 3 seconds with a 1-second hold at the top before lowering. The extended hold at full extension really activates the glutes.", tips: "Squeeze as hard as possible at the top for the full second. Don't let your lower back arch to compensate.", defaultWeights: [27, 40.5, 54, 63] },
+    "db-bulgarian-split-squat-tempo": { name: "DB Bulgarian split squat (tempo)", muscles: "Quads, glutes, hamstrings, core", desc: "Rear foot elevated, front foot stepped forward. Lower in 3 seconds, pause at the bottom, drive up in 1 second. This is one of the hardest exercises in the programme.", tips: "You will need significantly less weight than your standard Bulgarian split squat. The 3-second lower is brutal. This is a normal feeling.", defaultWeights: [12.5, 18.5, 28.5, 33] },
+    "db-sumo-deadlift-tempo": { name: "DB sumo deadlift (tempo)", muscles: "Glutes, inner thighs, hamstrings, lower back", desc: "Wide stance, dumbbell between legs. Lower in 3 seconds. Pause at the bottom. Drive up in 1 second. Slow lowering maximises hamstring stretch.", tips: "Keep your back flat throughout — the slow tempo means your muscles are under load for longer, so form matters even more.", defaultWeights: [27, 36, 49.5, 54] },
+    "db-bent-over-row-tempo": { name: "DB bent-over row (tempo)", muscles: "Upper back, rear shoulders, biceps", desc: "Hinge forward, back flat. Row toward your hips in 1 second. Lower in 3 seconds with full arm extension at the bottom.", tips: "The slow lowering works the back in a lengthened position, which is one of the most effective ways to build muscle.", defaultWeights: [13.5, 18.5, 25, 29] },
+    "single-arm-row-tempo": { name: "Single-arm row (tempo)", muscles: "Lats, rhomboids, rear shoulders", desc: "Supported on a bench or chair with one hand and knee. Row in 1 second. Lower in 3 seconds. Full arm extension at the bottom on every rep.", tips: "Don't rush the lowering. Full extension at the bottom is where most people cheat — resist it.", defaultWeights: [16.5, 23, 33, 37.5] },
+    "db-shrug-tempo": { name: "DB shrug (tempo)", muscles: "Upper trapezius", desc: "Hold dumbbells at sides. Shrug straight up in 1 second. Hold for 2 seconds at the top. Lower in 3 seconds. The extended hold makes this dramatically more effective.", tips: "Keep the movement pure vertical. The 2-second hold at the top is the key addition in Phase 4.", defaultWeights: [13.5, 18.5, 27, 30.5] },
+    "db-curl-tempo": { name: "DB curl (tempo)", muscles: "Biceps, brachialis", desc: "Standard curl with 3-second lowering. Curl up in 1 second, lower in 3 seconds, full extension at the bottom. The slow negative is where bicep growth really happens.", tips: "Lower all the way to full arm extension on each rep. Don't stop halfway down.", defaultWeights: [8, 10, 12.5, 13.5] },
+    "db-romanian-deadlift-tempo": { name: "DB Romanian deadlift (tempo)", muscles: "Hamstrings, glutes, lower back", desc: "Standard RDL with 3-second lowering phase. Hinge slowly, feeling the hamstring stretch build over 3 seconds. Pause at the bottom. Drive up in 1 second.", tips: "The tempo RDL is exceptional for hamstring development. Keep the dumbbells dragging close to your legs throughout.", defaultWeights: [18, 27, 36, 40.5] },
+    "db-woodchop": { name: "DB woodchop", muscles: "Obliques, core, shoulders", desc: "Hold one dumbbell with both hands. Start high on one side and chop diagonally downward to the opposite hip, rotating through your core. Control the return. Complete all reps then switch direction.", tips: "The rotation comes from your core, not your arms. Keep your arms relatively straight.", defaultWeights: [6, 8, 12, 14] },
+    "db-woodchop-heavy": { name: "DB woodchop (heavy)", muscles: "Obliques, core, shoulders", desc: "Same as Phase 3 woodchop but heavier. Do both high-to-low and low-to-high directions for complete oblique coverage.", tips: "Heavier weight requires more control. Don't let momentum take over.", defaultWeights: [8, 10, 14, 16] },
+    "db-suitcase-carry": { name: "DB suitcase carry", muscles: "Core (lateral stabilisation), obliques, traps, forearms", desc: "Hold one heavy dumbbell at your side, as if carrying a suitcase. Walk in a straight line keeping your shoulders perfectly level — don't lean toward or away from the weight. Complete steps on one side then switch.", tips: "The challenge is staying upright against the weight trying to tip you sideways. This is one of the best core exercises in existence.", defaultWeights: [17, 22, 30.5, 34] },
+    "db-windmill": { name: "DB windmill", muscles: "Obliques, shoulders (stability), hamstrings, glutes", desc: "Hold one dumbbell overhead in your right hand, arm locked out. Feet wide, toes at 45°. Hinge sideways, pushing your right hip out, reaching your left hand down toward your left foot — keeping your eyes on the dumbbell. Return to standing.", tips: "Keep the overhead arm locked. This is a stability and flexibility movement as much as a strength one. Go very light.", defaultWeights: [5.5, 7, 10, 12] },
+    "db-ab-rollout-floor": { name: "DB ab rollout (floor)", muscles: "Core (entire), lats, shoulders", desc: "Kneel on the floor. Hold a dumbbell horizontally and place it on the floor in front of you. Roll it slowly forward as your body extends, keeping your core braced. Roll back in before your hips touch the floor.", tips: "This is very hard. Keep your core braced the entire time. If you can't control the return, you've gone too far.", defaultWeights: [6.5, 8, 10, 12] },
+    "db-russian-twist": { name: "DB Russian twist", muscles: "Obliques, rectus abdominis, hip flexors", desc: "Sit on the floor with knees bent. Lean back to about 45°. Hold one dumbbell with both hands and rotate side to side, touching the dumbbell to the floor each time. In Phase 3, raise your feet off the floor.", tips: "The rotation comes from your torso, not just your arms. Keep your lower back from rounding.", defaultWeights: [4.5, 6, 8, 10] },
+    "v-up": { name: "V-up", muscles: "Rectus abdominis, hip flexors", desc: "Lie flat on your back, arms stretched overhead. Simultaneously raise your straight legs and your upper body, reaching your hands toward your feet to form a V shape. Lower back down with control.", tips: "Keep your legs straight. If this is too hard, bend your knees slightly. The lowering phase is where the abs work hardest.", defaultWeights: [0, 0, 0, 0] },
+    "v-up-with-db-pass": { name: "V-up with DB pass", muscles: "Rectus abdominis, hip flexors, coordination", desc: "Same as a V-up but hold a dumbbell in your hands. At the top of the V, pass the dumbbell to your feet (grip it between your feet). Lower down. On the next rep, pass it back to your hands at the top.", tips: "Use a very light dumbbell — the coordination element makes this deceptively hard.", defaultWeights: [0, 0, 0, 0] },
+    "plank-hold": { name: "Plank hold", muscles: "Core (entire), shoulders, glutes", desc: "Forearms on the floor, elbows under shoulders. Body in a straight line from head to heel. Squeeze your abs, glutes, and quads simultaneously. Hold.", tips: "Don't let your hips sag or pike up. If your form breaks before the time is up, rest and try again.", defaultWeights: [0, 0, 0, 0] },
+    "db-crunch": { name: "DB crunch", muscles: "Rectus abdominis (upper)", desc: "Lie on your back, knees bent. Hold a dumbbell on your chest with both hands. Crunch your shoulders off the floor — not a full sit-up, just shoulder blades clearing the ground. Lower slowly.", tips: "Don't pull your neck. The movement is small — it's a crunch, not a sit-up. Exhale as you come up.", defaultWeights: [5.5, 7, 10, 12] },
+    "leg-raise": { name: "Leg raise", muscles: "Lower abs, hip flexors", desc: "Lie flat on your back, hands under your glutes for support. Keep legs straight and raise them to 90°. Lower slowly until they almost touch the floor. The key is keeping your lower back pressed down the whole time.", tips: "If your lower back arches as you lower, you're going too far down. Only lower as far as you can control.", defaultWeights: [0, 0, 0, 0] },
+    "bird-dog": { name: "Bird dog", muscles: "Core, lower back, glutes (stability)", desc: "Start on all fours, hands under shoulders, knees under hips. Extend your right arm forward and left leg back simultaneously, keeping your back completely flat. Hold 2 seconds. Return and switch sides.", tips: "Don't let your hips rotate or your back arch. Imagine balancing a glass of water on your lower back.", defaultWeights: [0, 0, 0, 0] },
+    "heel-tap": { name: "Heel tap", muscles: "Obliques, transverse abdominis", desc: "Lie on your back, knees bent, feet flat. Crunch slightly so your shoulders hover off the floor. Reach sideways to tap your right heel, then your left heel, alternating. Keep the crunch position throughout.", tips: "The crunch position should be maintained the entire set — don't relax your abs between taps.", defaultWeights: [0, 0, 0, 0] },
+    "plank-to-push-up": { name: "Plank to push-up", muscles: "Core, chest, triceps, shoulders", desc: "Start in a forearm plank. Push up to a high plank by placing one hand then the other on the floor. Then lower back down to forearms, one arm at a time. Alternate which arm leads.", tips: "Keep your hips as still as possible throughout. This transitions between anti-rotation core work and push movement.", defaultWeights: [0, 0, 0, 0] },
+    "side-plank": { name: "Side plank", muscles: "Obliques, glutes (medius), core", desc: "Lie on your side, forearm on the floor, elbow under shoulder. Raise your hips off the floor until your body is in a straight line. Hold. Switch sides.", tips: "Stack your feet or stagger them for balance. Don't let your hips drop or rotate forward.", defaultWeights: [0, 0, 0, 0] },
+    "mountain-climber": { name: "Mountain climber", muscles: "Core, hip flexors, shoulders (stability)", desc: "Start in a high plank. Drive one knee toward your chest, then quickly switch, alternating legs at a controlled pace. Keep your hips level — don't let them rise.", tips: "Slow mountain climbers are a core exercise. Fast ones become more cardio. In this programme, keep them controlled.", defaultWeights: [0, 0, 0, 0] },
+    "hollow-body-hold": { name: "Hollow body hold", muscles: "Deep core (transverse abdominis), rectus abdominis", desc: "Lie flat, arms stretched overhead. Press your entire lower back into the floor. Raise your shoulders and legs slightly — just a few inches. Hold this position, maintaining the lower back contact with the floor.", tips: "The key is keeping your lower back on the floor. If it lifts, raise your legs higher until you can maintain it. This is harder than it looks.", defaultWeights: [0, 0, 0, 0] },
+    "plank-db-drag": { name: "Plank DB drag", muscles: "Core (anti-rotation), shoulders, chest", desc: "High plank position. Place a dumbbell to the outside of your left hand. Reach across with your right hand and drag the dumbbell to the right side. Alternate sides.", tips: "Fight against your hips rotating as you drag. The wider your feet, the more stable you'll be.", defaultWeights: [4.5, 6, 8, 10] },
+    "db-rear-delt-fly": { name: "DB rear delt fly", muscles: "Rear (posterior) deltoids, rhomboids, mid traps", desc: "Hinge forward at the hips with a flat back. Hold dumbbells hanging straight down with palms facing each other. With a slight bend in the elbow, raise both arms out to the sides until parallel to the floor. Squeeze shoulder blades together at the top. Lower slowly.", tips: "Go very light — these are easy to swing if too heavy. Imagine you're pouring water out of two jugs as you raise. Lead with the elbows, not the hands.", defaultWeights: [0, 4, 6.5, 8] },
+    "db-face-pull-floor": { name: "DB face pull (floor)", muscles: "Rear deltoids, external rotators, upper back", desc: "Lie face down on the floor. Hold light dumbbells with elbows wide. Pull the dumbbells toward your face as if doing a face pull on a cable machine — elbows stay higher than the dumbbells. Squeeze the rear delts at the top.", tips: "This is a corrective exercise as much as a strength one — it helps counteract all the forward-pressing movements. Go very light.", defaultWeights: [0, 4, 6.5, 8] }
+  };
+
+  // ── EXERCISE CATEGORIES ──
+  // Maps exercise slug → primary category for filter chips
+  const CATEGORIES = ['All', 'Chest', 'Back', 'Shoulders', 'Arms', 'Legs', 'Glutes', 'Core'];
+
+  function categorise(slug, muscles) {
+    const m = (muscles || '').toLowerCase();
+    if (slug.includes('curl') || slug.includes('tricep') || slug.includes('skull') || m.includes('biceps') || m.includes('triceps') || m.includes('brachi') || m.includes('forearm')) return 'Arms';
+    if (slug.includes('floor-press') || slug.includes('close-grip') || slug.includes('push-up') || m.includes('chest') || m.includes('pectorals')) return 'Chest';
+    if (slug.includes('shrug') || slug.includes('lateral-raise') || slug.includes('front-raise') || slug.includes('overhead-press') || slug.includes('arnold') || slug.includes('upright-row') || slug.includes('rear-delt') || slug.includes('face-pull')) return 'Shoulders';
+    if (slug.includes('row') || slug.includes('shrug') || m.includes('lats') || m.includes('upper back') || m.includes('rhomboids') || m.includes('trapez')) return 'Back';
+    if (slug.includes('bridge') || m.includes('glutes')) return 'Glutes';
+    if (slug.includes('squat') || slug.includes('lunge') || slug.includes('deadlift') || slug.includes('calf') || slug.includes('step-up') || m.includes('quads') || m.includes('hamstrings') || m.includes('calves')) return 'Legs';
+    if (m.includes('core') || m.includes('abdominis') || m.includes('obliques') || m.includes('hip flexors') || slug.includes('plank') || slug.includes('crunch') || slug.includes('leg-raise') || slug.includes('hollow') || slug.includes('windmill') || slug.includes('woodchop') || slug.includes('russian') || slug.includes('dead-bug') || slug.includes('bird-dog') || slug.includes('heel-tap') || slug.includes('v-up') || slug.includes('mountain-climber') || slug.includes('seated-knee-tuck') || slug.includes('suitcase-carry') || slug.includes('ab-rollout') || slug.includes('side-plank')) return 'Core';
+    return 'Arms';
+  }
+
+  // Build a categorised list once
+  let _libraryItems = null;
+  function getLibraryItems() {
+    if (_libraryItems) return _libraryItems;
+    _libraryItems = Object.keys(EXERCISE_DATA).map(slug => {
+      const data = EXERCISE_DATA[slug];
+      return {
+        slug,
+        name: data.name || slug,
+        muscles: data.muscles || '',
+        desc: data.desc || '',
+        tips: data.tips || '',
+        defaultWeights: data.defaultWeights || [0,0,0,0],
+        category: categorise(slug, data.muscles || '')
+      };
+    }).sort((a, b) => a.name.localeCompare(b.name));
+    return _libraryItems;
+  }
+
+
+
+  // ── FULLSCREEN WORKOUT VIEW ──
+  function openFullscreen(headerEl) {
+    const card = headerEl.closest('.workout-card');
+    const phaseSection = headerEl.closest('.phase-section');
+    const phaseTitle = phaseSection.querySelector('.phase-title')?.textContent || '';
+    const phaseMonths = phaseSection.querySelector('.phase-months')?.textContent || '';
+    const badge = headerEl.querySelector('.workout-badge')?.textContent || '';
+    const name = headerEl.querySelector('.workout-name')?.textContent || '';
+
+    document.getElementById('fsPhaseLabel').textContent = phaseMonths + ' · ' + phaseTitle + ' · ' + badge;
+    document.getElementById('fsTitle').textContent = name;
+
+    // Build the rows from the card's exercise list
+    const rows = card.querySelectorAll('.exercise-list .exercise-item');
+    const list = document.getElementById('fsList');
+    list.innerHTML = '';
+    rows.forEach(row => {
+      const num = row.querySelector('.ex-num')?.textContent || '';
+      const exName = row.querySelector('.ex-name')?.cloneNode(true);
+      if (exName) {
+        const icon = exName.querySelector('.ex-info-icon');
+        if (icon) icon.remove();
+      }
+      const exNameText = exName ? exName.textContent.trim() : '';
+      const exerciseKey = row.dataset.exercise;
+      const phaseIdx = parseInt(row.dataset.phase);
+      const weightBadge = row.querySelector('[data-weight-badge]');
+      const weightText = weightBadge ? weightBadge.textContent.trim() : '';
+      const isBodyweight = weightBadge?.classList.contains('bodyweight');
+      const sets = row.querySelector('.ex-sets')?.textContent || '';
+
+      // Extract dumbbell count from weight text e.g. "6.5kg × 2"
+      const dbMatch = weightText.match(/×\s*(\d+)\s*$/);
+      const dbCount = dbMatch ? dbMatch[1] : null;
+
+      const saved = exerciseKey ? getSavedWeight(exerciseKey + '_phase' + phaseIdx) : null;
+      const isCustom = saved !== null;
+
+      const li = document.createElement('li');
+      li.className = 'fs-row';
+      const weightCls = isBodyweight ? 'fs-weight bodyweight' : (isCustom ? 'fs-weight custom' : 'fs-weight');
+      li.innerHTML = `
+        <span class="fs-num">${num}</span>
+        <span class="fs-name">${exNameText}</span>
+        <span class="${weightCls}" data-fs-weight data-exercise-key="${exerciseKey || ''}" data-phase-idx="${phaseIdx}" data-db-count="${dbCount || ''}" data-bodyweight="${isBodyweight ? '1' : ''}" onclick="editFsWeight(this)">${weightText}</span>
+        <span class="fs-sets">${sets}</span>
+      `;
+      list.appendChild(li);
+    });
+
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    _savedScrollY = window.scrollY;
+    document.getElementById('fsOverlay').classList.add('open');
+    document.body.classList.add('fs-active');
+    document.body.style.paddingRight = scrollbarWidth + 'px';
+    document.body.style.top = '-' + _savedScrollY + 'px';
+  }
+
+  // Inline weight editor in fullscreen mode
+  function editFsWeight(badgeEl) {
+    if (badgeEl.dataset.bodyweight === '1') return;
+    if (badgeEl.querySelector('input')) return; // already editing
+
+    const exerciseKey = badgeEl.dataset.exerciseKey;
+    const phaseIdx = parseInt(badgeEl.dataset.phaseIdx);
+    const dbCount = badgeEl.dataset.dbCount;
+    const currentText = badgeEl.textContent.trim();
+    // Parse current numeric value
+    const numMatch = currentText.match(/^([0-9.]+)/);
+    const currentVal = numMatch ? numMatch[1] : '';
+
+    const input = document.createElement('input');
+    input.type = 'number';
+    input.step = '0.5';
+    input.min = '0';
+    input.value = currentVal;
+    input.className = 'fs-weight-input';
+
+    badgeEl.textContent = '';
+    badgeEl.appendChild(input);
+    input.focus();
+    input.select();
+
+    const commit = () => {
+      const val = parseFloat(input.value);
+      if (!isNaN(val) && val >= 0) {
+        // Save to localStorage
+        if (exerciseKey) setSavedWeight(exerciseKey + '_phase' + phaseIdx, val);
+        // Update badge
+        const newText = val + 'kg' + (dbCount ? ' × ' + dbCount : '');
+        badgeEl.textContent = newText;
+        badgeEl.classList.remove('bodyweight');
+        badgeEl.classList.add('custom');
+        // Update the underlying weight badges on the main page from saved state
+        refreshWeightBadges();
+      } else {
+        badgeEl.textContent = currentText;
+      }
+    };
+
+    const cancel = () => {
+      badgeEl.textContent = currentText;
+    };
+
+    input.addEventListener('blur', commit);
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); commit(); input.blur(); }
+      else if (e.key === 'Escape') { cancel(); input.blur(); }
+    });
+  }
+
+  function closeFullscreen() {
+    document.getElementById('fsOverlay').classList.remove('open');
+    document.body.classList.remove('fs-active');
+    document.body.style.paddingRight = '';
+    document.body.style.top = '';
+    window.scrollTo(0, _savedScrollY || 0);
+    // Reflect any weights edited in fullscreen on the main page
+    refreshWeightBadges();
+  }
+
+  function commitPhaseInput(input) {
+    const exerciseKey = input.dataset.exerciseKey;
+    const phaseIdx = parseInt(input.dataset.phaseIdx);
+    if (!exerciseKey) return;
+    const val = input.value.trim();
+    if (val === '') {
+      // Cleared — remove saved override
+      try { localStorage.removeItem(storageKey(exerciseKey + '_phase' + phaseIdx)); } catch(e) {}
+      input.classList.remove('custom');
+    } else {
+      const num = parseFloat(val);
+      if (isNaN(num) || num < 0) return;
+      setSavedWeight(exerciseKey + '_phase' + phaseIdx, num);
+      input.value = num;
+      input.classList.add('custom');
+    }
+    // Update main weight badges throughout the page
+    refreshWeightBadges();
+    // Also update the main current-phase weight input if it's the same phase
+    if (_currentExercise === exerciseKey && _currentPhase === phaseIdx) {
+      document.getElementById('weightInput').value = input.value;
+    }
+  }
+
+  // ── EXERCISE LIBRARY ──
+  let _activeCategory = 'All';
+  let _searchTerm = '';
+  let _expandedSlug = null;
+
+  function openLibrary() {
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    _savedScrollY = window.scrollY;
+    document.getElementById('libraryPanel').classList.add('open');
+    document.getElementById('libraryBackdrop').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.body.style.paddingRight = scrollbarWidth + 'px';
+
+    // Render chips on first open
+    const chipsEl = document.getElementById('libraryChips');
+    if (!chipsEl.dataset.rendered) {
+      chipsEl.innerHTML = CATEGORIES.map(cat => 
+        `<button class="library-chip${cat === _activeCategory ? ' active' : ''}" data-cat="${cat}" onclick="setLibraryCategory('${cat}')">${cat}</button>`
+      ).join('');
+      chipsEl.dataset.rendered = '1';
+    }
+
+    // Hook up search
+    const searchEl = document.getElementById('librarySearch');
+    if (!searchEl.dataset.hooked) {
+      searchEl.addEventListener('input', e => {
+        _searchTerm = e.target.value.trim().toLowerCase();
+        renderLibrary();
+      });
+      searchEl.dataset.hooked = '1';
+    }
+
+    renderLibrary();
+  }
+
+  function closeLibrary() {
+    document.getElementById('libraryPanel').classList.remove('open');
+    document.getElementById('libraryBackdrop').classList.remove('open');
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+  }
+
+  function setLibraryCategory(cat) {
+    _activeCategory = cat;
+    document.querySelectorAll('.library-chip').forEach(c => {
+      c.classList.toggle('active', c.dataset.cat === cat);
+    });
+    renderLibrary();
+  }
+
+  function renderLibrary() {
+    const items = getLibraryItems();
+    const filtered = items.filter(item => {
+      if (_activeCategory !== 'All' && item.category !== _activeCategory) return false;
+      if (_searchTerm && !item.name.toLowerCase().includes(_searchTerm) && !item.muscles.toLowerCase().includes(_searchTerm)) return false;
+      return true;
+    });
+
+    document.getElementById('libraryCount').textContent = filtered.length + ' of ' + items.length + ' exercises';
+
+    const body = document.getElementById('libraryBody');
+    if (filtered.length === 0) {
+      body.innerHTML = '<div class="library-empty">No exercises match your filters.</div>';
+      return;
+    }
+
+    body.innerHTML = filtered.map(item => `
+      <div class="lib-item${item.slug === _expandedSlug ? ' expanded' : ''}" data-slug="${item.slug}">
+        <div class="lib-item-header" onclick="toggleLibraryItem('${item.slug}')">
+          <div class="lib-item-name">${item.name}</div>
+          <div class="lib-item-muscle">${item.category}</div>
+          <span class="lib-item-chevron">›</span>
+        </div>
+        <div class="lib-item-body">
+          <div class="lib-item-content">
+            <div class="lib-section-label">Muscles worked</div>
+            <div class="lib-desc">${item.muscles}</div>
+            <div class="lib-section-label">How to do it</div>
+            <div class="lib-desc">${item.desc}</div>
+            <div class="lib-section-label">Tip</div>
+            <div class="lib-tip">${item.tips}</div>
+            <div class="lib-section-label">Weights across the year (editable)</div>
+            <div class="lib-weight-grid">
+              ${['Phase 1','Phase 2','Phase 3','Phase 4'].map((label, i) => {
+                const saved = getSavedWeight(item.slug + '_phase' + i);
+                const dw = item.defaultWeights[i];
+                const isBW = dw === 0;
+                const value = saved !== null ? saved : (isBW ? '' : dw);
+                const isCustom = saved !== null;
+                const cls = ['wpc-input'];
+                if (isCustom) cls.push('custom');
+                if (isBW) cls.push('bodyweight');
+                const placeholder = isBW ? 'BW' : 'kg';
+                const disabled = isBW ? 'disabled' : '';
+                return `<div class="weight-phase-cell">
+                  <div class="wpc-label">${label}</div>
+                  <input type="number" step="0.5" min="0" class="${cls.join(' ')}" value="${value}" placeholder="${placeholder}" ${disabled}
+                    data-exercise-key="${item.slug}" data-phase-idx="${i}"
+                    onblur="commitPhaseInput(this); refreshLibraryItem('${item.slug}')"
+                    onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur();}else if(event.key==='Escape'){this.value=this.defaultValue;this.blur();}" />
+                </div>`;
+              }).join('')}
+            </div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function toggleLibraryItem(slug) {
+    // Accordion: collapse currently-expanded if any, then expand the clicked (unless same)
+    const wasExpanded = _expandedSlug === slug;
+    _expandedSlug = wasExpanded ? null : slug;
+    document.querySelectorAll('.lib-item').forEach(el => {
+      el.classList.toggle('expanded', el.dataset.slug === _expandedSlug);
+    });
+  }
+
+  // After saving a weight from inside the library, update the library row so the .custom class flips correctly
+  function refreshLibraryItem(slug) {
+    // Re-render the inputs without collapsing the panel — just refresh classes
+    const item = document.querySelector('.lib-item[data-slug="' + CSS.escape(slug) + '"]');
+    if (!item) return;
+    item.querySelectorAll('.wpc-input').forEach(input => {
+      const phaseIdx = parseInt(input.dataset.phaseIdx);
+      const saved = getSavedWeight(slug + '_phase' + phaseIdx);
+      input.classList.toggle('custom', saved !== null);
+    });
+  }
+
+  // ── PHASE SWITCHER ──
+  const PHASE_NAMES = ['Phase 1 — Foundation', 'Phase 2 — Building', 'Phase 3 — Intensity', 'Phase 4 — Mastery'];
+
+  function showPhase(index) {
+    document.querySelectorAll('.phase-section').forEach((s, i) => s.classList.toggle('visible', i === index));
+    document.querySelectorAll('.phases-drawer-item').forEach((b, i) => b.classList.toggle('active', i === index));
+    document.querySelectorAll('.phase-tab').forEach((b, i) => b.classList.toggle('active', i === index));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    refreshWeightBadges();
+    try { localStorage.setItem('kilo_last_phase', index); } catch(e) {}
+  }
+
+  function togglePhases() {
+    const drawer = document.getElementById('phasesDrawer');
+    const bd = document.getElementById('phasesBackdrop');
+    const open = drawer.classList.toggle('open');
+    bd.classList.toggle('open', open);
+  }
+
+  function pickPhase(index) {
+    showPhase(index);
+    togglePhases();
+  }
+
+  // ── STORAGE HELPERS ──
+  function storageKey(name) { return 'kilo_weight_' + name.toLowerCase().replace(/[^a-z0-9]/g, '_'); }
+
+  function getSavedWeight(name) {
+    try { return localStorage.getItem(storageKey(name)); } catch(e) { return null; }
+  }
+
+  function setSavedWeight(name, val) {
+    try { localStorage.setItem(storageKey(name), val); } catch(e) {}
+  }
+
+  function getDisplayWeight(name, phaseIdx) {
+    const saved = getSavedWeight(name + '_phase' + phaseIdx);
+    if (saved !== null) return saved + ' kg';
+    const data = EXERCISE_DATA[name];
+    if (!data) return null;
+    const w = data.defaultWeights[phaseIdx];
+    return w === 0 ? 'bodyweight' : w + ' kg';
+  }
+
+  // ── REFRESH WEIGHT BADGES ON PAGE ──
+  function refreshWeightBadges() {
+    document.querySelectorAll('[data-weight-badge]').forEach(badge => {
+      const item = badge.closest('[data-exercise]');
+      if (!item) return;
+      const name = item.dataset.exercise;
+      const phase = parseInt(item.dataset.phase);
+      const saved = getSavedWeight(name + '_phase' + phase);
+      const defaultText = badge.dataset.defaultText || badge.textContent;
+      if (saved !== null) {
+        // Preserve the dumbbell count from default text (e.g. "× 2")
+        const dbMatch = defaultText.match(/×\s*\d+\s*$/);
+        const dbSuffix = dbMatch ? ' ' + dbMatch[0] : '';
+        badge.textContent = saved + 'kg' + dbSuffix;
+        badge.classList.remove('bodyweight');
+        badge.style.color = 'var(--orange-dim)';
+        badge.title = 'Your saved weight';
+      } else {
+        // Restore default
+        badge.textContent = defaultText;
+        badge.style.color = '';
+        badge.title = '';
+        if (defaultText.toLowerCase().includes('bodyweight')) {
+          badge.classList.add('bodyweight');
+        } else {
+          badge.classList.remove('bodyweight');
+        }
+      }
+    });
+  }
+
+  // ── MODAL ──
+  let _currentExercise = null;
+  let _currentPhase = 0;
+  let _savedScrollY = 0;
+
+  function openModal(el) {
+    const name = el.dataset.exercise;
+    // Extract dumbbell count from badge text (e.g. "6.5kg × 2" → "× 2 dumbbells")
+    const badge = el.querySelector('[data-weight-badge]');
+    const badgeText = badge ? badge.textContent.trim() : '';
+    const dbMatch = badgeText.match(/×\s*(\d+)/);
+    const dbLabel = document.getElementById('dumbellCountLabel');
+    if (dbLabel) {
+      if (dbMatch && dbMatch[1] === '1') dbLabel.textContent = '× 1 dumbbell';
+      else if (dbMatch) dbLabel.textContent = '× ' + dbMatch[1] + ' dumbbells';
+      else dbLabel.textContent = '';
+    }
+    const phase = parseInt(el.dataset.phase);
+    const data = EXERCISE_DATA[name];
+    if (!data) return;
+
+    _currentExercise = name;
+    _currentPhase = phase;
+
+    const displayName = (data.name || name).replace(' (tempo)', '');
+    document.getElementById('modalTitle').textContent = displayName;
+    document.getElementById('modalMuscles').textContent = data.muscles;
+    document.getElementById('modalDesc').textContent = data.desc;
+    document.getElementById('modalTip').textContent = data.tips;
+
+    // Weight input — show saved or default for current phase
+    const saved = getSavedWeight(name + '_phase' + phase);
+    const defaultW = data.defaultWeights[phase];
+    const inputEl = document.getElementById('weightInput');
+    if (saved !== null) {
+      inputEl.value = saved;
+    } else if (defaultW === 0) {
+      inputEl.value = '';
+      inputEl.placeholder = 'bodyweight';
+    } else {
+      inputEl.value = defaultW;
+    }
+    document.getElementById('weightSavedMsg').style.display = 'none';
+
+    // Phase weight grid — each cell is editable
+    const phaseLabels = ['Phase 1', 'Phase 2', 'Phase 3', 'Phase 4'];
+    const grid = document.getElementById('weightPhases');
+    grid.innerHTML = phaseLabels.map((label, i) => {
+      const savedP = getSavedWeight(name + '_phase' + i);
+      const dw = data.defaultWeights[i];
+      const isBW = dw === 0;
+      const value = savedP !== null ? savedP : (isBW ? '' : dw);
+      const isCurrent = i === phase;
+      const isCustom = savedP !== null;
+      const cls = ['wpc-input'];
+      if (isCurrent) cls.push('current');
+      if (isCustom) cls.push('custom');
+      if (isBW) cls.push('bodyweight');
+      const placeholder = isBW ? 'BW' : 'kg';
+      const disabled = isBW ? 'disabled' : '';
+      return `<div class="weight-phase-cell">
+        <div class="wpc-label">${label}</div>
+        <input type="number" step="0.5" min="0" class="${cls.join(' ')}" value="${value}" placeholder="${placeholder}" ${disabled}
+          data-exercise-key="${name}" data-phase-idx="${i}" />
+      </div>`;
+    }).join('');
+
+    // Wire up input handlers (commit on blur / Enter)
+    grid.querySelectorAll('.wpc-input').forEach(input => {
+      input.addEventListener('blur', () => commitPhaseInput(input));
+      input.addEventListener('keydown', e => {
+        if (e.key === 'Enter') { e.preventDefault(); input.blur(); }
+        if (e.key === 'Escape') { input.value = input.defaultValue; input.blur(); }
+      });
+    });
+
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    document.getElementById('exerciseSlideout').classList.add('open');
+    document.getElementById('slideoutBackdrop').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.body.style.paddingRight = scrollbarWidth + 'px';
+  }
+
+  function closeModal() {
+    document.getElementById('exerciseSlideout').classList.remove('open');
+    document.getElementById('slideoutBackdrop').classList.remove('open');
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+  }
+
+  function saveWeight() {
+    const val = document.getElementById('weightInput').value;
+    if (!val || !_currentExercise) return;
+    const parsed = parseFloat(val);
+    if (isNaN(parsed) || parsed < 0) return;
+
+    setSavedWeight(_currentExercise + '_phase' + _currentPhase, parsed);
+
+    // Update phase grid
+    const cells = document.querySelectorAll('#weightPhases .wpc-value');
+    if (cells[_currentPhase]) cells[_currentPhase].textContent = parsed + ' kg';
+
+    // Flash saved message
+    const msg = document.getElementById('weightSavedMsg');
+    msg.style.display = 'inline';
+    setTimeout(() => { msg.style.display = 'none'; }, 2000);
+
+    // Refresh badges on page
+    refreshWeightBadges();
+  }
+
+  // Allow Enter key in weight input
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('weightInput').addEventListener('keydown', e => {
+      if (e.key === 'Enter') saveWeight();
+    });
+    // Snapshot original HTML weight values so we can reset to them when a saved override is cleared
+    document.querySelectorAll('[data-weight-badge]').forEach(badge => {
+      if (!badge.dataset.defaultText) badge.dataset.defaultText = badge.textContent;
+    });
+    try {
+      const saved = localStorage.getItem('kilo_last_phase');
+      if (saved !== null) showPhase(parseInt(saved));
+    } catch(e) {}
+    refreshWeightBadges();
+  });
+
+  // Close modal on Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      if (document.getElementById('fsOverlay').classList.contains('open')) {
+        closeFullscreen();
+      } else if (document.getElementById('libraryPanel').classList.contains('open')) {
+        closeLibrary();
+      } else if (document.getElementById('phasesDrawer').classList.contains('open')) {
+        togglePhases();
+      } else {
+        closeModal();
+      }
+    }
+  });
+</script>
+
+
+
+<!-- Fullscreen workout view -->
+<div class="fs-overlay" id="fsOverlay">
+  <div class="fs-container">
+    <div class="fs-header">
+      <div class="fs-title-block">
+        <div class="fs-phase-label" id="fsPhaseLabel"></div>
+        <div class="fs-title" id="fsTitle"></div>
+      </div>
+      <button class="fs-close" onclick="closeFullscreen()" aria-label="Close">✕</button>
+    </div>
+    <ul class="fs-list" id="fsList"></ul>
+  </div>
+</div>
+
+
+<!-- Exercise Library panel -->
+<div class="library-backdrop" id="libraryBackdrop" onclick="closeLibrary()"></div>
+<div class="library-panel" id="libraryPanel" role="dialog" aria-label="Exercise library">
+  <div class="library-header">
+    <div>
+      <div class="library-title">Exercise Library</div>
+      <div class="library-subtitle" id="libraryCount">Loading...</div>
+    </div>
+    <button class="slideout-close" onclick="closeLibrary()" aria-label="Close library">✕</button>
+  </div>
+  <div class="library-search-wrap">
+    <input type="text" class="library-search" id="librarySearch" placeholder="Search exercises..." />
+  </div>
+  <div class="library-chips" id="libraryChips"></div>
+  <div class="library-body" id="libraryBody"></div>
+</div>
+
+<!-- Slide-out panel -->
+<div class="slideout-backdrop" id="slideoutBackdrop" onclick="closeModal()"></div>
+<div class="slideout" id="exerciseSlideout">
+  <div class="slideout-header">
+    <div>
+      <div class="modal-title" id="modalTitle"></div>
+      <div class="modal-muscles" id="modalMuscles"></div>
+    </div>
+    <button class="slideout-close" onclick="closeModal()">✕</button>
+  </div>
+  <div class="slideout-body">
+    <div class="modal-section-label">How to do it</div>
+    <div class="modal-desc" id="modalDesc"></div>
+    <div class="modal-section-label">Tip</div>
+    <div class="modal-tip" id="modalTip"></div>
+    <div class="modal-section-label">Your weight — current phase</div>
+    <div class="modal-weight-row">
+      <input type="number" class="weight-input" id="weightInput" step="0.5" min="0" placeholder="kg" />
+      <span style="font-family:var(--mono);font-size:0.75rem;color:var(--muted)" id="dumbellCountLabel"></span>
+      <button class="weight-save-btn" onclick="saveWeight()">Save</button>
+      <span class="weight-saved-msg" id="weightSavedMsg">Saved ✓</span>
+    </div>
+    <div class="modal-section-label" style="margin-top:1rem;">Weights across the year</div>
+    <div class="weight-phases" id="weightPhases"></div>
+  </div>
+</div>
+
+</body>
+</html>
