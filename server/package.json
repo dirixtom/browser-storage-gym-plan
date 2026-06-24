@@ -1,0 +1,21 @@
+{
+  "name": "gym-plan-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Backend sync server for the Kilo gym plan app (GitHub OAuth + Postgres).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node --env-file=.env server.js",
+    "init-db": "node --env-file=.env -e \"import('node:fs').then(fs=>import('pg').then(async({default:pg})=>{const p=new pg.Pool({connectionString:process.env.DATABASE_URL});await p.query(fs.readFileSync('./schema.sql','utf8'));console.log('schema applied');await p.end();}))\""
+  },
+  "dependencies": {
+    "@fastify/cookie": "^9.3.1",
+    "@fastify/rate-limit": "^9.1.0",
+    "@fastify/static": "^7.0.4",
+    "fastify": "^4.28.1",
+    "pg": "^8.12.0"
+  }
+}
