@@ -1317,6 +1317,7 @@
     <div class="page-tagline">1-year programme</div>
   </div>
   <div class="page-header-actions">
+    <button class="page-action-btn" id="authBtn" hidden aria-label="Sign in to sync">Sign in</button>
     <button class="page-action-btn" onclick="openLibrary()" aria-label="Open exercise library">
       <span class="page-action-icon">≡</span>
       <span class="page-action-label">Library</span>
@@ -2115,8 +2116,8 @@
     if (!exerciseKey) return;
     const val = input.value.trim();
     if (val === '') {
-      // Cleared — remove saved override
-      try { localStorage.removeItem(storageKey(exerciseKey + '_phase' + phaseIdx)); } catch(e) {}
+      // Cleared — remove saved override (tombstoned so the clear syncs)
+      kvDelete(storageKey(exerciseKey + '_phase' + phaseIdx));
       input.classList.remove('custom');
     } else {
       const num = parseFloat(val);
@@ -2266,13 +2267,15 @@
   // ── PHASE SWITCHER ──
   const PHASE_NAMES = ['Phase 1 — Foundation', 'Phase 2 — Building', 'Phase 3 — Intensity', 'Phase 4 — Mastery'];
 
-  function showPhase(index) {
+  function showPhase(index, persist) {
     document.querySelectorAll('.phase-section').forEach((s, i) => s.classList.toggle('visible', i === index));
     document.querySelectorAll('.phases-drawer-item').forEach((b, i) => b.classList.toggle('active', i === index));
     document.querySelectorAll('.phase-tab').forEach((b, i) => b.classList.toggle('active', i === index));
     window.scrollTo({ top: 0, behavior: 'smooth' });
     refreshWeightBadges();
-    try { localStorage.setItem('kilo_last_phase', index); } catch(e) {}
+    // persist defaults to true (user action); programmatic restore/sync passes false
+    // so it doesn't bump the timestamp or trigger a redundant push.
+    if (persist !== false) kvSet('kilo_last_phase', String(index));
   }
 
   function togglePhases() {
@@ -2288,14 +2291,52 @@
   }
 
   // ── STORAGE HELPERS ──
+  // All persistent data lives in localStorage. When the user is logged in, every
+  // write also records a timestamp (a "meta" sidecar) and is pushed to the server,
+  // and on login we reconcile with the server using newer-wins. Logged out, the
+  // app behaves exactly as before — nothing leaves the device.
+
+  const META_PREFIX = 'kilo_meta_';
+  // Keys we sync: per-exercise weight overrides + the last-viewed phase.
+  const SYNC_KEY_RE = /^(kilo_weight_|kilo_last_phase$)/;
+
   function storageKey(name) { return 'kilo_weight_' + name.toLowerCase().replace(/[^a-z0-9]/g, '_'); }
 
   function getSavedWeight(name) {
     try { return localStorage.getItem(storageKey(name)); } catch(e) { return null; }
   }
 
+  // ── sync metadata (timestamp sidecar) ──
+  function setMeta(lsKey, meta) {
+    try { localStorage.setItem(META_PREFIX + lsKey, JSON.stringify(meta)); } catch(e) {}
+  }
+  function getMeta(lsKey) {
+    try { const m = localStorage.getItem(META_PREFIX + lsKey); return m ? JSON.parse(m) : null; }
+    catch(e) { return null; }
+  }
+
+  // Write a value + fresh timestamp, then queue a push if logged in.
+  function kvSet(lsKey, val) {
+    try {
+      localStorage.setItem(lsKey, val);
+      setMeta(lsKey, { updated_at: new Date().toISOString(), deleted: false });
+    } catch(e) {}
+    Sync.queue(lsKey);
+  }
+
+  // Tombstone a value: remove it but remember the deletion + timestamp so the
+  // clear propagates and isn't resurrected by an older value from the server.
+  function kvDelete(lsKey) {
+    try {
+      localStorage.removeItem(lsKey);
+      setMeta(lsKey, { updated_at: new Date().toISOString(), deleted: true });
+    } catch(e) {}
+    Sync.queue(lsKey);
+  }
+
+  // setSavedWeight keeps its old signature (name like 'goblet-squat_phase2').
   function setSavedWeight(name, val) {
-    try { localStorage.setItem(storageKey(name), val); } catch(e) {}
+    kvSet(storageKey(name), String(val));
   }
 
   function getDisplayWeight(name, phaseIdx) {
@@ -2458,11 +2499,13 @@
     document.querySelectorAll('[data-weight-badge]').forEach(badge => {
       if (!badge.dataset.defaultText) badge.dataset.defaultText = badge.textContent;
     });
+    Sync.migrateMeta();
     try {
       const saved = localStorage.getItem('kilo_last_phase');
-      if (saved !== null) showPhase(parseInt(saved));
+      if (saved !== null) showPhase(parseInt(saved), false);
     } catch(e) {}
     refreshWeightBadges();
+    Sync.init();
   });
 
   // Close modal on Escape
@@ -2479,6 +2522,182 @@
       }
     }
   });
+
+  // ── SYNC CLIENT ──
+  // Optional cloud sync via the same-origin backend. If no backend is reachable
+  // (app opened as a static file / on GitHub Pages without a server), every call
+  // fails quietly and the app stays in pure local-storage mode.
+  const Sync = (function () {
+    let loggedIn = false;
+    let busy = false;
+    let pushTimer = null;
+    const pending = new Set();
+
+    function api(path, opts) {
+      return fetch(path, Object.assign({
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+      }, opts || {}));
+    }
+
+    // Stamp any existing un-timestamped data as "now" so a first login pushes the
+    // local values up (local-wins on first migration).
+    function migrateMeta() {
+      const now = new Date().toISOString();
+      const keys = [];
+      try {
+        for (let i = 0; i < localStorage.length; i++) {
+          const k = localStorage.key(i);
+          if (k && SYNC_KEY_RE.test(k)) keys.push(k);
+        }
+      } catch (e) { return; }
+      keys.forEach(k => { if (!getMeta(k)) setMeta(k, { updated_at: now, deleted: false }); });
+    }
+
+    // Every key we know about: live values + tombstones (meta with the value gone).
+    function localSyncKeys() {
+      const set = new Set();
+      try {
+        for (let i = 0; i < localStorage.length; i++) {
+          const k = localStorage.key(i);
+          if (!k) continue;
+          if (SYNC_KEY_RE.test(k)) set.add(k);
+          else if (k.startsWith(META_PREFIX)) set.add(k.slice(META_PREFIX.length));
+        }
+      } catch (e) {}
+      return set;
+    }
+
+    function collectItem(lsKey) {
+      const meta = getMeta(lsKey) || { updated_at: new Date(0).toISOString(), deleted: false };
+      const deleted = !!meta.deleted;
+      let value = null;
+      try { value = deleted ? null : localStorage.getItem(lsKey); } catch (e) {}
+      return { item_key: lsKey, value, deleted, updated_at: meta.updated_at };
+    }
+
+    // Apply one remote item locally if it is strictly newer than what we have.
+    function applyRemote(r) {
+      const lm = getMeta(r.item_key);
+      const localTs = lm ? Date.parse(lm.updated_at) : -Infinity;
+      const remoteTs = Date.parse(r.updated_at);
+      if (remoteTs <= localTs) return false;
+      try {
+        if (r.deleted) localStorage.removeItem(r.item_key);
+        else localStorage.setItem(r.item_key, r.value);
+      } catch (e) {}
+      setMeta(r.item_key, { updated_at: r.updated_at, deleted: !!r.deleted });
+      return true;
+    }
+
+    function refreshUI() {
+      refreshWeightBadges();
+      try {
+        const lp = localStorage.getItem('kilo_last_phase');
+        if (lp !== null) showPhase(parseInt(lp), false);
+      } catch (e) {}
+    }
+
+    // Full two-way reconcile (run on login and on window focus).
+    async function reconcile() {
+      if (busy) return;
+      busy = true;
+      try {
+        const res = await api('/api/sync');
+        if (!res.ok) return;
+        const remote = (await res.json()).items || [];
+        const remoteMap = new Map(remote.map(r => [r.item_key, r]));
+        const keys = new Set([...localSyncKeys(), ...remoteMap.keys()]);
+        const toPush = [];
+        keys.forEach(key => {
+          const local = collectItem(key);
+          const r = remoteMap.get(key);
+          const localTs = Date.parse(local.updated_at);
+          const remoteTs = r ? Date.parse(r.updated_at) : -Infinity;
+          if (r && remoteTs > localTs) applyRemote(r);
+          else if (localTs > remoteTs) toPush.push(local);
+        });
+        if (toPush.length) {
+          try { await api('/api/sync', { method: 'POST', body: JSON.stringify({ items: toPush }) }); }
+          catch (e) {}
+        }
+        refreshUI();
+      } catch (e) {
+        // backend unreachable — stay local-only
+      } finally {
+        busy = false;
+      }
+    }
+
+    // Debounced push of edited keys while logged in.
+    function queue(lsKey) {
+      if (!loggedIn) return;
+      pending.add(lsKey);
+      clearTimeout(pushTimer);
+      pushTimer = setTimeout(flush, 800);
+    }
+
+    async function flush() {
+      if (!loggedIn || pending.size === 0) return;
+      const keys = [...pending];
+      pending.clear();
+      const items = keys.map(collectItem);
+      try {
+        const res = await api('/api/sync', { method: 'POST', body: JSON.stringify({ items }) });
+        if (res.ok) {
+          // Adopt the server's authoritative timestamps for what we pushed.
+          const remote = (await res.json()).items || [];
+          const m = new Map(remote.map(r => [r.item_key, r]));
+          keys.forEach(k => { const r = m.get(k); if (r) setMeta(k, { updated_at: r.updated_at, deleted: !!r.deleted }); });
+        } else {
+          keys.forEach(k => pending.add(k)); // retry later
+        }
+      } catch (e) {
+        keys.forEach(k => pending.add(k)); // offline — retry at next flush/login
+      }
+    }
+
+    function renderAuth() {
+      const btn = document.getElementById('authBtn');
+      if (!btn) return;
+      if (loggedIn) {
+        btn.textContent = 'Sign out';
+        btn.title = 'Synced — click to sign out';
+        btn.onclick = logout;
+      } else {
+        btn.textContent = 'Sign in';
+        btn.title = 'Sign in with GitHub to sync across devices';
+        btn.onclick = login;
+      }
+      btn.hidden = false;
+    }
+
+    function login() { window.location.href = '/auth/github/login'; }
+
+    async function logout() {
+      try { await api('/auth/logout', { method: 'POST' }); } catch (e) {}
+      loggedIn = false;
+      renderAuth();
+    }
+
+    async function init() {
+      try {
+        const res = await api('/api/me');
+        if (!res.ok) return;            // no backend / error → stay local-only, no button
+        const me = await res.json();
+        loggedIn = !!me.loggedIn;
+        renderAuth();
+        if (loggedIn) {
+          await reconcile();
+          window.addEventListener('focus', () => { reconcile(); });
+        }
+      } catch (e) {
+        // No backend reachable: leave the Sign-in button hidden, app stays local.
+      }
+    }
+
+    return { init, migrateMeta, queue, reconcile };
+  })();
 </script>
 
 
