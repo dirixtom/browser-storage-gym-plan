@@ -50,6 +50,16 @@ psql -U gymapp -d gymapp -c '\conninfo'
 
 ## 2. Configure
 
+Build the frontend first (the server serves `web/dist/`):
+
+```bash
+cd web
+npm ci
+npm run build
+```
+
+Then configure the server:
+
 ```bash
 cd server
 cp .env.example .env

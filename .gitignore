@@ -148,3 +148,6 @@ Thumbs.db
 .vscode/
 .idea/
 *.swp
+
+# Astro
+.astro/
