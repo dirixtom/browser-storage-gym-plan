@@ -1,21 +1,22 @@
 // Kilo gym plan — sync server.
 //
 // Responsibilities:
-//   * Serve the static app (index.html etc.) at the same origin as the API.
+//   * Serve the static app (the Astro build in ../web/dist) at the same origin as the API.
 //   * GitHub OAuth login, gated to a single allowed numeric GitHub id.
 //   * A tiny newer-wins key/value sync API backed by Postgres.
 //
 // Run with:  node --env-file=.env server.js   (npm start)
 // Node >= 20 (native fetch + --env-file).
+// Build the frontend first:  cd ../web && npm ci && npm run build
 
 import crypto from 'node:crypto';
-import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import Fastify from 'fastify';
 import cookie from '@fastify/cookie';
 import rateLimit from '@fastify/rate-limit';
+import fastifyStatic from '@fastify/static';
 import pg from 'pg';
 
 // ── Config ───────────────────────────────────────────────────────────────
@@ -45,7 +46,9 @@ for (const [k, v] of Object.entries({
 }
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const INDEX_PATH = path.join(__dirname, '..', 'index.html'); // single-file frontend at repo root
+// Astro build output. Only this directory is exposed — server/.env, .git, etc.
+// live outside it and are never served.
+const DIST_DIR = path.join(__dirname, '..', 'web', 'dist');
 
 const pool = new pg.Pool({ connectionString: DATABASE_URL });
 
@@ -286,19 +289,23 @@ app.post('/api/sync', {
 });
 
 // ── Static app ─────────────────────────────────────────────────────────--
-// The frontend is a single self-contained index.html. We serve ONLY that file,
-// explicitly — never a directory — so server/.env, .git, etc. are never exposed.
-function sendIndex(reply) {
-  let html;
-  try {
-    html = fs.readFileSync(INDEX_PATH, 'utf8');
-  } catch {
-    return reply.code(500).send('index.html not found');
+// The frontend is the Astro build in web/dist. Registered AFTER the API/auth
+// routes so it can never shadow them; rooted at dist so nothing outside the
+// build output is reachable.
+await app.register(fastifyStatic, {
+  root: DIST_DIR,
+  index: ['index.html'],
+  wildcard: false,
+});
+
+// Any unmatched GET outside /api and /auth falls back to the app shell so a
+// hard refresh on any path still loads the single-page app.
+app.setNotFoundHandler((req, reply) => {
+  if (req.raw.method === 'GET' && !req.url.startsWith('/api') && !req.url.startsWith('/auth')) {
+    return reply.sendFile('index.html');
   }
-  reply.header('Content-Type', 'text/html; charset=utf-8').send(html);
-}
-app.get('/', (req, reply) => sendIndex(reply));
-app.get('/index.html', (req, reply) => sendIndex(reply));
+  reply.code(404).send({ error: 'not_found' });
+});
 
 // ── Start ──────────────────────────────────────────────────────────────--
 try {
