@@ -10,12 +10,14 @@ import { ExerciseLibrary } from './ExerciseLibrary';
 import { FullscreenTrainView, type FullscreenTarget } from './FullscreenTrainView';
 import { PhaseSection } from './PhaseSection';
 import { PhaseTabs } from './PhaseTabs';
+import { TrainingGuideSheet } from './TrainingGuideSheet';
 
 /** One overlay open at a time (replaces the legacy Escape-precedence ladder). */
 type Overlay =
   | { type: 'detail'; target: DetailTarget }
   | { type: 'fullscreen'; target: FullscreenTarget }
   | { type: 'library' }
+  | { type: 'guide' }
   | null;
 
 function Shell() {
@@ -28,7 +30,7 @@ function Shell() {
   const openDetail = (ex: WorkoutExercise) =>
     setOverlay({
       type: 'detail',
-      target: { slug: ex.slug, phase: current.index, dumbbells: ex.dumbbells },
+      target: { slug: ex.slug, phase: current.index, dumbbells: ex.dumbbells, restPause: ex.restPause },
     });
 
   const openFullscreen = (workout: Workout) =>
@@ -52,6 +54,14 @@ function Shell() {
         </div>
         <div className="flex flex-wrap gap-2 max-sm:w-full max-sm:[&>button]:flex-1 max-sm:[&>button]:justify-center">
           <AuthButton />
+          <button
+            className="inline-flex cursor-pointer items-center gap-2 rounded-md border border-border bg-surface px-3.5 py-2 font-mono text-[0.72rem] tracking-wide text-foreground uppercase transition-all hover:border-orange hover:text-orange-dim"
+            onClick={() => setOverlay({ type: 'guide' })}
+            aria-label="Open training guide"
+          >
+            <span className="text-base leading-none text-orange">?</span>
+            Guide
+          </button>
           <button
             className="inline-flex cursor-pointer items-center gap-2 rounded-md border border-border bg-surface px-3.5 py-2 font-mono text-[0.72rem] tracking-wide text-foreground uppercase transition-all hover:border-orange hover:text-orange-dim"
             onClick={() => setOverlay({ type: 'library' })}
@@ -80,6 +90,7 @@ function Shell() {
         onClose={close}
       />
       <ExerciseLibrary open={overlay?.type === 'library'} onClose={close} />
+      <TrainingGuideSheet open={overlay?.type === 'guide'} onClose={close} phase={current.index} />
     </>
   );
 }
