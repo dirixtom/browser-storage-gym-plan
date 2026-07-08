@@ -596,7 +596,17 @@
     color: var(--orange-dim);
     white-space: nowrap;
     flex-shrink: 0;
+    width: 104px;
+    text-align: right;
   }
+
+  .ex-rp-slot {
+    display: inline-flex;
+    justify-content: center;
+    width: 32px;
+    flex-shrink: 0;
+  }
+  .ex-rp-slot .rp-tag { margin-left: 0; }
 
 
   /* Rotation note */
@@ -678,6 +688,9 @@
     border-radius: 3px;
     padding: 1px 6px;
     transition: background 0.15s;
+    box-sizing: border-box;
+    width: 92px;
+    text-align: center;
   }
   .ex-weight:hover { background: rgba(74,222,128,0.1); }
   .ex-weight.bodyweight { color: var(--muted); border-color: var(--border); }
@@ -1597,13 +1610,13 @@
           <div class="workout-name">Full body — push focus</div><span class="fs-hint">tap to expand</span>
         </div>
         <ul class="exercise-list">
-          <li class="exercise-item clickable" data-exercise="goblet-squat" data-phase="0" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">Goblet squat<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="goblet-squat">20.5kg × 1</span><span class="ex-sets">3 × 10</span></li>
-          <li class="exercise-item clickable" data-exercise="db-romanian-deadlift" data-phase="0" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB Romanian deadlift<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-romanian-deadlift">18kg × 2</span><span class="ex-sets">3 × 10</span></li>
-          <li class="exercise-item clickable" data-exercise="db-floor-press" data-phase="0" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB floor press<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-floor-press">11.5kg × 2</span><span class="ex-sets">3 × 8</span></li>
-          <li class="exercise-item clickable" data-exercise="db-bent-over-row" data-phase="0" onclick="openModal(this)"><span class="ex-num">4</span><span class="ex-name">DB bent-over row<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-bent-over-row">13.5kg × 2</span><span class="ex-sets">3 × 8</span></li>
-          <li class="exercise-item clickable" data-exercise="db-lateral-raise" data-phase="0" onclick="openModal(this)"><span class="ex-num">5</span><span class="ex-name">DB lateral raise<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-lateral-raise">4.5kg × 2</span><span class="ex-sets">3 × 10</span></li>
-          <li class="exercise-item clickable" data-exercise="db-curl" data-phase="0" onclick="openModal(this)"><span class="ex-num">6</span><span class="ex-name">DB curl<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-curl">8kg × 2</span><span class="ex-sets">3 × 8</span></li>
-          <li class="exercise-item clickable" data-exercise="db-tricep-overhead-extension" data-phase="0" onclick="openModal(this)"><span class="ex-num">7</span><span class="ex-name">DB tricep overhead extension<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-tricep-overhead-extension">6.5kg × 1</span><span class="ex-sets">3 × 8</span></li>
+          <li class="exercise-item clickable" data-exercise="goblet-squat" data-phase="0" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">Goblet squat<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="goblet-squat">20.5kg × 1</span><span class="ex-sets">3 × 10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-romanian-deadlift" data-phase="0" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB Romanian deadlift<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-romanian-deadlift">18kg × 2</span><span class="ex-sets">3 × 10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-floor-press" data-phase="0" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB floor press<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-floor-press">11.5kg × 2</span><span class="ex-sets">3 × 8</span></li>
+          <li class="exercise-item clickable" data-exercise="db-bent-over-row" data-phase="0" onclick="openModal(this)"><span class="ex-num">4</span><span class="ex-name">DB bent-over row<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-bent-over-row">13.5kg × 2</span><span class="ex-sets">3 × 8</span></li>
+          <li class="exercise-item clickable" data-exercise="db-lateral-raise" data-phase="0" onclick="openModal(this)"><span class="ex-num">5</span><span class="ex-name">DB lateral raise<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-lateral-raise">4.5kg × 2</span><span class="ex-sets">3 × 10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-curl" data-phase="0" onclick="openModal(this)"><span class="ex-num">6</span><span class="ex-name">DB curl<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-curl">8kg × 2</span><span class="ex-sets">3 × 8</span></li>
+          <li class="exercise-item clickable" data-exercise="db-tricep-overhead-extension" data-phase="0" onclick="openModal(this)"><span class="ex-num">7</span><span class="ex-name">DB tricep overhead extension<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-tricep-overhead-extension">6.5kg × 1</span><span class="ex-sets">3 × 8</span></li>
         </ul>
       </div>
       <div class="workout-card">
@@ -1612,13 +1625,13 @@
           <div class="workout-name">Full body — pull focus</div><span class="fs-hint">tap to expand</span>
         </div>
         <ul class="exercise-list">
-          <li class="exercise-item clickable" data-exercise="goblet-squat" data-phase="0" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">Goblet squat<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="goblet-squat">20.5kg × 1</span><span class="ex-sets">3 × 10</span></li>
-          <li class="exercise-item clickable" data-exercise="db-romanian-deadlift" data-phase="0" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB Romanian deadlift<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-romanian-deadlift">18kg × 2</span><span class="ex-sets">3 × 10</span></li>
-          <li class="exercise-item clickable" data-exercise="db-overhead-press" data-phase="0" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB overhead press<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-overhead-press">8kg × 2</span><span class="ex-sets">3 × 8</span></li>
-          <li class="exercise-item clickable" data-exercise="db-front-raise" data-phase="0" onclick="openModal(this)"><span class="ex-num">4</span><span class="ex-name">DB front raise<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-front-raise">4.5kg × 2</span><span class="ex-sets">3 × 10</span></li>
-          <li class="exercise-item clickable" data-exercise="db-shrug" data-phase="0" onclick="openModal(this)"><span class="ex-num">5</span><span class="ex-name">DB shrug<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-shrug">13.5kg × 2</span><span class="ex-sets">3 × 12</span></li>
-          <li class="exercise-item clickable" data-exercise="hammer-curl" data-phase="0" onclick="openModal(this)"><span class="ex-num">6</span><span class="ex-name">Hammer curl<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="hammer-curl">9kg × 2</span><span class="ex-sets">3 × 8</span></li>
-          <li class="exercise-item clickable" data-exercise="db-bent-over-row" data-phase="0" onclick="openModal(this)"><span class="ex-num">7</span><span class="ex-name">DB bent-over row<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-bent-over-row">13.5kg × 2</span><span class="ex-sets">3 × 8</span></li>
+          <li class="exercise-item clickable" data-exercise="goblet-squat" data-phase="0" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">Goblet squat<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="goblet-squat">20.5kg × 1</span><span class="ex-sets">3 × 10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-romanian-deadlift" data-phase="0" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB Romanian deadlift<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-romanian-deadlift">18kg × 2</span><span class="ex-sets">3 × 10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-overhead-press" data-phase="0" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB overhead press<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-overhead-press">8kg × 2</span><span class="ex-sets">3 × 8</span></li>
+          <li class="exercise-item clickable" data-exercise="db-front-raise" data-phase="0" onclick="openModal(this)"><span class="ex-num">4</span><span class="ex-name">DB front raise<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-front-raise">4.5kg × 2</span><span class="ex-sets">3 × 10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-shrug" data-phase="0" onclick="openModal(this)"><span class="ex-num">5</span><span class="ex-name">DB shrug<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-shrug">13.5kg × 2</span><span class="ex-sets">3 × 12</span></li>
+          <li class="exercise-item clickable" data-exercise="hammer-curl" data-phase="0" onclick="openModal(this)"><span class="ex-num">6</span><span class="ex-name">Hammer curl<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="hammer-curl">9kg × 2</span><span class="ex-sets">3 × 8</span></li>
+          <li class="exercise-item clickable" data-exercise="db-bent-over-row" data-phase="0" onclick="openModal(this)"><span class="ex-num">7</span><span class="ex-name">DB bent-over row<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-bent-over-row">13.5kg × 2</span><span class="ex-sets">3 × 8</span></li>
         </ul>
       </div>
     </div>
@@ -1708,17 +1721,17 @@
           <div class="workout-name">Legs — squat & hinge</div><span class="fs-hint">tap to expand</span>
         </div>
         <ul class="exercise-list">
-          <li class="exercise-item clickable" data-exercise="db-sumo-squat" data-phase="1" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">DB sumo squat<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-sumo-squat">28.5kg × 1</span><span class="ex-sets">3 × 8–12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-sumo-squat" data-phase="1" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">DB sumo squat<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-sumo-squat">28.5kg × 1</span><span class="ex-sets">3 × 8–12</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-bulgarian-split-squat" data-phase="1" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB Bulgarian split squat<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-bulgarian-split-squat">15.5kg × 2</span><span class="ex-sets">3 × 8–12 each</span></li>
+          <li class="exercise-item clickable" data-exercise="db-bulgarian-split-squat" data-phase="1" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB Bulgarian split squat<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-bulgarian-split-squat">15.5kg × 2</span><span class="ex-sets">3 × 8–12 each</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-romanian-deadlift" data-phase="1" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB Romanian deadlift<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-romanian-deadlift">22kg × 2</span><span class="ex-sets">3 × 8–12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-romanian-deadlift" data-phase="1" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB Romanian deadlift<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-romanian-deadlift">22kg × 2</span><span class="ex-sets">3 × 8–12</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-single-leg-rdl" data-phase="1" onclick="openModal(this)"><span class="ex-num">4</span><span class="ex-name">DB single-leg Romanian deadlift<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-single-leg-rdl">12kg × 1</span><span class="ex-sets">3 × 8–12 each</span></li>
+          <li class="exercise-item clickable" data-exercise="db-single-leg-rdl" data-phase="1" onclick="openModal(this)"><span class="ex-num">4</span><span class="ex-name">DB single-leg Romanian deadlift<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-single-leg-rdl">12kg × 1</span><span class="ex-sets">3 × 8–12 each</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-glute-bridge" data-phase="1" onclick="openModal(this)"><span class="ex-num">5</span><span class="ex-name">DB single-leg glute bridge<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-glute-bridge">19.5kg × 1</span><span class="ex-sets">3 × 10–15</span></li>
+          <li class="exercise-item clickable" data-exercise="db-glute-bridge" data-phase="1" onclick="openModal(this)"><span class="ex-num">5</span><span class="ex-name">DB single-leg glute bridge<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-glute-bridge">19.5kg × 1</span><span class="ex-sets">3 × 10–15</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-calf-raise" data-phase="1" onclick="openModal(this)" data-rp="1"><span class="ex-num">6</span><span class="ex-name">DB calf raise<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-calf-raise">28.5kg × 1</span><span class="ex-sets">3 × 12–15</span><span class="rp-tag">RP</span></li>
+          <li class="exercise-item clickable" data-exercise="db-calf-raise" data-phase="1" onclick="openModal(this)" data-rp="1"><span class="ex-num">6</span><span class="ex-name">DB calf raise<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"><span class="rp-tag">RP</span></span><span class="ex-weight" data-weight-badge="db-calf-raise">28.5kg × 1</span><span class="ex-sets">3 × 12–15</span></li>
 
         </ul>
       </div>
@@ -1728,19 +1741,19 @@
           <div class="workout-name">Upper A — press & row</div><span class="fs-hint">tap to expand</span>
         </div>
         <ul class="exercise-list">
-          <li class="exercise-item clickable" data-exercise="db-floor-press" data-phase="1" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">DB floor press<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-floor-press">14kg × 2</span><span class="ex-sets">3 × 8–12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-floor-press" data-phase="1" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">DB floor press<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-floor-press">14kg × 2</span><span class="ex-sets">3 × 8–12</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-bent-over-row" data-phase="1" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB bent-over row<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-bent-over-row">16kg × 2</span><span class="ex-sets">3 × 8–12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-bent-over-row" data-phase="1" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB bent-over row<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-bent-over-row">16kg × 2</span><span class="ex-sets">3 × 8–12</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-overhead-press" data-phase="1" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB overhead press<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-overhead-press">10kg × 2</span><span class="ex-sets">3 × 8–12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-overhead-press" data-phase="1" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB overhead press<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-overhead-press">10kg × 2</span><span class="ex-sets">3 × 8–12</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-lateral-raise" data-phase="1" onclick="openModal(this)" data-rp="1"><span class="ex-num">4</span><span class="ex-name">DB lateral raise<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-lateral-raise">6kg × 2</span><span class="ex-sets">3 × 10–15</span><span class="rp-tag">RP</span></li>
+          <li class="exercise-item clickable" data-exercise="db-lateral-raise" data-phase="1" onclick="openModal(this)" data-rp="1"><span class="ex-num">4</span><span class="ex-name">DB lateral raise<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"><span class="rp-tag">RP</span></span><span class="ex-weight" data-weight-badge="db-lateral-raise">6kg × 2</span><span class="ex-sets">3 × 10–15</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-curl" data-phase="1" onclick="openModal(this)" data-rp="1"><span class="ex-num">5</span><span class="ex-name">DB curl<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-curl">9.5kg × 2</span><span class="ex-sets">3 × 10–15</span><span class="rp-tag">RP</span></li>
+          <li class="exercise-item clickable" data-exercise="db-curl" data-phase="1" onclick="openModal(this)" data-rp="1"><span class="ex-num">5</span><span class="ex-name">DB curl<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"><span class="rp-tag">RP</span></span><span class="ex-weight" data-weight-badge="db-curl">9.5kg × 2</span><span class="ex-sets">3 × 10–15</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-tricep-overhead-extension" data-phase="1" onclick="openModal(this)"><span class="ex-num">6</span><span class="ex-name">DB tricep overhead extension<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-tricep-overhead-extension">9kg × 1</span><span class="ex-sets">3 × 10–15</span></li>
+          <li class="exercise-item clickable" data-exercise="db-tricep-overhead-extension" data-phase="1" onclick="openModal(this)"><span class="ex-num">6</span><span class="ex-name">DB tricep overhead extension<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-tricep-overhead-extension">9kg × 1</span><span class="ex-sets">3 × 10–15</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-rear-delt-fly" data-phase="1" onclick="openModal(this)"><span class="ex-num">7</span><span class="ex-name">DB rear delt fly<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-rear-delt-fly">4kg × 2</span><span class="ex-sets">3 × 10–15</span></li>
+          <li class="exercise-item clickable" data-exercise="db-rear-delt-fly" data-phase="1" onclick="openModal(this)"><span class="ex-num">7</span><span class="ex-name">DB rear delt fly<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-rear-delt-fly">4kg × 2</span><span class="ex-sets">3 × 10–15</span></li>
 
         </ul>
       </div>
@@ -1750,19 +1763,19 @@
           <div class="workout-name">Upper B — press & row variations</div><span class="fs-hint">tap to expand</span>
         </div>
         <ul class="exercise-list">
-          <li class="exercise-item clickable" data-exercise="db-close-grip-floor-press" data-phase="1" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">DB close-grip floor press<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-close-grip-floor-press">14kg × 2</span><span class="ex-sets">3 × 8–12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-close-grip-floor-press" data-phase="1" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">DB close-grip floor press<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-close-grip-floor-press">14kg × 2</span><span class="ex-sets">3 × 8–12</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-single-arm-row" data-phase="1" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB single-arm row<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-single-arm-row">19.5kg × 2</span><span class="ex-sets">3 × 8–12 each</span></li>
+          <li class="exercise-item clickable" data-exercise="db-single-arm-row" data-phase="1" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB single-arm row<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-single-arm-row">19.5kg × 2</span><span class="ex-sets">3 × 8–12 each</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-arnold-press" data-phase="1" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB Arnold press<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-arnold-press">10kg × 2</span><span class="ex-sets">3 × 8–12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-arnold-press" data-phase="1" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB Arnold press<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-arnold-press">10kg × 2</span><span class="ex-sets">3 × 8–12</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-lateral-raise" data-phase="1" onclick="openModal(this)"><span class="ex-num">4</span><span class="ex-name">DB lateral raise<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-lateral-raise">6kg × 2</span><span class="ex-sets">3 × 10–15</span></li>
+          <li class="exercise-item clickable" data-exercise="db-lateral-raise" data-phase="1" onclick="openModal(this)"><span class="ex-num">4</span><span class="ex-name">DB lateral raise<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-lateral-raise">6kg × 2</span><span class="ex-sets">3 × 10–15</span></li>
 
-          <li class="exercise-item clickable" data-exercise="hammer-curl" data-phase="1" onclick="openModal(this)" data-rp="1"><span class="ex-num">5</span><span class="ex-name">Hammer curl<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="hammer-curl">10.5kg × 2</span><span class="ex-sets">3 × 10–15</span><span class="rp-tag">RP</span></li>
+          <li class="exercise-item clickable" data-exercise="hammer-curl" data-phase="1" onclick="openModal(this)" data-rp="1"><span class="ex-num">5</span><span class="ex-name">Hammer curl<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"><span class="rp-tag">RP</span></span><span class="ex-weight" data-weight-badge="hammer-curl">10.5kg × 2</span><span class="ex-sets">3 × 10–15</span></li>
 
-          <li class="exercise-item clickable" data-exercise="tricep-kickback" data-phase="1" onclick="openModal(this)" data-rp="1"><span class="ex-num">6</span><span class="ex-name">Tricep kickback<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="tricep-kickback">8kg × 2</span><span class="ex-sets">3 × 10–15</span><span class="rp-tag">RP</span></li>
+          <li class="exercise-item clickable" data-exercise="tricep-kickback" data-phase="1" onclick="openModal(this)" data-rp="1"><span class="ex-num">6</span><span class="ex-name">Tricep kickback<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"><span class="rp-tag">RP</span></span><span class="ex-weight" data-weight-badge="tricep-kickback">8kg × 2</span><span class="ex-sets">3 × 10–15</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-face-pull-floor" data-phase="1" onclick="openModal(this)"><span class="ex-num">7</span><span class="ex-name">DB face pull (floor)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-face-pull-floor">4kg × 2</span><span class="ex-sets">3 × 12–15</span></li>
+          <li class="exercise-item clickable" data-exercise="db-face-pull-floor" data-phase="1" onclick="openModal(this)"><span class="ex-num">7</span><span class="ex-name">DB face pull (floor)<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-face-pull-floor">4kg × 2</span><span class="ex-sets">3 × 12–15</span></li>
 
         </ul>
       </div>
@@ -1860,17 +1873,17 @@
           <div class="workout-name">Legs — heavy sets</div><span class="fs-hint">tap to expand</span>
         </div>
         <ul class="exercise-list">
-          <li class="exercise-item clickable" data-exercise="db-sumo-squat" data-phase="2" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">DB sumo squat<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-sumo-squat">34.5kg × 1</span><span class="ex-sets">3 × 6–10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-sumo-squat" data-phase="2" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">DB sumo squat<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-sumo-squat">34.5kg × 1</span><span class="ex-sets">3 × 6–10</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-bulgarian-split-squat" data-phase="2" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB Bulgarian split squat<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-bulgarian-split-squat">20.5kg × 2</span><span class="ex-sets">3 × 6–10 each</span></li>
+          <li class="exercise-item clickable" data-exercise="db-bulgarian-split-squat" data-phase="2" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB Bulgarian split squat<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-bulgarian-split-squat">20.5kg × 2</span><span class="ex-sets">3 × 6–10 each</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-romanian-deadlift" data-phase="2" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB Romanian deadlift<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-romanian-deadlift">26kg × 2</span><span class="ex-sets">3 × 6–10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-romanian-deadlift" data-phase="2" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB Romanian deadlift<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-romanian-deadlift">26kg × 2</span><span class="ex-sets">3 × 6–10</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-single-leg-rdl" data-phase="2" onclick="openModal(this)"><span class="ex-num">4</span><span class="ex-name">DB single-leg Romanian deadlift<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-single-leg-rdl">14kg × 1</span><span class="ex-sets">3 × 6–10 each</span></li>
+          <li class="exercise-item clickable" data-exercise="db-single-leg-rdl" data-phase="2" onclick="openModal(this)"><span class="ex-num">4</span><span class="ex-name">DB single-leg Romanian deadlift<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-single-leg-rdl">14kg × 1</span><span class="ex-sets">3 × 6–10 each</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-glute-bridge" data-phase="2" onclick="openModal(this)"><span class="ex-num">5</span><span class="ex-name">DB single-leg glute bridge<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-glute-bridge">25.5kg × 1</span><span class="ex-sets">3 × 8–12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-glute-bridge" data-phase="2" onclick="openModal(this)"><span class="ex-num">5</span><span class="ex-name">DB single-leg glute bridge<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-glute-bridge">25.5kg × 1</span><span class="ex-sets">3 × 8–12</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-calf-raise" data-phase="2" onclick="openModal(this)" data-rp="1"><span class="ex-num">6</span><span class="ex-name">DB calf raise<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-calf-raise">34.5kg × 1</span><span class="ex-sets">3 × 15–20</span><span class="rp-tag">RP</span></li>
+          <li class="exercise-item clickable" data-exercise="db-calf-raise" data-phase="2" onclick="openModal(this)" data-rp="1"><span class="ex-num">6</span><span class="ex-name">DB calf raise<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"><span class="rp-tag">RP</span></span><span class="ex-weight" data-weight-badge="db-calf-raise">34.5kg × 1</span><span class="ex-sets">3 × 15–20</span></li>
 
         </ul>
       </div>
@@ -1880,19 +1893,19 @@
           <div class="workout-name">Upper A — heavy sets</div><span class="fs-hint">tap to expand</span>
         </div>
         <ul class="exercise-list">
-          <li class="exercise-item clickable" data-exercise="db-floor-press" data-phase="2" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">DB floor press<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-floor-press">17kg × 2</span><span class="ex-sets">3 × 6–10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-floor-press" data-phase="2" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">DB floor press<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-floor-press">17kg × 2</span><span class="ex-sets">3 × 6–10</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-bent-over-row" data-phase="2" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB bent-over row<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-bent-over-row">19kg × 2</span><span class="ex-sets">3 × 6–10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-bent-over-row" data-phase="2" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB bent-over row<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-bent-over-row">19kg × 2</span><span class="ex-sets">3 × 6–10</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-overhead-press" data-phase="2" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB overhead press<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-overhead-press">12.5kg × 2</span><span class="ex-sets">3 × 6–10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-overhead-press" data-phase="2" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB overhead press<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-overhead-press">12.5kg × 2</span><span class="ex-sets">3 × 6–10</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-lateral-raise" data-phase="2" onclick="openModal(this)" data-rp="1"><span class="ex-num">4</span><span class="ex-name">DB lateral raise<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-lateral-raise">8kg × 2</span><span class="ex-sets">3 × 8–12</span><span class="rp-tag">RP</span></li>
+          <li class="exercise-item clickable" data-exercise="db-lateral-raise" data-phase="2" onclick="openModal(this)" data-rp="1"><span class="ex-num">4</span><span class="ex-name">DB lateral raise<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"><span class="rp-tag">RP</span></span><span class="ex-weight" data-weight-badge="db-lateral-raise">8kg × 2</span><span class="ex-sets">3 × 8–12</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-curl" data-phase="2" onclick="openModal(this)" data-rp="1"><span class="ex-num">5</span><span class="ex-name">DB curl<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-curl">11.5kg × 2</span><span class="ex-sets">3 × 8–12</span><span class="rp-tag">RP</span></li>
+          <li class="exercise-item clickable" data-exercise="db-curl" data-phase="2" onclick="openModal(this)" data-rp="1"><span class="ex-num">5</span><span class="ex-name">DB curl<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"><span class="rp-tag">RP</span></span><span class="ex-weight" data-weight-badge="db-curl">11.5kg × 2</span><span class="ex-sets">3 × 8–12</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-tricep-overhead-extension" data-phase="2" onclick="openModal(this)"><span class="ex-num">6</span><span class="ex-name">DB tricep overhead extension<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-tricep-overhead-extension">12kg × 1</span><span class="ex-sets">3 × 8–12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-tricep-overhead-extension" data-phase="2" onclick="openModal(this)"><span class="ex-num">6</span><span class="ex-name">DB tricep overhead extension<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-tricep-overhead-extension">12kg × 1</span><span class="ex-sets">3 × 8–12</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-rear-delt-fly" data-phase="2" onclick="openModal(this)"><span class="ex-num">7</span><span class="ex-name">DB rear delt fly<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-rear-delt-fly">6.5kg × 2</span><span class="ex-sets">3 × 8–12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-rear-delt-fly" data-phase="2" onclick="openModal(this)"><span class="ex-num">7</span><span class="ex-name">DB rear delt fly<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-rear-delt-fly">6.5kg × 2</span><span class="ex-sets">3 × 8–12</span></li>
 
         </ul>
       </div>
@@ -1902,19 +1915,19 @@
           <div class="workout-name">Upper B — heavy sets</div><span class="fs-hint">tap to expand</span>
         </div>
         <ul class="exercise-list">
-          <li class="exercise-item clickable" data-exercise="db-close-grip-floor-press" data-phase="2" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">DB close-grip floor press<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-close-grip-floor-press">17kg × 2</span><span class="ex-sets">3 × 6–10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-close-grip-floor-press" data-phase="2" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">DB close-grip floor press<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-close-grip-floor-press">17kg × 2</span><span class="ex-sets">3 × 6–10</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-single-arm-row" data-phase="2" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB single-arm row<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-single-arm-row">24.5kg × 2</span><span class="ex-sets">3 × 6–10 each</span></li>
+          <li class="exercise-item clickable" data-exercise="db-single-arm-row" data-phase="2" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB single-arm row<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-single-arm-row">24.5kg × 2</span><span class="ex-sets">3 × 6–10 each</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-arnold-press" data-phase="2" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB Arnold press<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-arnold-press">12.5kg × 2</span><span class="ex-sets">3 × 6–10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-arnold-press" data-phase="2" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB Arnold press<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-arnold-press">12.5kg × 2</span><span class="ex-sets">3 × 6–10</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-lateral-raise" data-phase="2" onclick="openModal(this)"><span class="ex-num">4</span><span class="ex-name">DB lateral raise<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-lateral-raise">8kg × 2</span><span class="ex-sets">3 × 8–12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-lateral-raise" data-phase="2" onclick="openModal(this)"><span class="ex-num">4</span><span class="ex-name">DB lateral raise<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-lateral-raise">8kg × 2</span><span class="ex-sets">3 × 8–12</span></li>
 
-          <li class="exercise-item clickable" data-exercise="hammer-curl" data-phase="2" onclick="openModal(this)" data-rp="1"><span class="ex-num">5</span><span class="ex-name">Hammer curl<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="hammer-curl">12.5kg × 2</span><span class="ex-sets">3 × 8–12</span><span class="rp-tag">RP</span></li>
+          <li class="exercise-item clickable" data-exercise="hammer-curl" data-phase="2" onclick="openModal(this)" data-rp="1"><span class="ex-num">5</span><span class="ex-name">Hammer curl<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"><span class="rp-tag">RP</span></span><span class="ex-weight" data-weight-badge="hammer-curl">12.5kg × 2</span><span class="ex-sets">3 × 8–12</span></li>
 
-          <li class="exercise-item clickable" data-exercise="tricep-kickback" data-phase="2" onclick="openModal(this)" data-rp="1"><span class="ex-num">6</span><span class="ex-name">Tricep kickback<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="tricep-kickback">10kg × 2</span><span class="ex-sets">3 × 8–12</span><span class="rp-tag">RP</span></li>
+          <li class="exercise-item clickable" data-exercise="tricep-kickback" data-phase="2" onclick="openModal(this)" data-rp="1"><span class="ex-num">6</span><span class="ex-name">Tricep kickback<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"><span class="rp-tag">RP</span></span><span class="ex-weight" data-weight-badge="tricep-kickback">10kg × 2</span><span class="ex-sets">3 × 8–12</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-face-pull-floor" data-phase="2" onclick="openModal(this)"><span class="ex-num">7</span><span class="ex-name">DB face pull (floor)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-face-pull-floor">6.5kg × 2</span><span class="ex-sets">3 × 12–15</span></li>
+          <li class="exercise-item clickable" data-exercise="db-face-pull-floor" data-phase="2" onclick="openModal(this)"><span class="ex-num">7</span><span class="ex-name">DB face pull (floor)<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-face-pull-floor">6.5kg × 2</span><span class="ex-sets">3 × 12–15</span></li>
 
         </ul>
       </div>
@@ -2010,17 +2023,17 @@
           <div class="workout-name">Legs — tempo</div><span class="fs-hint">tap to expand</span>
         </div>
         <ul class="exercise-list">
-          <li class="exercise-item clickable" data-exercise="db-sumo-squat" data-phase="3" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">DB sumo squat (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-sumo-squat">34.5kg × 1</span><span class="ex-sets">3 × 6–10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-sumo-squat" data-phase="3" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">DB sumo squat (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-sumo-squat">34.5kg × 1</span><span class="ex-sets">3 × 6–10</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-bulgarian-split-squat-tempo" data-phase="3" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB Bulgarian split squat (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-bulgarian-split-squat-tempo">20.5kg × 2</span><span class="ex-sets">3 × 6–10 each</span></li>
+          <li class="exercise-item clickable" data-exercise="db-bulgarian-split-squat-tempo" data-phase="3" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB Bulgarian split squat (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-bulgarian-split-squat-tempo">20.5kg × 2</span><span class="ex-sets">3 × 6–10 each</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-romanian-deadlift-tempo" data-phase="3" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB Romanian deadlift (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-romanian-deadlift-tempo">26kg × 2</span><span class="ex-sets">3 × 6–10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-romanian-deadlift-tempo" data-phase="3" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB Romanian deadlift (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-romanian-deadlift-tempo">26kg × 2</span><span class="ex-sets">3 × 6–10</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-single-leg-rdl" data-phase="3" onclick="openModal(this)"><span class="ex-num">4</span><span class="ex-name">DB single-leg Romanian deadlift (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-single-leg-rdl">14kg × 1</span><span class="ex-sets">3 × 6–10 each</span></li>
+          <li class="exercise-item clickable" data-exercise="db-single-leg-rdl" data-phase="3" onclick="openModal(this)"><span class="ex-num">4</span><span class="ex-name">DB single-leg Romanian deadlift (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-single-leg-rdl">14kg × 1</span><span class="ex-sets">3 × 6–10 each</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-glute-bridge" data-phase="3" onclick="openModal(this)"><span class="ex-num">5</span><span class="ex-name">DB single-leg glute bridge (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-glute-bridge">25.5kg × 1</span><span class="ex-sets">3 × 8–12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-glute-bridge" data-phase="3" onclick="openModal(this)"><span class="ex-num">5</span><span class="ex-name">DB single-leg glute bridge (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-glute-bridge">25.5kg × 1</span><span class="ex-sets">3 × 8–12</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-calf-raise" data-phase="3" onclick="openModal(this)" data-rp="1"><span class="ex-num">6</span><span class="ex-name">DB calf raise (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-calf-raise">34.5kg × 1</span><span class="ex-sets">3 × 15–20</span><span class="rp-tag">RP</span></li>
+          <li class="exercise-item clickable" data-exercise="db-calf-raise" data-phase="3" onclick="openModal(this)" data-rp="1"><span class="ex-num">6</span><span class="ex-name">DB calf raise (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"><span class="rp-tag">RP</span></span><span class="ex-weight" data-weight-badge="db-calf-raise">34.5kg × 1</span><span class="ex-sets">3 × 15–20</span></li>
 
         </ul>
       </div>
@@ -2030,19 +2043,19 @@
           <div class="workout-name">Upper A — tempo</div><span class="fs-hint">tap to expand</span>
         </div>
         <ul class="exercise-list">
-          <li class="exercise-item clickable" data-exercise="db-floor-press-tempo" data-phase="3" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">DB floor press (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-floor-press-tempo">17kg × 2</span><span class="ex-sets">3 × 6–10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-floor-press-tempo" data-phase="3" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">DB floor press (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-floor-press-tempo">17kg × 2</span><span class="ex-sets">3 × 6–10</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-bent-over-row-tempo" data-phase="3" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB bent-over row (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-bent-over-row-tempo">19kg × 2</span><span class="ex-sets">3 × 6–10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-bent-over-row-tempo" data-phase="3" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">DB bent-over row (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-bent-over-row-tempo">19kg × 2</span><span class="ex-sets">3 × 6–10</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-overhead-press-tempo" data-phase="3" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB overhead press (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-overhead-press-tempo">12.5kg × 2</span><span class="ex-sets">3 × 6–10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-overhead-press-tempo" data-phase="3" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB overhead press (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-overhead-press-tempo">12.5kg × 2</span><span class="ex-sets">3 × 6–10</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-lateral-raise-tempo" data-phase="3" onclick="openModal(this)" data-rp="1"><span class="ex-num">4</span><span class="ex-name">DB lateral raise (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-lateral-raise-tempo">8kg × 2</span><span class="ex-sets">3 × 8–12</span><span class="rp-tag">RP</span></li>
+          <li class="exercise-item clickable" data-exercise="db-lateral-raise-tempo" data-phase="3" onclick="openModal(this)" data-rp="1"><span class="ex-num">4</span><span class="ex-name">DB lateral raise (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"><span class="rp-tag">RP</span></span><span class="ex-weight" data-weight-badge="db-lateral-raise-tempo">8kg × 2</span><span class="ex-sets">3 × 8–12</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-curl-tempo" data-phase="3" onclick="openModal(this)" data-rp="1"><span class="ex-num">5</span><span class="ex-name">DB curl (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-curl-tempo">11.5kg × 2</span><span class="ex-sets">3 × 8–12</span><span class="rp-tag">RP</span></li>
+          <li class="exercise-item clickable" data-exercise="db-curl-tempo" data-phase="3" onclick="openModal(this)" data-rp="1"><span class="ex-num">5</span><span class="ex-name">DB curl (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"><span class="rp-tag">RP</span></span><span class="ex-weight" data-weight-badge="db-curl-tempo">11.5kg × 2</span><span class="ex-sets">3 × 8–12</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-tricep-overhead-extension-tempo" data-phase="3" onclick="openModal(this)"><span class="ex-num">6</span><span class="ex-name">DB tricep overhead extension (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-tricep-overhead-extension-tempo">12kg × 1</span><span class="ex-sets">3 × 8–12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-tricep-overhead-extension-tempo" data-phase="3" onclick="openModal(this)"><span class="ex-num">6</span><span class="ex-name">DB tricep overhead extension (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-tricep-overhead-extension-tempo">12kg × 1</span><span class="ex-sets">3 × 8–12</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-rear-delt-fly" data-phase="3" onclick="openModal(this)"><span class="ex-num">7</span><span class="ex-name">DB rear delt fly (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-rear-delt-fly">6.5kg × 2</span><span class="ex-sets">3 × 8–12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-rear-delt-fly" data-phase="3" onclick="openModal(this)"><span class="ex-num">7</span><span class="ex-name">DB rear delt fly (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-rear-delt-fly">6.5kg × 2</span><span class="ex-sets">3 × 8–12</span></li>
 
         </ul>
       </div>
@@ -2052,19 +2065,19 @@
           <div class="workout-name">Upper B — tempo</div><span class="fs-hint">tap to expand</span>
         </div>
         <ul class="exercise-list">
-          <li class="exercise-item clickable" data-exercise="db-close-grip-floor-press" data-phase="3" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">DB close-grip floor press (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-close-grip-floor-press">17kg × 2</span><span class="ex-sets">3 × 6–10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-close-grip-floor-press" data-phase="3" onclick="openModal(this)"><span class="ex-num">1</span><span class="ex-name">DB close-grip floor press (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-close-grip-floor-press">17kg × 2</span><span class="ex-sets">3 × 6–10</span></li>
 
-          <li class="exercise-item clickable" data-exercise="single-arm-row-tempo" data-phase="3" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">Single-arm row (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="single-arm-row-tempo">24.5kg × 2</span><span class="ex-sets">3 × 6–10 each</span></li>
+          <li class="exercise-item clickable" data-exercise="single-arm-row-tempo" data-phase="3" onclick="openModal(this)"><span class="ex-num">2</span><span class="ex-name">Single-arm row (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="single-arm-row-tempo">24.5kg × 2</span><span class="ex-sets">3 × 6–10 each</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-arnold-press" data-phase="3" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB Arnold press (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-arnold-press">12.5kg × 2</span><span class="ex-sets">3 × 6–10</span></li>
+          <li class="exercise-item clickable" data-exercise="db-arnold-press" data-phase="3" onclick="openModal(this)"><span class="ex-num">3</span><span class="ex-name">DB Arnold press (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-arnold-press">12.5kg × 2</span><span class="ex-sets">3 × 6–10</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-lateral-raise-tempo" data-phase="3" onclick="openModal(this)"><span class="ex-num">4</span><span class="ex-name">DB lateral raise (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-lateral-raise-tempo">8kg × 2</span><span class="ex-sets">3 × 8–12</span></li>
+          <li class="exercise-item clickable" data-exercise="db-lateral-raise-tempo" data-phase="3" onclick="openModal(this)"><span class="ex-num">4</span><span class="ex-name">DB lateral raise (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-lateral-raise-tempo">8kg × 2</span><span class="ex-sets">3 × 8–12</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-hammer-curl-tempo" data-phase="3" onclick="openModal(this)" data-rp="1"><span class="ex-num">5</span><span class="ex-name">DB hammer curl (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-hammer-curl-tempo">12.5kg × 2</span><span class="ex-sets">3 × 8–12</span><span class="rp-tag">RP</span></li>
+          <li class="exercise-item clickable" data-exercise="db-hammer-curl-tempo" data-phase="3" onclick="openModal(this)" data-rp="1"><span class="ex-num">5</span><span class="ex-name">DB hammer curl (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"><span class="rp-tag">RP</span></span><span class="ex-weight" data-weight-badge="db-hammer-curl-tempo">12.5kg × 2</span><span class="ex-sets">3 × 8–12</span></li>
 
-          <li class="exercise-item clickable" data-exercise="tricep-kickback" data-phase="3" onclick="openModal(this)" data-rp="1"><span class="ex-num">6</span><span class="ex-name">Tricep kickback (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="tricep-kickback">10kg × 2</span><span class="ex-sets">3 × 8–12</span><span class="rp-tag">RP</span></li>
+          <li class="exercise-item clickable" data-exercise="tricep-kickback" data-phase="3" onclick="openModal(this)" data-rp="1"><span class="ex-num">6</span><span class="ex-name">Tricep kickback (tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"><span class="rp-tag">RP</span></span><span class="ex-weight" data-weight-badge="tricep-kickback">10kg × 2</span><span class="ex-sets">3 × 8–12</span></li>
 
-          <li class="exercise-item clickable" data-exercise="db-face-pull-floor" data-phase="3" onclick="openModal(this)"><span class="ex-num">7</span><span class="ex-name">DB face pull (floor, tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-weight" data-weight-badge="db-face-pull-floor">6.5kg × 2</span><span class="ex-sets">3 × 12–15</span></li>
+          <li class="exercise-item clickable" data-exercise="db-face-pull-floor" data-phase="3" onclick="openModal(this)"><span class="ex-num">7</span><span class="ex-name">DB face pull (floor, tempo)<span class="ex-info-icon">ⓘ</span></span><span class="ex-rp-slot"></span><span class="ex-weight" data-weight-badge="db-face-pull-floor">6.5kg × 2</span><span class="ex-sets">3 × 12–15</span></li>
 
         </ul>
       </div>
