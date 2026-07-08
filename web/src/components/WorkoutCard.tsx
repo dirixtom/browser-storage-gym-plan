@@ -16,7 +16,7 @@ function ExerciseRow({
   const w = useWeight(exercise.slug, phaseIdx);
   return (
     <li
-      className="group flex cursor-pointer items-baseline justify-between gap-3 border-b border-border px-4 py-[7px] transition-colors last:border-b-0 hover:bg-surface2"
+      className="group flex cursor-pointer items-baseline gap-3 border-b border-border px-4 py-[7px] transition-colors last:border-b-0 hover:bg-surface2"
       onClick={() => onOpenDetail(exercise)}
       role="button"
       tabIndex={0}
@@ -28,13 +28,23 @@ function ExerciseRow({
       }}
     >
       <span className="w-3.5 shrink-0 font-mono text-[0.65rem] text-muted">{index + 1}</span>
-      <span className="flex-1 text-[0.82rem] text-foreground group-hover:text-orange-dim">
+      <span className="min-w-0 flex-1 text-[0.82rem] text-foreground group-hover:text-orange-dim">
         {exercise.name}
         <span className="ml-1 text-[0.65rem] text-border transition-colors group-hover:text-orange">ⓘ</span>
       </span>
+      <span className="flex w-8 shrink-0 justify-center">
+        {exercise.restPause && (
+          <span
+            className="rounded-xs border border-orange/40 bg-orange/10 px-1 font-mono text-[0.6rem] text-orange"
+            title="Rest-pause last set: failure → rest 15–20 sec → failure → rest 15–20 sec → failure, 2–3 mini-sets"
+          >
+            RP
+          </span>
+        )}
+      </span>
       <span
         className={cn(
-          'shrink-0 rounded-xs border px-1.5 py-px font-mono text-[0.65rem] whitespace-nowrap',
+          'w-[92px] shrink-0 rounded-xs border px-1.5 py-px text-center font-mono text-[0.65rem] whitespace-nowrap',
           w.isBodyweight
             ? 'border-border text-muted'
             : w.isCustom
@@ -45,16 +55,8 @@ function ExerciseRow({
       >
         {badgeText(w, exercise.dumbbells)}
       </span>
-      <span className="flex shrink-0 items-center gap-1 font-mono text-[0.72rem] whitespace-nowrap text-orange-dim">
+      <span className="w-[104px] shrink-0 text-right font-mono text-[0.72rem] whitespace-nowrap text-orange-dim">
         {exercise.setsReps}
-        {exercise.restPause && (
-          <span
-            className="rounded-xs border border-orange/40 bg-orange/10 px-1 text-[0.6rem] text-orange"
-            title="Rest-pause last set: failure → rest 15–20 sec → failure → rest 15–20 sec → failure, 2–3 mini-sets"
-          >
-            RP
-          </span>
-        )}
       </span>
     </li>
   );
