@@ -190,7 +190,7 @@ export const PHASES: Phase[] = [
       {
         "name": "Dead bug",
         "desc": "Lie on back, arms up, knees at 90°. Lower opposite arm and leg slowly, return.",
-        "setsReps": "3 × 8 each side"
+        "setsReps": "3 × 8"
       },
       {
         "name": "DB crunch",
@@ -205,12 +205,12 @@ export const PHASES: Phase[] = [
       {
         "name": "Bird dog",
         "desc": "On all fours, extend opposite arm and leg simultaneously. Hold 2 sec.",
-        "setsReps": "3 × 8 each side"
+        "setsReps": "3 × 8"
       },
       {
         "name": "Heel tap",
         "desc": "Lie on back, knees bent. Crunch sideways to tap each heel alternately.",
-        "setsReps": "3 × 15 each side"
+        "setsReps": "3 × 15"
       },
       {
         "name": "Seated knee tuck",
@@ -278,7 +278,7 @@ export const PHASES: Phase[] = [
           {
             "slug": "db-bulgarian-split-squat",
             "name": "DB Bulgarian split squat",
-            "setsReps": "3 × 8–12 each",
+            "setsReps": "3 × 8–12",
             "dumbbells": 2
           },
           {
@@ -290,13 +290,13 @@ export const PHASES: Phase[] = [
           {
             "slug": "db-single-leg-rdl",
             "name": "DB single-leg Romanian deadlift",
-            "setsReps": "3 × 8–12 each",
+            "setsReps": "3 × 8–12",
             "dumbbells": 1
           },
           {
             "slug": "db-glute-bridge",
             "name": "DB single-leg glute bridge",
-            "setsReps": "3 × 10–15 each",
+            "setsReps": "3 × 10–15",
             "dumbbells": 1
           },
           {
@@ -373,7 +373,7 @@ export const PHASES: Phase[] = [
           {
             "slug": "db-single-arm-row",
             "name": "DB single-arm row",
-            "setsReps": "3 × 8–12 each",
+            "setsReps": "3 × 8–12",
             "dumbbells": 2
           },
           {
@@ -421,7 +421,7 @@ export const PHASES: Phase[] = [
       {
         "name": "DB Russian twist",
         "desc": "Sit at 45°, hold one dumbbell, rotate side to side. Feet on floor. Oblique focus.",
-        "setsReps": "3 × 10–15 each side"
+        "setsReps": "3 × 10–15"
       },
       {
         "name": "Leg raise",
@@ -436,12 +436,12 @@ export const PHASES: Phase[] = [
       {
         "name": "Dead bug",
         "desc": "Arms up, knees at 90°. Lower opposite arm and leg simultaneously. Lower back stays on floor.",
-        "setsReps": "3 × 8–12 each side"
+        "setsReps": "3 × 8–12"
       },
       {
         "name": "DB woodchop",
         "desc": "Hold one dumbbell with both hands. Rotate and chop diagonally from high to low.",
-        "setsReps": "3 × 10–12 each side"
+        "setsReps": "3 × 10–12"
       }
     ]
   },
@@ -504,7 +504,7 @@ export const PHASES: Phase[] = [
           {
             "slug": "db-bulgarian-split-squat",
             "name": "DB Bulgarian split squat",
-            "setsReps": "3 × 6–10 each",
+            "setsReps": "3 × 6–10",
             "dumbbells": 2
           },
           {
@@ -516,13 +516,13 @@ export const PHASES: Phase[] = [
           {
             "slug": "db-single-leg-rdl",
             "name": "DB single-leg Romanian deadlift",
-            "setsReps": "3 × 6–10 each",
+            "setsReps": "3 × 6–10",
             "dumbbells": 1
           },
           {
             "slug": "db-glute-bridge",
             "name": "DB single-leg glute bridge",
-            "setsReps": "3 × 8–12 each",
+            "setsReps": "3 × 8–12",
             "dumbbells": 1
           },
           {
@@ -599,7 +599,7 @@ export const PHASES: Phase[] = [
           {
             "slug": "db-single-arm-row",
             "name": "DB single-arm row",
-            "setsReps": "3 × 6–10 each",
+            "setsReps": "3 × 6–10",
             "dumbbells": 2
           },
           {
@@ -642,7 +642,7 @@ export const PHASES: Phase[] = [
       {
         "name": "DB Russian twist",
         "desc": "Feet raised off floor. Heavier dumbbell. Rotate fully each side.",
-        "setsReps": "3 × 12–15 each side"
+        "setsReps": "3 × 12–15"
       },
       {
         "name": "Hollow body hold",
@@ -652,12 +652,12 @@ export const PHASES: Phase[] = [
       {
         "name": "DB suitcase carry",
         "desc": "One dumbbell at your side. Walk 15 steps keeping shoulders level. Core fights to stay upright.",
-        "setsReps": "3 × 15 steps each side"
+        "setsReps": "3 × 15 steps"
       },
       {
         "name": "DB woodchop",
         "desc": "Both hands on one dumbbell. Chop diagonally high to low. Rotation comes from core.",
-        "setsReps": "3 × 8–12 each side"
+        "setsReps": "3 × 8–12"
       },
       {
         "name": "V-up",
@@ -724,13 +724,13 @@ export const PHASES: Phase[] = [
           {
             "slug": "db-bulgarian-split-squat-tempo",
             "name": "DB Bulgarian split squat (tempo)",
-            "setsReps": "3 × 6–10 each",
+            "setsReps": "3 × 6–10",
             "dumbbells": 2
           },
           {
             "slug": "db-reverse-lunge-tempo",
             "name": "DB reverse lunge (tempo)",
-            "setsReps": "3 × 6–10 each",
+            "setsReps": "3 × 6–10",
             "dumbbells": 2
           },
           {
@@ -742,13 +742,13 @@ export const PHASES: Phase[] = [
           {
             "slug": "db-single-leg-rdl",
             "name": "DB single-leg Romanian deadlift (tempo)",
-            "setsReps": "3 × 6–10 each",
+            "setsReps": "3 × 6–10",
             "dumbbells": 1
           },
           {
             "slug": "db-glute-bridge",
             "name": "DB single-leg glute bridge (tempo)",
-            "setsReps": "3 × 8–12 each",
+            "setsReps": "3 × 8–12",
             "dumbbells": 1
           },
           {
@@ -825,7 +825,7 @@ export const PHASES: Phase[] = [
           {
             "slug": "single-arm-row-tempo",
             "name": "Single-arm row (tempo)",
-            "setsReps": "3 × 6–10 each",
+            "setsReps": "3 × 6–10",
             "dumbbells": 2
           },
           {
@@ -878,17 +878,17 @@ export const PHASES: Phase[] = [
       {
         "name": "DB woodchop (heavy)",
         "desc": "Heavier dumbbell. Controlled rotation high-to-low and low-to-high each side.",
-        "setsReps": "3 × 8–12 each side"
+        "setsReps": "3 × 8–12"
       },
       {
         "name": "DB suitcase carry",
         "desc": "Heavier than Phase 3. Walk slow, shoulders level, core braced the whole time.",
-        "setsReps": "3 × 20 steps each side"
+        "setsReps": "3 × 20 steps"
       },
       {
         "name": "DB windmill",
         "desc": "One dumbbell overhead, feet wide. Hinge sideways, reach other hand to floor. Eyes on the weight.",
-        "setsReps": "3 × 6–8 each side"
+        "setsReps": "3 × 6–8"
       },
       {
         "name": "V-up with DB pass",

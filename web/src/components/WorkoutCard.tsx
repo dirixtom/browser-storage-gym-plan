@@ -32,7 +32,7 @@ function ExerciseRow({
         {exercise.name}
         <span className="ml-1 text-[0.65rem] text-border transition-colors group-hover:text-orange">ⓘ</span>
       </span>
-      <span className="flex w-8 shrink-0 justify-center">
+      <span className="flex w-7 shrink-0 justify-center">
         {exercise.restPause && (
           <span
             className="rounded-xs border border-orange/40 bg-orange/10 px-1 font-mono text-[0.6rem] text-orange"
@@ -44,7 +44,7 @@ function ExerciseRow({
       </span>
       <span
         className={cn(
-          'w-[92px] shrink-0 rounded-xs border px-1.5 py-px text-center font-mono text-[0.65rem] whitespace-nowrap',
+          'w-[76px] shrink-0 rounded-xs border px-1.5 py-px text-right font-mono text-[0.65rem] whitespace-nowrap',
           w.isBodyweight
             ? 'border-border text-muted'
             : w.isCustom
@@ -55,7 +55,7 @@ function ExerciseRow({
       >
         {badgeText(w, exercise.dumbbells)}
       </span>
-      <span className="w-[104px] shrink-0 text-right font-mono text-[0.72rem] whitespace-nowrap text-orange-dim">
+      <span className="w-[66px] shrink-0 text-right font-mono text-[0.72rem] whitespace-nowrap text-orange-dim">
         {exercise.setsReps}
       </span>
     </li>
