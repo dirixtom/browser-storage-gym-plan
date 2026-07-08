@@ -11,7 +11,7 @@ import { EXERCISE_DATA, type Exercise } from '@/data/exercises';
 import { EFFORT_CUES, FS_GUIDE_DETAILS } from '@/data/guide';
 import type { Phase, Workout, WorkoutExercise } from '@/data/phases';
 import { badgeText, useWeight } from '@/hooks/useWeight';
-import { cn, splitSetsReps } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 
 export interface FullscreenTarget {
   phase: Phase;
@@ -36,7 +36,6 @@ function FsRow({
 }) {
   const { slug, name, setsReps, dumbbells, restPause } = exercise;
   const info = (EXERCISE_DATA as Record<string, Exercise>)[slug];
-  const { core, suffix } = splitSetsReps(setsReps);
   const w = useWeight(slug, phaseIdx);
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState('');
@@ -132,9 +131,8 @@ function FsRow({
             </button>
           )}
         </span>
-        <span className="flex min-w-[94px] shrink-0 justify-end gap-1.5 font-mono text-[1.05rem] whitespace-nowrap text-orange-dim">
-          <span>{core}</span>
-          {suffix && <span className="text-[0.8rem] text-muted">{suffix.trim()}</span>}
+        <span className="w-[94px] shrink-0 text-right font-mono text-[1.05rem] whitespace-nowrap text-orange-dim">
+          {setsReps}
         </span>
       </span>
       {expanded && info && (

@@ -1,6 +1,6 @@
 import type { Workout, WorkoutExercise } from '@/data/phases';
 import { badgeText, useWeight } from '@/hooks/useWeight';
-import { cn, splitSetsReps } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 
 function ExerciseRow({
   exercise,
@@ -14,7 +14,6 @@ function ExerciseRow({
   onOpenDetail: (ex: WorkoutExercise) => void;
 }) {
   const w = useWeight(exercise.slug, phaseIdx);
-  const { core, suffix } = splitSetsReps(exercise.setsReps);
   return (
     <li
       className="group flex cursor-pointer items-baseline gap-3 border-b border-border px-4 py-[7px] transition-colors last:border-b-0 hover:bg-surface2"
@@ -56,9 +55,8 @@ function ExerciseRow({
       >
         {badgeText(w, exercise.dumbbells)}
       </span>
-      <span className="flex min-w-[66px] shrink-0 justify-end gap-1 font-mono text-[0.72rem] whitespace-nowrap text-orange-dim">
-        <span>{core}</span>
-        {suffix && <span className="text-[0.62rem] text-muted">{suffix.trim()}</span>}
+      <span className="w-[66px] shrink-0 text-right font-mono text-[0.72rem] whitespace-nowrap text-orange-dim">
+        {exercise.setsReps}
       </span>
     </li>
   );
