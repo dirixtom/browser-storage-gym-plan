@@ -1,0 +1,31 @@
+name: Deploy simple/index.html via SSH
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "simple/index.html"
+  workflow_dispatch: {}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare deploy folder
+        run: |
+          mkdir -p deploy
+          cp simple/index.html deploy/index.html
+
+      - name: Upload via rsync over SSH
+        uses: easingthemes/ssh-deploy@v5
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.SSH_HOST }}
+          REMOTE_USER: ${{ secrets.SSH_USERNAME }}
+          REMOTE_PORT: ${{ secrets.SSH_PORT }}
+          TARGET: ${{ secrets.SSH_TARGET_DIR }}
+          SOURCE: "deploy/"
+          ARGS: "-avzr"
