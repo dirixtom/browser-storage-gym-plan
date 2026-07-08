@@ -11,7 +11,7 @@ import { EXERCISE_DATA, type Exercise } from '@/data/exercises';
 import { EFFORT_CUES, FS_GUIDE_DETAILS } from '@/data/guide';
 import type { Phase, Workout, WorkoutExercise } from '@/data/phases';
 import { badgeText, useWeight } from '@/hooks/useWeight';
-import { cn } from '@/lib/utils';
+import { cn, splitSetsReps } from '@/lib/utils';
 
 export interface FullscreenTarget {
   phase: Phase;
@@ -36,6 +36,7 @@ function FsRow({
 }) {
   const { slug, name, setsReps, dumbbells, restPause } = exercise;
   const info = (EXERCISE_DATA as Record<string, Exercise>)[slug];
+  const { core, suffix } = splitSetsReps(setsReps);
   const w = useWeight(slug, phaseIdx);
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState('');
@@ -59,7 +60,7 @@ function FsRow({
   };
 
   return (
-    <li className="grid grid-cols-[36px_1fr_auto_auto] items-center gap-5 border-b border-border px-2 py-5 last:border-b-0 max-md:grid-cols-[36px_1fr] max-md:grid-rows-[auto_auto] max-md:gap-x-4 max-md:gap-y-2.5 max-md:px-1 max-md:py-4">
+    <li className="grid grid-cols-[36px_1fr_auto] items-center gap-4 border-b border-border px-2 py-5 last:border-b-0 max-md:grid-cols-[36px_1fr] max-md:grid-rows-[auto_auto] max-md:gap-x-4 max-md:gap-y-2.5 max-md:px-1 max-md:py-4">
       <span className="font-mono text-[1.1rem] font-medium text-muted max-md:row-start-1 max-md:text-[1.2rem]">
         {index + 1}
       </span>
@@ -68,7 +69,7 @@ function FsRow({
           type="button"
           aria-expanded={expanded}
           onClick={() => setExpanded((v) => !v)}
-          className="flex cursor-pointer items-baseline gap-1.5 text-left text-[1.6rem] leading-snug font-medium text-foreground max-md:col-start-2 max-md:row-start-1 max-md:text-[1.5rem]"
+          className="flex min-w-0 cursor-pointer items-baseline gap-1.5 text-left text-[1.6rem] leading-snug font-medium text-foreground max-md:col-start-2 max-md:row-start-1 max-md:text-[1.5rem]"
         >
           {name}
           <ChevronDownIcon
@@ -76,61 +77,68 @@ function FsRow({
           />
         </button>
       ) : (
-        <span className="text-[1.6rem] leading-snug font-medium text-foreground max-md:col-start-2 max-md:row-start-1 max-md:text-[1.5rem]">
+        <span className="min-w-0 text-[1.6rem] leading-snug font-medium text-foreground max-md:col-start-2 max-md:row-start-1 max-md:text-[1.5rem]">
           {name}
         </span>
       )}
-      {editing ? (
-        <input
-          ref={inputRef}
-          type="number"
-          step="0.5"
-          min="0"
-          autoFocus
-          value={draft}
-          onChange={(e) => setDraft(e.target.value)}
-          onBlur={commit}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              e.preventDefault();
-              e.currentTarget.blur();
-            }
-            if (e.key === 'Escape') {
-              e.stopPropagation(); // cancel edit only; keep the view open
-              setEditing(false);
-            }
-          }}
-          className="w-[110px] rounded-[5px] border border-orange bg-surface2 px-2.5 py-1.5 text-center font-mono text-[1.15rem] text-foreground outline-none max-md:col-start-2 max-md:row-start-2 max-md:justify-self-start [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
-          aria-label={`Weight for ${name} (kg)`}
-        />
-      ) : (
-        <button
-          onClick={startEdit}
-          className={cn(
-            'rounded-[5px] border px-3.5 py-[7px] font-mono text-[1.15rem] whitespace-nowrap transition-colors select-none max-md:col-start-2 max-md:row-start-2 max-md:justify-self-start max-md:px-3 max-md:py-1.5',
-            w.isBodyweight
-              ? 'cursor-default border-border bg-surface text-muted'
-              : w.isCustom
-                ? 'cursor-pointer border-orange-dim/25 bg-orange-dim/8 text-orange-dim hover:border-orange-dim/45 hover:bg-orange-dim/18'
-                : 'cursor-pointer border-green/25 bg-green/8 text-green hover:border-green/45 hover:bg-green/18',
-          )}
-        >
-          {badgeText(w, dumbbells)}
-        </button>
-      )}
-      <span className="flex min-w-[90px] items-center justify-end gap-1.5 text-right font-mono text-[1.15rem] whitespace-nowrap text-orange-dim max-md:col-start-2 max-md:row-start-2 max-md:min-w-0 max-md:justify-self-end max-md:text-[1.2rem]">
-        {setsReps}
-        {restPause && (
-          <span
-            className="rounded-xs border border-orange/40 bg-orange/10 px-1 text-[0.65rem] text-orange"
-            title="Rest-pause last set: failure → rest 15–20 sec → failure → rest 15–20 sec → failure, 2–3 mini-sets"
-          >
-            RP
+      <span className="flex items-center gap-3 max-md:col-start-2 max-md:row-start-2 max-md:w-full max-md:justify-between">
+        <span className="flex items-center gap-2">
+          <span className="flex w-9 shrink-0 justify-center">
+            {restPause && (
+              <span
+                className="rounded-xs border border-orange/40 bg-orange/10 px-1 font-mono text-[0.65rem] text-orange"
+                title="Rest-pause last set: failure → rest 15–20 sec → failure → rest 15–20 sec → failure, 2–3 mini-sets"
+              >
+                RP
+              </span>
+            )}
           </span>
-        )}
+          {editing ? (
+            <input
+              ref={inputRef}
+              type="number"
+              step="0.5"
+              min="0"
+              autoFocus
+              value={draft}
+              onChange={(e) => setDraft(e.target.value)}
+              onBlur={commit}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  e.currentTarget.blur();
+                }
+                if (e.key === 'Escape') {
+                  e.stopPropagation(); // cancel edit only; keep the view open
+                  setEditing(false);
+                }
+              }}
+              className="w-[124px] rounded-[5px] border border-orange bg-surface2 px-2 py-1.5 text-right font-mono text-[1.05rem] text-foreground outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+              aria-label={`Weight for ${name} (kg)`}
+            />
+          ) : (
+            <button
+              onClick={startEdit}
+              className={cn(
+                'w-[124px] rounded-[5px] border px-2 py-[7px] text-right font-mono text-[1.05rem] whitespace-nowrap transition-colors select-none',
+                w.isBodyweight
+                  ? 'cursor-default border-border bg-surface text-muted'
+                  : w.isCustom
+                    ? 'cursor-pointer border-orange-dim/25 bg-orange-dim/8 text-orange-dim hover:border-orange-dim/45 hover:bg-orange-dim/18'
+                    : 'cursor-pointer border-green/25 bg-green/8 text-green hover:border-green/45 hover:bg-green/18',
+              )}
+            >
+              {badgeText(w, dumbbells)}
+            </button>
+          )}
+        </span>
+        <span className="flex min-w-[94px] shrink-0 justify-end gap-1.5 font-mono text-[1.05rem] whitespace-nowrap text-orange-dim">
+          <span>{core}</span>
+          {suffix && <span className="text-[0.8rem] text-muted">{suffix.trim()}</span>}
+        </span>
       </span>
       {expanded && info && (
-        <div className="col-span-4 max-md:col-span-2 -mt-1 pb-1">
+        <div className="col-span-3 max-md:col-span-2 -mt-1 pb-1">
           <div className="mb-1 font-mono text-[0.62rem] tracking-widest text-muted uppercase">
             How to do it
           </div>
