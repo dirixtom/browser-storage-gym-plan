@@ -1,4 +1,5 @@
 import type { Phase, Workout, WorkoutExercise } from '@/data/phases';
+import { EFFORT_LEGEND } from '@/data/guide';
 import { WorkoutCard } from './WorkoutCard';
 
 /** Best-effort port of the rotation note's orange <span> highlights. */
@@ -74,6 +75,9 @@ export function PhaseSection({
         {phase.workoutsLabel}
       </div>
       <RotationNote note={phase.rotationNote} />
+      <div className="mb-3.5 rounded border border-orange/25 bg-surface px-3 py-1.5 font-mono text-[0.72rem] leading-relaxed text-orange-dim">
+        {EFFORT_LEGEND[phase.index] ?? EFFORT_LEGEND[0]}
+      </div>
       <div className="mb-8 grid grid-cols-[repeat(auto-fit,minmax(340px,1fr))] gap-3 max-[400px]:grid-cols-1">
         {phase.workouts.map((workout) => (
           <WorkoutCard

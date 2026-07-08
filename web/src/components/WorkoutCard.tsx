@@ -45,8 +45,16 @@ function ExerciseRow({
       >
         {badgeText(w, exercise.dumbbells)}
       </span>
-      <span className="shrink-0 font-mono text-[0.72rem] whitespace-nowrap text-orange-dim">
+      <span className="flex shrink-0 items-center gap-1 font-mono text-[0.72rem] whitespace-nowrap text-orange-dim">
         {exercise.setsReps}
+        {exercise.restPause && (
+          <span
+            className="rounded-xs border border-orange/40 bg-orange/10 px-1 text-[0.6rem] text-orange"
+            title="Rest-pause last set: failure → rest 15–20 sec → failure → rest 15–20 sec → failure, 2–3 mini-sets"
+          >
+            RP
+          </span>
+        )}
       </span>
     </li>
   );
