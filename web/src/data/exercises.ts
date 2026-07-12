@@ -744,6 +744,30 @@ export const EXERCISE_DATA = {
       0
     ]
   },
+  "clamshell": {
+    "name": "Clamshell",
+    "muscles": "Glutes (medius), hip abductors",
+    "desc": "Lie on your side with knees bent ~45°, hips stacked, feet together. Keeping your feet touching, raise your top knee toward the ceiling like an opening clamshell, then lower with control. Complete all reps, then switch sides.",
+    "tips": "Use as a warm-up before leg day to activate the glutes. Keep your hips stacked and don't let your torso roll backward as the knee lifts.",
+    "defaultWeights": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "lateral-leg-raise": {
+    "name": "Lateral leg raise",
+    "muscles": "Glutes (medius), hip abductors",
+    "desc": "Lie on your side, legs stacked and straight, head resting on your lower arm. Raise your top leg straight up toward the ceiling, keeping it in line with your body, then lower with control. Complete all reps, then switch sides.",
+    "tips": "Use as a warm-up before leg day to activate the glutes. Keep your hips stacked and don't let the leg drift forward — lift straight up.",
+    "defaultWeights": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
   "mountain-climber": {
     "name": "Mountain climber",
     "muscles": "Core, hip flexors, shoulders (stability)",

@@ -22,6 +22,9 @@ independent parts** — know which one you're being asked to change:
   check which of `web/` or `simple/index.html` (or both) the user actually
   means before editing.
 
+(`e2e/` is a fourth, test-only directory — Playwright tests over the full
+`web` + `server` + Postgres stack; see Testing.)
+
 There used to be a root `index.html` ("the legacy app") that was mechanically
 extracted into `web/src/data/{exercises,phases}.ts` via
 `web/scripts/extract-data.mjs`, then removed. Comments like "ported from the
@@ -36,11 +39,12 @@ npm install
 npm run dev       # astro dev at http://localhost:4321, proxies /api and /auth to 127.0.0.1:8787
 npm run build     # -> web/dist/ (static)
 npm run check     # astro/type check
-npm test          # node --test, runs web/tests/*.test.mjs
+npm test          # test:unit (node --test) + test:dom (vitest run)
 npm run preview   # serve the production build locally
 ```
 
-Run a single test file directly: `node --test tests/storage.test.mjs` (from `web/`).
+Single test file: `node --import tsx/esm --test tests/unit/sync.test.ts`
+(unit) or `npx vitest run tests/dom/PhaseTabs.test.tsx` (dom), from `web/`.
 
 Server commands run from `server/` (needs `web/dist/` built first):
 
@@ -49,6 +53,13 @@ npm install
 npm run init-db   # applies schema.sql to Postgres
 npm start         # node --env-file=.env server.js, listens on 127.0.0.1:8787
 ```
+
+## Testing
+
+- `web/`: `npm test` runs `node --test` (`tests/unit/`, pure logic) + Vitest+RTL+jsdom (`tests/dom/`, hooks/components).
+- `server/`: `npm test` = `node --test` via Fastify `inject()`, against a real Postgres (`TEST_DATABASE_URL`) — see `server/README.md`.
+- `e2e/`: `npx playwright test` — real browser + real server + real Postgres (`E2E_DATABASE_URL`). Real GitHub OAuth can't run in tests, so a session is seeded in Postgres with a matching signed cookie (`e2e/tests/support/session.ts`). Set `PLAYWRIGHT_CHROMIUM_PATH` if the sandbox's pre-installed browser doesn't match what Playwright expects.
+- CI: `.github/workflows/test.yml` runs all three on PRs/push to `main`.
 
 ## Architecture
 
@@ -73,9 +84,9 @@ npm start         # node --env-file=.env server.js, listens on 127.0.0.1:8787
   (`{updated_at, deleted}`) used for newer-wins conflict resolution and
   tombstones. **This format is locked** — it's shared verbatim with the
   Postgres `kv_item` table (`server/schema.sql`) and is asserted byte-for-byte
-  by `web/tests/storage.test.mjs`. Never change `storageKey()`'s transform or
-  the key prefixes; doing so would orphan every existing user's data and
-  every synced row.
+  by `web/tests/unit/storage-keys.test.mjs`. Never change `storageKey()`'s
+  transform or the key prefixes; doing so would orphan every existing user's
+  data and every synced row.
 - `src/lib/sync.ts` holds the newer-wins merge/reconcile logic as plain,
   framework-free functions (kept testable independent of React). It registers
   a queue callback into `storage.ts` (`registerSyncQueue`) rather than
@@ -92,8 +103,9 @@ npm start         # node --env-file=.env server.js, listens on 127.0.0.1:8787
 
 ### Backend (`server/`)
 
-- Single file (`server.js`), Fastify. Single-user gate: only
-  `ALLOWED_GITHUB_ID` (a numeric GitHub id) may log in via GitHub OAuth;
+- One module (`server.js`) exporting `buildApp({ pool, config })` — tests
+  build the app without a full `.env` or a real `listen()`. Single-user gate:
+  only `ALLOWED_GITHUB_ID` (a numeric GitHub id) may log in via GitHub OAuth;
   everyone else gets `403` and nothing is persisted for them.
 - Sessions are random ids in a signed, `HttpOnly; Secure` cookie, backed by a
   Postgres `session` table (revocable, expiring).
