@@ -22,6 +22,19 @@ independent parts** — know which one you're being asked to change:
   check which of `web/` or `simple/index.html` (or both) the user actually
   means before editing.
 
+**Whenever exercises or workouts change, update both `web/` and
+`simple/index.html`.** There is no build step keeping them in sync (the old
+`extract-data.mjs` migration script is stale and non-functional — see below)
+so any addition, removal, or edit to exercise data (`web/src/data/exercises.ts`
+and the matching `EXERCISE_DATA` object inside `simple/index.html`'s inline
+`<script>`) or workout/phase content (`web/src/data/phases.ts` and the
+hand-written `<li class="exercise-item">` rows inside `simple/index.html`)
+must be applied to both places by hand. The two files' actual workout
+programs have already drifted independently (e.g. their "Legs" days list
+different exercises) — don't assume a diff from one transfers verbatim to
+the other; port the intent (same exercise, same phase/day, same sets/reps
+convention) rather than copy-pasting.
+
 (`e2e/` is a fourth, test-only directory — Playwright tests over the full
 `web` + `server` + Postgres stack; see Testing.)
 
