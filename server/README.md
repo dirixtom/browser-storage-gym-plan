@@ -159,6 +159,34 @@ Then visit `https://gym.<your-domain>/` and click **Sign in**.
 
 ---
 
+## Testing
+
+`npm test` runs `server/tests/*.test.mjs` against a real, disposable Postgres — the
+newer-wins upsert in `/api/sync` is exercised as actual SQL, not mocked. Point it at any
+throwaway database via `TEST_DATABASE_URL` (defaults to
+`postgres://postgres:test@127.0.0.1:5432/kilo_test`); `resetDb()` truncates every table
+between tests, so never point this at a real one.
+
+Docker:
+
+```bash
+docker run --rm -d --name kilo-test-pg -e POSTGRES_PASSWORD=test -e POSTGRES_DB=kilo_test -p 5433:5432 postgres:16
+PGPASSWORD=test psql -h 127.0.0.1 -p 5433 -U postgres -d kilo_test -f schema.sql
+TEST_DATABASE_URL="postgres://postgres:test@127.0.0.1:5433/kilo_test" npm test
+docker stop kilo-test-pg
+```
+
+Or a local Postgres 16 install (no Docker):
+
+```bash
+createdb kilo_test
+psql -d kilo_test -f schema.sql
+TEST_DATABASE_URL="postgres://<user>@127.0.0.1:5432/kilo_test" npm test
+```
+
+The e2e suite (`../e2e/`) reuses the same `webServer` + test-database pattern to drive the
+built app through a real browser — see `e2e/README.md`.
+
 ## Security notes
 
 - The browser never receives the DB credentials, the OAuth client secret, or your GitHub

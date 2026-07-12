@@ -28,7 +28,7 @@ test('storageKey matches the legacy transform byte-for-byte', () => {
 
 test('src/lib/storage.ts contains the exact same transform', () => {
   const src = fs.readFileSync(
-    path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'src', 'lib', 'storage.ts'),
+    path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..', 'src', 'lib', 'storage.ts'),
     'utf8',
   );
   assert.match(
