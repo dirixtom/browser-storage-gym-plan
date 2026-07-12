@@ -270,6 +270,18 @@ export const PHASES: Phase[] = [
         "name": "Legs — quads, hamstrings, glutes",
         "exercises": [
           {
+            "slug": "clamshell",
+            "name": "Clamshell",
+            "setsReps": "1 × 12",
+            "dumbbells": 0
+          },
+          {
+            "slug": "lateral-leg-raise",
+            "name": "Lateral leg raise",
+            "setsReps": "1 × 12",
+            "dumbbells": 0
+          },
+          {
             "slug": "db-sumo-squat",
             "name": "DB sumo squat",
             "setsReps": "3 × 8–12",
@@ -496,6 +508,18 @@ export const PHASES: Phase[] = [
         "name": "Legs — quads, hamstrings, glutes",
         "exercises": [
           {
+            "slug": "clamshell",
+            "name": "Clamshell",
+            "setsReps": "1 × 12",
+            "dumbbells": 0
+          },
+          {
+            "slug": "lateral-leg-raise",
+            "name": "Lateral leg raise",
+            "setsReps": "1 × 12",
+            "dumbbells": 0
+          },
+          {
             "slug": "db-sumo-squat",
             "name": "DB sumo squat",
             "setsReps": "3 × 6–10",
@@ -721,6 +745,18 @@ export const PHASES: Phase[] = [
         "badge": "Legs",
         "name": "Legs — quads, hamstrings, glutes",
         "exercises": [
+          {
+            "slug": "clamshell",
+            "name": "Clamshell",
+            "setsReps": "1 × 12",
+            "dumbbells": 0
+          },
+          {
+            "slug": "lateral-leg-raise",
+            "name": "Lateral leg raise",
+            "setsReps": "1 × 12",
+            "dumbbells": 0
+          },
           {
             "slug": "db-bulgarian-split-squat-tempo",
             "name": "DB Bulgarian split squat (tempo)",
