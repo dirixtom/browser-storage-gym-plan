@@ -131,3 +131,14 @@ npm start         # node --env-file=.env server.js, listens on 127.0.0.1:8787
   registered before the static handler so they can never be shadowed; the
   404 handler falls back to `index.html` for any unmatched GET outside
   `/api`/`/auth` so client-side routing survives a hard refresh.
+
+## PR workflow
+
+- Once every item that belongs in a PR is actually done, mark the PR ready
+  for review (take it out of draft) instead of leaving it in draft
+  indefinitely.
+- Before marking ready for review, check the changes against the feature
+  plan (the task/issue the PR is meant to satisfy) to confirm nothing from
+  that plan is missing.
+- Never merge a PR unless the user explicitly says to merge it, even after
+  marking it ready for review and even if CI is green.
