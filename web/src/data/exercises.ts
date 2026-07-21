@@ -747,13 +747,13 @@ export const EXERCISE_DATA = {
   "clamshell": {
     "name": "Clamshell",
     "muscles": "Glutes (medius), hip abductors",
-    "desc": "Lie on your side with knees bent ~45°, hips stacked, feet together. Keeping your feet touching, raise your top knee toward the ceiling like an opening clamshell, then lower with control. Complete all reps, then switch sides.",
-    "tips": "Use as a warm-up before leg day to activate the glutes. Keep your hips stacked and don't let your torso roll backward as the knee lifts.",
+    "desc": "Loop a resistance band around your thighs, just above the knees. Lie on your side with knees bent ~45°, hips stacked, feet together. Keeping your feet touching, raise your top knee toward the ceiling against the band's resistance, then lower with control. Complete all reps, then switch sides.",
+    "tips": "Use as a warm-up before leg day to activate the glutes. Keep your hips stacked and don't let your torso roll backward as the knee lifts. Use a band with roughly 5kg of resistance at the top of the movement.",
     "defaultWeights": [
-      0,
-      0,
-      0,
-      0
+      5,
+      5,
+      5,
+      5
     ]
   },
   "lateral-leg-raise": {
