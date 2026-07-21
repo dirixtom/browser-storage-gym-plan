@@ -56,5 +56,6 @@ export function badgeText(state: WeightState, dumbbells: number): string {
   if (state.override !== null) {
     return dumbbells > 0 ? `${state.override}kg × ${dumbbells}` : `${state.override}kg`;
   }
-  return state.defaultWeight === 0 ? 'bodyweight' : `${state.defaultWeight}kg × ${dumbbells}`;
+  if (state.defaultWeight === 0) return 'bodyweight';
+  return dumbbells > 0 ? `${state.defaultWeight}kg × ${dumbbells}` : `${state.defaultWeight}kg`;
 }
