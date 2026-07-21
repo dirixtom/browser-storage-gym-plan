@@ -171,13 +171,13 @@ export const EXERCISE_DATA = {
   "db-sumo-squat": {
     "name": "DB sumo squat",
     "muscles": "Quads, glutes, inner thighs (adductors)",
-    "desc": "Stand with feet wider than shoulder-width, toes pointed out at 45°. Hold a dumbbell in each hand at your sides. Squat down, keeping your knees tracking over your toes, then drive up.",
+    "desc": "Stand with feet wider than shoulder-width, toes pointed out at 45°. Hold one dumbbell vertically between your legs with both hands. Squat down, keeping your knees tracking over your toes, then drive up.",
     "tips": "The wide stance shifts more emphasis to the inner thighs and glutes. Keep your chest up and don't let your knees cave inward.",
     "defaultWeights": [
-      18,
-      18,
-      18,
-      18
+      24,
+      24,
+      24,
+      24
     ]
   },
   "db-bulgarian-split-squat": {

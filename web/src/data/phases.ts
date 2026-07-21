@@ -285,7 +285,7 @@ export const PHASES: Phase[] = [
             "slug": "db-sumo-squat",
             "name": "DB sumo squat",
             "setsReps": "3 × 8–12",
-            "dumbbells": 2
+            "dumbbells": 1
           },
           {
             "slug": "db-bulgarian-split-squat",
@@ -523,7 +523,7 @@ export const PHASES: Phase[] = [
             "slug": "db-sumo-squat",
             "name": "DB sumo squat",
             "setsReps": "3 × 6–10",
-            "dumbbells": 2
+            "dumbbells": 1
           },
           {
             "slug": "db-bulgarian-split-squat",
