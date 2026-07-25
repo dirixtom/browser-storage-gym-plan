@@ -376,10 +376,10 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "db-face-pull-floor",
-            "name": "DB face pull (floor)",
-            "setsReps": "3 × 12–15",
-            "dumbbells": 2
+            "slug": "banded-pallof-press",
+            "name": "Banded Pallof press",
+            "setsReps": "2 × 10 each side",
+            "dumbbells": 0
           }
         ]
       }
@@ -570,10 +570,10 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "db-face-pull-floor",
-            "name": "DB face pull (floor)",
-            "setsReps": "3 × 12–15",
-            "dumbbells": 2
+            "slug": "banded-pallof-press",
+            "name": "Banded Pallof press",
+            "setsReps": "2 × 10 each side",
+            "dumbbells": 0
           }
         ]
       }
@@ -764,10 +764,10 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "db-face-pull-floor",
-            "name": "DB face pull (floor, tempo)",
-            "setsReps": "3 × 12–15",
-            "dumbbells": 2
+            "slug": "banded-pallof-press",
+            "name": "Banded Pallof press (tempo)",
+            "setsReps": "2 × 10 each side",
+            "dumbbells": 0
           }
         ]
       }
