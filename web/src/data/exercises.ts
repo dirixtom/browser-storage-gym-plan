@@ -36,6 +36,18 @@ export const EXERCISE_DATA = {
       31
     ]
   },
+  "db-side-lunge": {
+    "name": "DB side lunge",
+    "muscles": "Inner thighs (adductors), quads, glutes",
+    "desc": "Hold one dumbbell vertically at your chest with both hands. Stand tall, then take a wide step to one side, bending that knee and pushing your hips back while keeping the other leg completely straight. You should feel a strong stretch along the inside of the straight leg. Push off the bent leg's heel to return to standing. Complete all reps, then switch sides.",
+    "tips": "This is your adductor work — the stretch in the straight leg's groin is the point, so step wide enough to feel it. Keep the straight leg fully extended and the toes on both feet pointing forward, and don't let the bent knee cave inward. The sumo squat hits the same muscles but nowhere near this range of motion.",
+    "defaultWeights": [
+      17,
+      20,
+      24,
+      24
+    ]
+  },
   "db-romanian-deadlift": {
     "name": "DB Romanian deadlift",
     "muscles": "Hamstrings, glutes, lower back",

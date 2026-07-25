@@ -2,7 +2,7 @@
 // the per-phase legend above workouts, and the fullscreen "tap to train" cue bar.
 
 export interface GuideSection {
-  id: 'effort' | 'double-progression' | 'tempo' | 'rest' | 'deload' | 'phase1';
+  id: 'effort' | 'progression' | 'tempo' | 'rest' | 'deload' | 'phase1';
   title: string;
   body: string[];
 }
@@ -17,11 +17,11 @@ export const GUIDE_SECTIONS: GuideSection[] = [
     ],
   },
   {
-    id: 'double-progression',
-    title: 'Double progression',
+    id: 'progression',
+    title: 'Progression',
     body: [
-      'Every exercise has a rep range (e.g. 8–12). Start at the bottom of the range with a weight you can control.',
-      'Add reps each session. When you hit the TOP of the range on ALL sets, add weight next session — reps drop back to the bottom, then climb again.',
+      'Every exercise has a fixed rep target. Pick a weight you can hit that target with on all sets, keeping 1–2 reps in reserve.',
+      'When you complete every rep on every set with good form, add weight next session. If you miss the target, hold the weight until you hit it.',
     ],
   },
   {
@@ -69,8 +69,8 @@ export const EFFORT_CUES: [string, string, string, string] = [
 /** Per-phase effort legend rendered above the workouts grid. */
 export const EFFORT_LEGEND: [string, string, string, string] = [
   'Form first — every set stops 2–3 reps short of failure. Failure training starts in Phase 2.',
-  'Work sets at 1–2 reps in reserve · last set of every exercise → failure · hit the top of the range on all sets → add weight',
-  'Work sets at 1–2 reps in reserve · last set of every exercise → failure · hit the top of the range on all sets → add weight',
+  'Work sets at 1–2 reps in reserve · last set of every exercise → failure · hit every rep on all sets → add weight',
+  'Work sets at 1–2 reps in reserve · last set of every exercise → failure · hit every rep on all sets → add weight',
   'Strict 3s down · 1s pause tempo · 1–2 reps in reserve · last set of every exercise → failure',
 ];
 
@@ -82,7 +82,7 @@ export const FS_GUIDE_DETAILS: [string[], string[], string[], string[]] = [
   ],
   [
     'Work sets: 1–2 reps in reserve. Last set of every exercise: go to failure.',
-    'Hit the top of the rep range on every set → add weight next session.',
+    'Hit every rep on all sets → add weight next session.',
   ],
   [
     'Work sets: 1–2 reps in reserve. Last set of every exercise: go to failure.',
