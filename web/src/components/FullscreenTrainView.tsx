@@ -34,7 +34,7 @@ function FsRow({
   exercise: WorkoutExercise;
   phaseIdx: number;
 }) {
-  const { slug, name, setsReps, dumbbells, restPause } = exercise;
+  const { slug, name, setsReps, dumbbells } = exercise;
   const info = (EXERCISE_DATA as Record<string, Exercise>)[slug];
   const w = useWeight(slug, phaseIdx);
   const [editing, setEditing] = useState(false);
@@ -82,16 +82,6 @@ function FsRow({
       )}
       <span className="flex items-center gap-3 max-md:col-start-2 max-md:row-start-2 max-md:w-full max-md:justify-between">
         <span className="flex items-center gap-2">
-          <span className="flex w-9 shrink-0 justify-center">
-            {restPause && (
-              <span
-                className="rounded-xs border border-orange/40 bg-orange/10 px-1 font-mono text-[0.65rem] text-orange"
-                title="Rest-pause last set: failure → rest 15–20 sec → failure → rest 15–20 sec → failure, 2–3 mini-sets"
-              >
-                RP
-              </span>
-            )}
-          </span>
           {editing ? (
             <input
               ref={inputRef}

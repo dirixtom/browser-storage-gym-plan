@@ -44,13 +44,11 @@ export function TrainingGuideSheet({
 
           {GUIDE_SECTIONS.map((section) => {
             const isPhase1Exception = section.id === 'phase1';
-            const isDeemphasized = phase === 0 && section.id === 'rest-pause';
             return (
               <div
                 key={section.id}
                 className={cn(
                   isPhase1Exception && phase === 0 && 'rounded-md border border-orange/40 px-3 py-2 -mx-3',
-                  isDeemphasized && 'opacity-60',
                 )}
               >
                 <SectionLabel>{section.title}</SectionLabel>

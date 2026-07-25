@@ -30,7 +30,7 @@ function Shell() {
   const openDetail = (ex: WorkoutExercise) =>
     setOverlay({
       type: 'detail',
-      target: { slug: ex.slug, phase: current.index, dumbbells: ex.dumbbells, restPause: ex.restPause },
+      target: { slug: ex.slug, phase: current.index, dumbbells: ex.dumbbells },
     });
 
   const openFullscreen = (workout: Workout) =>

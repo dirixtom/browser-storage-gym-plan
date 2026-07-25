@@ -9,7 +9,6 @@ export interface DetailTarget {
   slug: string;
   phase: number;
   dumbbells: number;
-  restPause?: boolean;
 }
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
@@ -55,16 +54,6 @@ function DetailBody({ target }: { target: DetailTarget }) {
       <p className="rounded-md bg-surface2 px-3 py-2.5 text-[0.85rem] leading-relaxed text-muted">
         {data.tips}
       </p>
-
-      {target.restPause && (
-        <>
-          <SectionLabel>Last set</SectionLabel>
-          <p className="rounded-md bg-surface2 px-3 py-2.5 text-[0.85rem] leading-relaxed text-muted">
-            Rest-pause: go to failure, rest 15–20 sec, go again (~30–50% of the first set's reps), rest
-            15–20 sec, once more. 2–3 mini-sets total.
-          </p>
-        </>
-      )}
 
       <SectionLabel>Your weight — current phase</SectionLabel>
       <div className="mt-1 flex items-center gap-2.5">

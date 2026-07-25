@@ -9,10 +9,8 @@ export interface WorkoutExercise {
   /** Display name as shown in the workout card (can differ from EXERCISE_DATA name). */
   name: string;
   setsReps: string;
-  /** Number of dumbbells used; 0 = bodyweight. */
+  /** Number of dumbbells used; 0 = bodyweight (or banded — see EXERCISE_DATA). */
   dumbbells: number;
-  /** Last set is rest-pause: failure → rest 15–20s → failure again, 2–3 mini-sets. Isolation only; Phase 2+. */
-  restPause?: boolean;
 }
 
 export interface Workout {
@@ -21,9 +19,6 @@ export interface Workout {
   name: string;
   exercises: WorkoutExercise[];
 }
-
-/** Core-finisher card. Free text — names are NOT EXERCISE_DATA slugs. */
-export interface CoreItem { name: string; desc: string; setsReps: string; }
 
 export interface Phase {
   index: number;
@@ -36,8 +31,6 @@ export interface Phase {
   workoutsLabel: string;
   rotationNote: string;
   workouts: Workout[];
-  coreLabel: string;
-  core: CoreItem[];
 }
 
 export const PHASES: Phase[] = [
@@ -46,7 +39,7 @@ export const PHASES: Phase[] = [
     "tabName": "Foundation",
     "monthsLabel": "Months 1–3",
     "title": "Foundation",
-    "goal": "Learn the movements and build the habit. Each session is 7 exercises × 3 sets — light enough to focus on form but enough volume to start adapting. Lower body and back take a beating; upper body stays controlled and conservative.",
+    "goal": "Learn the movements and build the habit. Each session is 7 lifts × 3 sets plus a core finisher — light enough to focus on form but enough volume to start adapting. Lower body and back take a beating; upper body stays controlled and conservative.",
     "stats": [
       {
         "label": "Session length",
@@ -76,7 +69,7 @@ export const PHASES: Phase[] = [
       },
       {
         "time": "30–35 min",
-        "desc": "Main workout — 7 exercises, 3 sets each"
+        "desc": "Main workout — 7 lifts × 3 sets, then the core finisher"
       },
       {
         "time": "5 min",
@@ -92,10 +85,10 @@ export const PHASES: Phase[] = [
         "name": "Full body — push focus",
         "exercises": [
           {
-            "slug": "goblet-squat",
-            "name": "Goblet squat",
+            "slug": "db-squat",
+            "name": "DB squat",
             "setsReps": "3 × 10",
-            "dumbbells": 1
+            "dumbbells": 2
           },
           {
             "slug": "db-romanian-deadlift",
@@ -132,6 +125,12 @@ export const PHASES: Phase[] = [
             "name": "DB tricep overhead extension",
             "setsReps": "3 × 8",
             "dumbbells": 1
+          },
+          {
+            "slug": "banded-pallof-press",
+            "name": "Banded Pallof press",
+            "setsReps": "2 × 8 each side",
+            "dumbbells": 0
           }
         ]
       },
@@ -141,10 +140,10 @@ export const PHASES: Phase[] = [
         "name": "Full body — pull focus",
         "exercises": [
           {
-            "slug": "goblet-squat",
-            "name": "Goblet squat",
+            "slug": "db-squat",
+            "name": "DB squat",
             "setsReps": "3 × 10",
-            "dumbbells": 1
+            "dumbbells": 2
           },
           {
             "slug": "db-romanian-deadlift",
@@ -181,41 +180,14 @@ export const PHASES: Phase[] = [
             "name": "DB bent-over row",
             "setsReps": "3 × 8",
             "dumbbells": 2
+          },
+          {
+            "slug": "db-half-kneeling-woodchop",
+            "name": "DB half-kneeling woodchop",
+            "setsReps": "2 × 8 each side",
+            "dumbbells": 1
           }
         ]
-      }
-    ],
-    "coreLabel": "Core — add 3 of these at the end of each session, rotate through them",
-    "core": [
-      {
-        "name": "Dead bug",
-        "desc": "Lie on back, arms up, knees at 90°. Lower opposite arm and leg slowly, return.",
-        "setsReps": "3 × 8"
-      },
-      {
-        "name": "DB crunch",
-        "desc": "Lie on back, hold one dumbbell on chest. Crunch shoulders off floor. No neck pulling.",
-        "setsReps": "3 × 12"
-      },
-      {
-        "name": "Leg raise",
-        "desc": "Lie flat, legs straight, lower back pressed to floor. Raise legs to 90°, lower slowly.",
-        "setsReps": "3 × 10"
-      },
-      {
-        "name": "Bird dog",
-        "desc": "On all fours, extend opposite arm and leg simultaneously. Hold 2 sec.",
-        "setsReps": "3 × 8"
-      },
-      {
-        "name": "Heel tap",
-        "desc": "Lie on back, knees bent. Crunch sideways to tap each heel alternately.",
-        "setsReps": "3 × 15"
-      },
-      {
-        "name": "Seated knee tuck",
-        "desc": "Lean back slightly, hands behind you. Draw both knees to chest, extend out. Lower abs.",
-        "setsReps": "3 × 12"
       }
     ]
   },
@@ -224,11 +196,11 @@ export const PHASES: Phase[] = [
     "tabName": "Building",
     "monthsLabel": "Months 4–6",
     "title": "Building",
-    "goal": "Three sessions a week on a Legs / Upper A / Upper B split. Legs get one focused day (you run 3× a week too), while both upper days train chest, back, shoulders and arms — so every upper muscle is trained twice a week. Volume climbs where it was thin: chest, arms and hamstrings.",
+    "goal": "Three sessions a week on a Legs / Upper A / Upper B split. Legs get one focused day and double as your core day (you run 3× a week too), while both upper days train chest, back, shoulders and arms — so every upper muscle is trained twice a week. Volume climbs where it was thin: chest, arms and hamstrings.",
     "stats": [
       {
         "label": "Session length",
-        "value": "45–55 min"
+        "value": "30–40 min"
       },
       {
         "label": "Rest between sets",
@@ -253,8 +225,8 @@ export const PHASES: Phase[] = [
         "desc": "Warm-up — include 1 light set of first exercise at 50% weight"
       },
       {
-        "time": "35–45 min",
-        "desc": "Main workout — 6–7 exercises, 3 sets each"
+        "time": "20–30 min",
+        "desc": "Main workout — 3–7 lifts × 3 sets, then the core finisher"
       },
       {
         "time": "5 min",
@@ -267,7 +239,7 @@ export const PHASES: Phase[] = [
       {
         "id": "p2-legs",
         "badge": "Legs",
-        "name": "Legs — quads, hamstrings, glutes",
+        "name": "Legs & core — quads, hamstrings, glutes, obliques",
         "exercises": [
           {
             "slug": "clamshell",
@@ -276,10 +248,10 @@ export const PHASES: Phase[] = [
             "dumbbells": 0
           },
           {
-            "slug": "lateral-leg-raise",
-            "name": "Lateral leg raise",
-            "setsReps": "1 × 12",
-            "dumbbells": 0
+            "slug": "db-squat",
+            "name": "DB squat",
+            "setsReps": "3 × 8–12",
+            "dumbbells": 2
           },
           {
             "slug": "db-sumo-squat",
@@ -288,35 +260,22 @@ export const PHASES: Phase[] = [
             "dumbbells": 1
           },
           {
-            "slug": "db-bulgarian-split-squat",
-            "name": "DB Bulgarian split squat",
-            "setsReps": "3 × 8–12",
-            "dumbbells": 2
-          },
-          {
             "slug": "db-romanian-deadlift",
             "name": "DB Romanian deadlift",
             "setsReps": "3 × 8–12",
             "dumbbells": 2
           },
           {
-            "slug": "db-single-leg-rdl",
-            "name": "DB single-leg Romanian deadlift",
-            "setsReps": "3 × 8–12",
+            "slug": "db-half-kneeling-woodchop",
+            "name": "DB half-kneeling woodchop",
+            "setsReps": "2 × 10–12 each side",
             "dumbbells": 1
           },
           {
-            "slug": "db-glute-bridge",
-            "name": "DB single-leg glute bridge",
-            "setsReps": "3 × 10–15",
+            "slug": "db-half-kneeling-side-bend",
+            "name": "DB half-kneeling side bend",
+            "setsReps": "2 × 10–12 each side",
             "dumbbells": 1
-          },
-          {
-            "slug": "db-calf-raise",
-            "name": "DB calf raise",
-            "setsReps": "3 × 12–15",
-            "dumbbells": 2,
-            "restPause": true
           }
         ]
       },
@@ -347,15 +306,13 @@ export const PHASES: Phase[] = [
             "slug": "db-lateral-raise",
             "name": "DB lateral raise",
             "setsReps": "3 × 10–15",
-            "dumbbells": 2,
-            "restPause": true
+            "dumbbells": 2
           },
           {
             "slug": "db-curl",
             "name": "DB curl",
             "setsReps": "3 × 10–15",
-            "dumbbells": 2,
-            "restPause": true
+            "dumbbells": 2
           },
           {
             "slug": "db-tricep-overhead-extension",
@@ -368,6 +325,12 @@ export const PHASES: Phase[] = [
             "name": "DB rear delt fly",
             "setsReps": "3 × 10–15",
             "dumbbells": 2
+          },
+          {
+            "slug": "banded-pallof-press",
+            "name": "Banded Pallof press",
+            "setsReps": "2 × 10 each side",
+            "dumbbells": 0
           }
         ]
       },
@@ -404,56 +367,21 @@ export const PHASES: Phase[] = [
             "slug": "hammer-curl",
             "name": "Hammer curl",
             "setsReps": "3 × 10–15",
-            "dumbbells": 2,
-            "restPause": true
+            "dumbbells": 2
           },
           {
             "slug": "tricep-kickback",
             "name": "Tricep kickback",
             "setsReps": "3 × 10–15",
-            "dumbbells": 2,
-            "restPause": true
+            "dumbbells": 2
           },
           {
-            "slug": "db-face-pull-floor",
-            "name": "DB face pull (floor)",
-            "setsReps": "3 × 12–15",
-            "dumbbells": 2
+            "slug": "banded-pallof-press",
+            "name": "Banded Pallof press",
+            "setsReps": "2 × 10 each side",
+            "dumbbells": 0
           }
         ]
-      }
-    ],
-    "coreLabel": "Core — pick 3 per session, rotate. More variety than Phase 1.",
-    "core": [
-      {
-        "name": "DB crunch",
-        "desc": "Dumbbell on chest. Controlled crunch, don't use momentum.",
-        "setsReps": "3 × 12–15"
-      },
-      {
-        "name": "DB Russian twist",
-        "desc": "Sit at 45°, hold one dumbbell, rotate side to side. Feet on floor. Oblique focus.",
-        "setsReps": "3 × 10–15"
-      },
-      {
-        "name": "Leg raise",
-        "desc": "Lower back flat, raise straight legs to 90° and lower slowly.",
-        "setsReps": "3 × 10–15"
-      },
-      {
-        "name": "Seated knee tuck",
-        "desc": "Lean back slightly, hands behind you. Draw both knees to chest. Keep feet off floor the whole set.",
-        "setsReps": "3 × 12–15"
-      },
-      {
-        "name": "Dead bug",
-        "desc": "Arms up, knees at 90°. Lower opposite arm and leg simultaneously. Lower back stays on floor.",
-        "setsReps": "3 × 8–12"
-      },
-      {
-        "name": "DB woodchop",
-        "desc": "Hold one dumbbell with both hands. Rotate and chop diagonally from high to low.",
-        "setsReps": "3 × 10–12"
       }
     ]
   },
@@ -466,7 +394,7 @@ export const PHASES: Phase[] = [
     "stats": [
       {
         "label": "Session length",
-        "value": "60–70 min"
+        "value": "40–50 min"
       },
       {
         "label": "Rest between sets",
@@ -491,8 +419,8 @@ export const PHASES: Phase[] = [
         "desc": "Warm-up — light movement + 1 warm-up set of first exercise"
       },
       {
-        "time": "50–60 min",
-        "desc": "Main workout — 6–7 exercises, 3 straight sets, 2 min rest"
+        "time": "30–40 min",
+        "desc": "Main workout — 3–7 lifts × 3 straight sets, 2 min rest, then the core finisher"
       },
       {
         "time": "5 min",
@@ -505,7 +433,7 @@ export const PHASES: Phase[] = [
       {
         "id": "p3-legs",
         "badge": "Legs",
-        "name": "Legs — quads, hamstrings, glutes",
+        "name": "Legs & core — quads, hamstrings, glutes, obliques",
         "exercises": [
           {
             "slug": "clamshell",
@@ -514,10 +442,10 @@ export const PHASES: Phase[] = [
             "dumbbells": 0
           },
           {
-            "slug": "lateral-leg-raise",
-            "name": "Lateral leg raise",
-            "setsReps": "1 × 12",
-            "dumbbells": 0
+            "slug": "db-squat",
+            "name": "DB squat",
+            "setsReps": "3 × 6–10",
+            "dumbbells": 2
           },
           {
             "slug": "db-sumo-squat",
@@ -526,35 +454,22 @@ export const PHASES: Phase[] = [
             "dumbbells": 1
           },
           {
-            "slug": "db-bulgarian-split-squat",
-            "name": "DB Bulgarian split squat",
-            "setsReps": "3 × 6–10",
-            "dumbbells": 2
-          },
-          {
             "slug": "db-romanian-deadlift",
             "name": "DB Romanian deadlift",
             "setsReps": "3 × 6–10",
             "dumbbells": 2
           },
           {
-            "slug": "db-single-leg-rdl",
-            "name": "DB single-leg Romanian deadlift",
-            "setsReps": "3 × 6–10",
+            "slug": "db-half-kneeling-woodchop",
+            "name": "DB half-kneeling woodchop",
+            "setsReps": "2 × 8–12 each side",
             "dumbbells": 1
           },
           {
-            "slug": "db-glute-bridge",
-            "name": "DB single-leg glute bridge",
-            "setsReps": "3 × 8–12",
+            "slug": "db-half-kneeling-side-bend",
+            "name": "DB half-kneeling side bend",
+            "setsReps": "2 × 8–12 each side",
             "dumbbells": 1
-          },
-          {
-            "slug": "db-calf-raise",
-            "name": "DB calf raise",
-            "setsReps": "3 × 15–20",
-            "dumbbells": 2,
-            "restPause": true
           }
         ]
       },
@@ -585,15 +500,13 @@ export const PHASES: Phase[] = [
             "slug": "db-lateral-raise",
             "name": "DB lateral raise",
             "setsReps": "3 × 8–12",
-            "dumbbells": 2,
-            "restPause": true
+            "dumbbells": 2
           },
           {
             "slug": "db-curl",
             "name": "DB curl",
             "setsReps": "3 × 8–12",
-            "dumbbells": 2,
-            "restPause": true
+            "dumbbells": 2
           },
           {
             "slug": "db-tricep-overhead-extension",
@@ -606,6 +519,12 @@ export const PHASES: Phase[] = [
             "name": "DB rear delt fly",
             "setsReps": "3 × 8–12",
             "dumbbells": 2
+          },
+          {
+            "slug": "banded-pallof-press",
+            "name": "Banded Pallof press",
+            "setsReps": "2 × 10 each side",
+            "dumbbells": 0
           }
         ]
       },
@@ -642,56 +561,21 @@ export const PHASES: Phase[] = [
             "slug": "hammer-curl",
             "name": "Hammer curl",
             "setsReps": "3 × 8–12",
-            "dumbbells": 2,
-            "restPause": true
+            "dumbbells": 2
           },
           {
             "slug": "tricep-kickback",
             "name": "Tricep kickback",
             "setsReps": "3 × 8–12",
-            "dumbbells": 2,
-            "restPause": true
+            "dumbbells": 2
           },
           {
-            "slug": "db-face-pull-floor",
-            "name": "DB face pull (floor)",
-            "setsReps": "3 × 12–15",
-            "dumbbells": 2
+            "slug": "banded-pallof-press",
+            "name": "Banded Pallof press",
+            "setsReps": "2 × 10 each side",
+            "dumbbells": 0
           }
         ]
-      }
-    ],
-    "coreLabel": "Core — add as a finisher after the main workout. Superset core pairs for efficiency.",
-    "core": [
-      {
-        "name": "DB Russian twist",
-        "desc": "Feet raised off floor. Heavier dumbbell. Rotate fully each side.",
-        "setsReps": "3 × 12–15"
-      },
-      {
-        "name": "Hollow body hold",
-        "desc": "Lie flat, arms overhead, lower back on floor. Raise shoulders and legs slightly. Hold.",
-        "setsReps": "3 × 25–30 sec"
-      },
-      {
-        "name": "DB suitcase carry",
-        "desc": "One dumbbell at your side. Walk 15 steps keeping shoulders level. Core fights to stay upright.",
-        "setsReps": "3 × 15 steps"
-      },
-      {
-        "name": "DB woodchop",
-        "desc": "Both hands on one dumbbell. Chop diagonally high to low. Rotation comes from core.",
-        "setsReps": "3 × 8–12"
-      },
-      {
-        "name": "V-up",
-        "desc": "Lie flat, raise arms and legs simultaneously to form a V. Lower slowly.",
-        "setsReps": "3 × 8–12"
-      },
-      {
-        "name": "Seated knee tuck (weighted)",
-        "desc": "Feet off floor. Hold dumbbell between knees. Draw knees to chest, extend.",
-        "setsReps": "3 × 12–15"
       }
     ]
   },
@@ -704,7 +588,7 @@ export const PHASES: Phase[] = [
     "stats": [
       {
         "label": "Session length",
-        "value": "70–75 min"
+        "value": "45–55 min"
       },
       {
         "label": "Rest between sets",
@@ -729,8 +613,8 @@ export const PHASES: Phase[] = [
         "desc": "Warm-up — include hip flexor stretch, shoulder circles, thoracic rotation"
       },
       {
-        "time": "60–65 min",
-        "desc": "Main workout — 6–7 exercises, 3 sets with strict tempo"
+        "time": "35–45 min",
+        "desc": "Main workout — 3–7 lifts × 3 sets with strict tempo, then the core finisher"
       },
       {
         "time": "5 min",
@@ -743,7 +627,7 @@ export const PHASES: Phase[] = [
       {
         "id": "p4-legs",
         "badge": "Legs",
-        "name": "Legs — quads, hamstrings, glutes",
+        "name": "Legs & core — quads, hamstrings, glutes, obliques",
         "exercises": [
           {
             "slug": "clamshell",
@@ -752,22 +636,16 @@ export const PHASES: Phase[] = [
             "dumbbells": 0
           },
           {
-            "slug": "lateral-leg-raise",
-            "name": "Lateral leg raise",
-            "setsReps": "1 × 12",
-            "dumbbells": 0
-          },
-          {
-            "slug": "db-bulgarian-split-squat-tempo",
-            "name": "DB Bulgarian split squat (tempo)",
+            "slug": "db-squat",
+            "name": "DB squat (tempo)",
             "setsReps": "3 × 6–10",
             "dumbbells": 2
           },
           {
-            "slug": "db-reverse-lunge-tempo",
-            "name": "DB reverse lunge (tempo)",
+            "slug": "db-sumo-squat",
+            "name": "DB sumo squat (tempo)",
             "setsReps": "3 × 6–10",
-            "dumbbells": 2
+            "dumbbells": 1
           },
           {
             "slug": "db-romanian-deadlift-tempo",
@@ -776,23 +654,16 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "db-single-leg-rdl",
-            "name": "DB single-leg Romanian deadlift (tempo)",
-            "setsReps": "3 × 6–10",
+            "slug": "db-half-kneeling-woodchop",
+            "name": "DB half-kneeling woodchop (tempo)",
+            "setsReps": "2 × 8–12 each side",
             "dumbbells": 1
           },
           {
-            "slug": "db-glute-bridge",
-            "name": "DB single-leg glute bridge (tempo)",
-            "setsReps": "3 × 8–12",
+            "slug": "db-half-kneeling-side-bend",
+            "name": "DB half-kneeling side bend (tempo)",
+            "setsReps": "2 × 8–12 each side",
             "dumbbells": 1
-          },
-          {
-            "slug": "db-calf-raise",
-            "name": "DB calf raise (tempo)",
-            "setsReps": "3 × 15–20",
-            "dumbbells": 2,
-            "restPause": true
           }
         ]
       },
@@ -823,15 +694,13 @@ export const PHASES: Phase[] = [
             "slug": "db-lateral-raise-tempo",
             "name": "DB lateral raise (tempo)",
             "setsReps": "3 × 8–12",
-            "dumbbells": 2,
-            "restPause": true
+            "dumbbells": 2
           },
           {
             "slug": "db-curl-tempo",
             "name": "DB curl (tempo)",
             "setsReps": "3 × 8–12",
-            "dumbbells": 2,
-            "restPause": true
+            "dumbbells": 2
           },
           {
             "slug": "db-tricep-overhead-extension-tempo",
@@ -844,6 +713,12 @@ export const PHASES: Phase[] = [
             "name": "DB rear delt fly (tempo)",
             "setsReps": "3 × 8–12",
             "dumbbells": 2
+          },
+          {
+            "slug": "banded-pallof-press",
+            "name": "Banded Pallof press (tempo)",
+            "setsReps": "2 × 10 each side",
+            "dumbbells": 0
           }
         ]
       },
@@ -880,56 +755,21 @@ export const PHASES: Phase[] = [
             "slug": "db-hammer-curl-tempo",
             "name": "DB hammer curl (tempo)",
             "setsReps": "3 × 8–12",
-            "dumbbells": 2,
-            "restPause": true
+            "dumbbells": 2
           },
           {
             "slug": "tricep-kickback",
             "name": "Tricep kickback (tempo)",
             "setsReps": "3 × 8–12",
-            "dumbbells": 2,
-            "restPause": true
+            "dumbbells": 2
           },
           {
-            "slug": "db-face-pull-floor",
-            "name": "DB face pull (floor, tempo)",
-            "setsReps": "3 × 12–15",
-            "dumbbells": 2
+            "slug": "banded-pallof-press",
+            "name": "Banded Pallof press (tempo)",
+            "setsReps": "2 × 10 each side",
+            "dumbbells": 0
           }
         ]
-      }
-    ],
-    "coreLabel": "Core — tempo applies here too. Every movement slow and deliberate.",
-    "core": [
-      {
-        "name": "DB ab rollout (floor)",
-        "desc": "Kneel, roll dumbbell out slowly as body extends. Pull back before hips touch floor.",
-        "setsReps": "3 × 6–10"
-      },
-      {
-        "name": "Hollow body hold",
-        "desc": "30 seconds minimum. Arms overhead, shoulders and legs raised, lower back on floor.",
-        "setsReps": "3 × 30–40 sec"
-      },
-      {
-        "name": "DB woodchop (heavy)",
-        "desc": "Heavier dumbbell. Controlled rotation high-to-low and low-to-high each side.",
-        "setsReps": "3 × 8–12"
-      },
-      {
-        "name": "DB suitcase carry",
-        "desc": "Heavier than Phase 3. Walk slow, shoulders level, core braced the whole time.",
-        "setsReps": "3 × 20 steps"
-      },
-      {
-        "name": "DB windmill",
-        "desc": "One dumbbell overhead, feet wide. Hinge sideways, reach other hand to floor. Eyes on the weight.",
-        "setsReps": "3 × 6–8"
-      },
-      {
-        "name": "V-up with DB pass",
-        "desc": "V-up while passing a dumbbell from hands to feet and back. Coordination + full core.",
-        "setsReps": "3 × 8–10"
       }
     ]
   }
