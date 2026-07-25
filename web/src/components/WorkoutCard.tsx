@@ -32,16 +32,6 @@ function ExerciseRow({
         {exercise.name}
         <span className="ml-1 text-[0.65rem] text-border transition-colors group-hover:text-orange">ⓘ</span>
       </span>
-      <span className="flex w-7 shrink-0 justify-center">
-        {exercise.restPause && (
-          <span
-            className="rounded-xs border border-orange/40 bg-orange/10 px-1 font-mono text-[0.6rem] text-orange"
-            title="Rest-pause last set: failure → rest 15–20 sec → failure → rest 15–20 sec → failure, 2–3 mini-sets"
-          >
-            RP
-          </span>
-        )}
-      </span>
       <span
         className={cn(
           'w-[76px] shrink-0 rounded-xs border px-1.5 py-px text-right font-mono text-[0.65rem] whitespace-nowrap',

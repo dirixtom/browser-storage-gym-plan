@@ -89,34 +89,6 @@ export function PhaseSection({
           />
         ))}
       </div>
-
-      {/* Core section */}
-      <div className="mt-8 border-t border-border pt-6">
-        <div className="font-mono text-[0.68rem] tracking-widest text-muted uppercase">
-          {phase.coreLabel}
-        </div>
-        <div className="mt-3 grid grid-cols-[repeat(auto-fit,minmax(190px,1fr))] gap-3">
-          {phase.core.map((item) => (
-            <div key={item.name} className="overflow-hidden rounded-lg border border-border bg-surface">
-              <div className="flex items-center gap-2 border-b border-border px-3.5 py-2.5 text-[0.8rem] font-medium text-foreground">
-                <span className="size-1.5 shrink-0 rounded-full bg-green" />
-                {item.name}
-              </div>
-              <ul className="py-2">
-                <li className="flex items-baseline justify-between gap-3 border-b border-border px-4 py-[7px]">
-                  <span className="flex-1 text-[0.82rem] leading-snug text-foreground">{item.desc}</span>
-                </li>
-                <li className="flex items-baseline justify-between gap-3 px-4 py-[7px]">
-                  <span className="flex-1 text-[0.82rem] text-foreground">Sets &amp; reps</span>
-                  <span className="shrink-0 font-mono text-[0.72rem] whitespace-nowrap text-orange-dim">
-                    {item.setsReps}
-                  </span>
-                </li>
-              </ul>
-            </div>
-          ))}
-        </div>
-      </div>
     </section>
   );
 }

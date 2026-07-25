@@ -24,6 +24,18 @@ export const EXERCISE_DATA = {
       30.5
     ]
   },
+  "db-squat": {
+    "name": "DB squat",
+    "muscles": "Quads, glutes",
+    "desc": "Stand with feet shoulder-width apart, holding a dumbbell in each hand at your sides. Squat down by bending your knees and pushing your hips back, keeping your chest up and back flat. Drive through your heels to stand.",
+    "tips": "Keep your weight in your heels and knees tracking over your toes. More quad-dominant than the sumo squat, so do it first while your form is freshest.",
+    "defaultWeights": [
+      22,
+      26,
+      31,
+      31
+    ]
+  },
   "db-romanian-deadlift": {
     "name": "DB Romanian deadlift",
     "muscles": "Hamstrings, glutes, lower back",
@@ -572,6 +584,42 @@ export const EXERCISE_DATA = {
     "defaultWeights": [
       6,
       8,
+      12,
+      12
+    ]
+  },
+  "db-half-kneeling-woodchop": {
+    "name": "DB half-kneeling woodchop",
+    "muscles": "Obliques, core, shoulders",
+    "desc": "Kneel on one knee with the other foot planted out to the side, hips square and ribs down. Hold one dumbbell with both hands. Start high above the shoulder on the side of the planted foot and chop diagonally down across your body toward the opposite hip, rotating through your core. Control the return. Complete all reps, then switch sides.",
+    "tips": "Half-kneeling takes your legs out of it, so the rotation has to come from your core — that's the point, and it's why you need less weight than the standing version. Keep the down knee, hip and shoulder stacked; if your hips shift or your lower back arches, go lighter.",
+    "defaultWeights": [
+      5,
+      6,
+      8,
+      8
+    ]
+  },
+  "banded-pallof-press": {
+    "name": "Banded Pallof press",
+    "muscles": "Obliques, core (anti-rotation), shoulders",
+    "desc": "Anchor a resistance band at chest height. Kneel side-on to the anchor on the knee nearest it, other foot planted, and hold the band at your sternum with both hands. Press it straight out until your arms are locked, hold for 2 sec resisting the band's pull to rotate you, then bring it back to your chest. Complete all reps, then switch sides.",
+    "tips": "Nothing moves except your arms — the work is refusing to twist. Step further from the anchor to make it harder. Use a band with roughly 5kg of resistance at full extension.",
+    "defaultWeights": [
+      5,
+      5,
+      5,
+      5
+    ]
+  },
+  "db-half-kneeling-side-bend": {
+    "name": "DB half-kneeling side bend",
+    "muscles": "Obliques, quadratus lumborum, core",
+    "desc": "Kneel on one knee with the other foot planted out to the side. Hold a dumbbell in the hand on the same side as the down knee, hanging at your side. Bend sideways toward the dumbbell as far as is comfortable, then pull yourself back upright using the obliques on the opposite side. Complete all reps, then switch sides.",
+    "tips": "Bend straight sideways — don't let your torso rotate or lean forward. The upward pull is the working half of the rep, so control it rather than swinging back up.",
+    "defaultWeights": [
+      8,
+      10,
       12,
       12
     ]
