@@ -346,8 +346,8 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "db-single-arm-row",
-            "name": "DB single-arm row",
+            "slug": "db-bent-over-row",
+            "name": "DB bent-over row",
             "setsReps": "3 × 10",
             "dumbbells": 2
           },
@@ -540,8 +540,8 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "db-single-arm-row",
-            "name": "DB single-arm row",
+            "slug": "db-bent-over-row",
+            "name": "DB bent-over row",
             "setsReps": "3 × 8",
             "dumbbells": 2
           },
@@ -734,8 +734,8 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "single-arm-row-tempo",
-            "name": "Single-arm row (tempo)",
+            "slug": "db-bent-over-row-tempo",
+            "name": "DB bent-over row (tempo)",
             "setsReps": "3 × 8",
             "dumbbells": 2
           },
