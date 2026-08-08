@@ -43,6 +43,23 @@ extracted into `web/src/data/{exercises,phases}.ts` via
 `web/scripts/extract-data.mjs`, then removed. Comments like "ported from the
 legacy app" refer to that removed file, not to `simple/index.html`.
 
+## Training constraints (the plan's single user)
+
+The plan is written for one person, who has a permanent hand/arm injury.
+Respect these whenever you add, swap, or reorder exercises:
+
+- **No push-ups or any open-palm floor position.** The hand cannot be opened
+  flat on command. This rules out push-up variants, planks on the hands,
+  renegade rows, ab rollouts, mountain climbers, and plank-to-push-up —
+  regardless of how well they fit the muscle target. Bodyweight substitutes
+  are not a safe default here; prefer a gripped-dumbbell movement instead.
+- **Gripping is fine; releasing on command is not.** Anything held in a
+  closed fist (dumbbells, a band handle) works normally.
+- **Straps/support are used above roughly 20kg per hand.** Grip-limited
+  pulls (RDL, shrug, bent-over row) already exceed this in the later phases,
+  which is expected — no need to cap the load, just don't design a movement
+  whose limiting factor is bare-handed grip endurance.
+
 ## Commands
 
 All frontend commands run from `web/`:
