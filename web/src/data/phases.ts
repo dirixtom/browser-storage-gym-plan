@@ -340,8 +340,8 @@ export const PHASES: Phase[] = [
         "name": "Upper B — chest, back, shoulders, arms",
         "exercises": [
           {
-            "slug": "db-close-grip-floor-press",
-            "name": "DB close-grip floor press",
+            "slug": "db-floor-press",
+            "name": "DB floor press",
             "setsReps": "3 × 10",
             "dumbbells": 2
           },
@@ -534,8 +534,8 @@ export const PHASES: Phase[] = [
         "name": "Upper B — chest, back, shoulders, arms",
         "exercises": [
           {
-            "slug": "db-close-grip-floor-press",
-            "name": "DB close-grip floor press",
+            "slug": "db-floor-press",
+            "name": "DB floor press",
             "setsReps": "3 × 8",
             "dumbbells": 2
           },
@@ -728,8 +728,8 @@ export const PHASES: Phase[] = [
         "name": "Upper B — chest, back, shoulders, arms",
         "exercises": [
           {
-            "slug": "db-close-grip-floor-press",
-            "name": "DB close-grip floor press (tempo)",
+            "slug": "db-floor-press-tempo",
+            "name": "DB floor press (tempo)",
             "setsReps": "3 × 8",
             "dumbbells": 2
           },
