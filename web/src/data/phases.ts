@@ -250,14 +250,8 @@ export const PHASES: Phase[] = [
           {
             "slug": "db-squat",
             "name": "DB squat",
-            "setsReps": "3 × 10",
+            "setsReps": "4 × 10",
             "dumbbells": 2
-          },
-          {
-            "slug": "db-sumo-squat",
-            "name": "DB sumo squat",
-            "setsReps": "3 × 10",
-            "dumbbells": 1
           },
           {
             "slug": "db-romanian-deadlift",
@@ -444,14 +438,8 @@ export const PHASES: Phase[] = [
           {
             "slug": "db-squat",
             "name": "DB squat",
-            "setsReps": "3 × 8",
+            "setsReps": "4 × 8",
             "dumbbells": 2
-          },
-          {
-            "slug": "db-sumo-squat",
-            "name": "DB sumo squat",
-            "setsReps": "3 × 8",
-            "dumbbells": 1
           },
           {
             "slug": "db-romanian-deadlift",
@@ -638,14 +626,8 @@ export const PHASES: Phase[] = [
           {
             "slug": "db-squat",
             "name": "DB squat (tempo)",
-            "setsReps": "3 × 8",
+            "setsReps": "4 × 8",
             "dumbbells": 2
-          },
-          {
-            "slug": "db-sumo-squat",
-            "name": "DB sumo squat (tempo)",
-            "setsReps": "3 × 8",
-            "dumbbells": 1
           },
           {
             "slug": "db-romanian-deadlift-tempo",
