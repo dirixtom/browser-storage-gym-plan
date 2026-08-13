@@ -28,7 +28,7 @@ export const EXERCISE_DATA = {
     "name": "DB squat",
     "muscles": "Quads, glutes",
     "desc": "Stand with feet shoulder-width apart, holding a dumbbell in each hand at your sides. Squat down by bending your knees and pushing your hips back, keeping your chest up and back flat. Drive through your heels to stand.",
-    "tips": "Keep your weight in your heels and knees tracking over your toes. More quad-dominant than the sumo squat, so do it first while your form is freshest.",
+    "tips": "Keep your weight in your heels and knees tracking over your toes.",
     "defaultWeights": [
       22,
       26,
@@ -40,7 +40,7 @@ export const EXERCISE_DATA = {
     "name": "DB side lunge",
     "muscles": "Inner thighs (adductors), quads, glutes",
     "desc": "Hold one dumbbell vertically at your chest with both hands. Stand tall, then take a wide step to one side, bending that knee and pushing your hips back while keeping the other leg completely straight. You should feel a strong stretch along the inside of the straight leg. Push off the bent leg's heel to return to standing. Complete all reps, then switch sides.",
-    "tips": "This is your adductor work — the stretch in the straight leg's groin is the point, so step wide enough to feel it. Keep the straight leg fully extended and the toes on both feet pointing forward, and don't let the bent knee cave inward. The sumo squat hits the same muscles but nowhere near this range of motion.",
+    "tips": "This is your adductor work — the stretch in the straight leg's groin is the point, so step wide enough to feel it. Keep the straight leg fully extended and the toes on both feet pointing forward, and don't let the bent knee cave inward.",
     "defaultWeights": [
       17,
       20,
@@ -190,18 +190,6 @@ export const EXERCISE_DATA = {
       10.5,
       12.5,
       12.5
-    ]
-  },
-  "db-sumo-squat": {
-    "name": "DB sumo squat",
-    "muscles": "Quads, glutes, inner thighs (adductors)",
-    "desc": "Stand with feet wider than shoulder-width, toes pointed out at 45°. Hold one dumbbell vertically between your legs with both hands. Squat down, keeping your knees tracking over your toes, then drive up.",
-    "tips": "The wide stance shifts more emphasis to the inner thighs and glutes. Keep your chest up and don't let your knees cave inward.",
-    "defaultWeights": [
-      24,
-      24,
-      24,
-      24
     ]
   },
   "db-bulgarian-split-squat": {
