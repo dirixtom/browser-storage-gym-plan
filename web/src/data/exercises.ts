@@ -37,13 +37,13 @@ export const EXERCISE_DATA = {
     ]
   },
   "db-side-lunge": {
-    "name": "DB side lunge",
+    "name": "KB side lunge",
     "muscles": "Inner thighs (adductors), quads, glutes",
-    "desc": "Hold one dumbbell vertically at your chest with both hands. Stand tall, then take a wide step to one side, bending that knee and pushing your hips back while keeping the other leg completely straight. You should feel a strong stretch along the inside of the straight leg. Push off the bent leg's heel to return to standing. Complete all reps, then switch sides.",
+    "desc": "Hold one kettlebell by the horns at your chest, or hanging from both hands in front of you. Stand tall, then take a wide step to one side, bending that knee and pushing your hips back while keeping the other leg completely straight. You should feel a strong stretch along the inside of the straight leg. Push off the bent leg's heel to return to standing. Complete all reps, then switch sides.",
     "tips": "This is your adductor work — the stretch in the straight leg's groin is the point, so step wide enough to feel it. Keep the straight leg fully extended and the toes on both feet pointing forward, and don't let the bent knee cave inward.",
     "defaultWeights": [
-      17,
-      20,
+      12,
+      16,
       24,
       24
     ]
@@ -874,6 +874,90 @@ export const EXERCISE_DATA = {
       4,
       6.5,
       6.5
+    ]
+  },
+  "kb-swing": {
+    "name": "KB swing",
+    "muscles": "Hamstrings, glutes, lower back",
+    "desc": "Stand with the kettlebell a foot in front of you, feet a little wider than shoulder-width. Hinge at the hips, grip the handle with both hands and hike it back between your legs like a rugby pass. Snap your hips forward hard — the bell floats up to chest height on its own. Let it fall back between your legs and repeat without pausing.",
+    "tips": "This is a hip snap, not a squat and not an arm lift. If your shoulders are doing the work, you're lifting instead of swinging. Keep the bell above knee height at the back of the swing and squeeze your glutes hard at the top. Progress by adding reps and speed, not just load.",
+    "defaultWeights": [
+      12,
+      16,
+      24,
+      24
+    ]
+  },
+  "kb-farmers-carry": {
+    "name": "Farmer's carry (alternating)",
+    "muscles": "Core (lateral stabilisation), obliques, upper traps, grip",
+    "desc": "Hold one kettlebell at your side in a dead-straight arm. Stand tall and march in place, driving each knee to hip height at a steady pace. Keep both shoulders level — the loaded side will want to hike up and the torso will want to lean away from the weight. Complete the time on one side, then switch hands.",
+    "tips": "With a single kettlebell this is a one-sided carry, so the anti-lean is the whole exercise — imagine a wall along your loaded side that you must not touch. Don't rush the march; a slow, tall knee drive is harder than a fast shuffle. Use straps if the grip gives out before the core does.",
+    "defaultWeights": [
+      12,
+      16,
+      24,
+      24
+    ]
+  },
+  "kb-overhead-walk": {
+    "name": "Overhead walk",
+    "muscles": "Shoulders (stability), upper traps, obliques, core (anti-lateral flexion)",
+    "desc": "Press one kettlebell overhead and lock the elbow, with the bell resting on the back of your forearm and your bicep beside your ear. Walk forward with controlled steps, keeping the arm vertical and the ribs down. Complete the steps, lower under control, then repeat with the other arm — two walks per arm, four in total.",
+    "tips": "The arm must stay stacked over the shoulder — if it drifts forward you'll feel it in your lower back instead of your shoulder. Brace your abs as if bracing for a punch and don't let your ribs flare. Go lighter than your press weight; this is a stability drill, not a press.",
+    "defaultWeights": [
+      12,
+      12,
+      16,
+      16
+    ]
+  },
+  "kb-single-arm-overhead-press": {
+    "name": "KB single-arm overhead press",
+    "muscles": "Shoulders (all three deltoid heads), triceps, core (anti-lateral flexion)",
+    "desc": "Clean or curl one kettlebell to the rack position — bell resting on the back of the forearm, elbow tucked into the ribs, wrist straight. Brace hard and press straight up until the elbow locks and the bicep is beside your ear. Lower back to the rack under control. Complete all reps, then switch arms.",
+    "tips": "Pressing one side at a time forces the obliques to stop you tipping — squeeze the glute on the free side to lock the torso down. Keep the wrist neutral so the bell sits on the forearm rather than bending the hand back. Once you can hit the top of the rep range on both arms, the load goes up.",
+    "defaultWeights": [
+      12,
+      12,
+      16,
+      16
+    ]
+  },
+  "sandbag-around-the-world": {
+    "name": "Sandbag around the world",
+    "muscles": "Shoulders (all heads), core (anti-rotation), upper traps",
+    "desc": "Press the sandbag overhead with both hands and lock the arms. Keeping the bag high, circle it around your head — behind, to the far side, in front — and back to the start, tracing one continuous ring. Complete all reps in one direction, then reverse.",
+    "tips": "Everything below the ribs stays perfectly still; only the arms travel. Fight the pull to lean away from the bag as it passes behind you. Keep the circle tight and slow — a wide, fast swing turns it into a momentum drill and the shoulders stop working.",
+    "defaultWeights": [
+      10,
+      15,
+      20,
+      25
+    ]
+  },
+  "iron-trident": {
+    "name": "Iron trident",
+    "muscles": "Obliques, rectus abdominis, hip flexors",
+    "desc": "Sit on the floor, knees bent, heels planted, leaning back to about 45° as in a Russian twist. Place the sandbag on the floor outside one hip. Reach across, lift it over that thigh and set it down between your feet, then lift it out to the other hip. Keep going side to side, always passing the bag over the legs rather than around them.",
+    "tips": "The seated version of the plank pull-through — same anti-rotation job, no hands on the floor. Keep your chest up and your lower back from rounding as you reach across; the moment your torso collapses, the abs stop working and it becomes an arm exercise. A kettlebell works if the sandbag is awkward to grip.",
+    "defaultWeights": [
+      10,
+      15,
+      20,
+      25
+    ]
+  },
+  "kb-russian-twist": {
+    "name": "KB Russian twist",
+    "muscles": "Obliques, rectus abdominis, hip flexors",
+    "desc": "Sit on the floor with knees bent and lean back to about 45°. Hold the kettlebell by the horns with both hands at chest height. Rotate your torso to one side until the bell is beside your hip, then rotate to the other side. From Phase 3, raise your heels off the floor.",
+    "tips": "The rotation comes from the ribcage, not the arms — keep the bell close to your body and let your torso turn it. Don't let the lower back round. 12kg is the lightest kettlebell in your set and it's a heavy twist: if your lower back complains in the first weeks, run this with a light dumbbell instead and come back to the bell later.",
+    "defaultWeights": [
+      12,
+      12,
+      12,
+      12
     ]
   }
 } as const satisfies Record<string, Exercise>;
