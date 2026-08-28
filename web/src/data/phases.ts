@@ -208,7 +208,7 @@ export const PHASES: Phase[] = [
     "tabName": "Building",
     "monthsLabel": "Months 4–6",
     "title": "Building",
-    "goal": "Three sessions a week on a Legs / Upper A / Upper B split. Legs get one focused day and double as your hinge and carry day (you run 3× a week too), while both upper days train chest, back, shoulders and arms — so every upper muscle is trained twice a week. Core work is spread one item per session: the iron trident on Upper A, the KB Russian twist on Upper B, carries and sandbag work on Legs. Every working exercise is 2 sets with a flat 90-second rest; the volume comes from more movements, not more sets. Compounds lead each session and exercises are then grouped heaviest-first, so the adjustable dumbbell needs few changes and almost all of them go downward — the shrug and calf raise are the exceptions, both heavier than the isolation work around them.",
+    "goal": "Three sessions a week on a Legs / Upper A / Upper B split. Legs get one focused day and double as your hinge and carry day (you run 3× a week too), while both upper days train chest, back, shoulders and arms — so every upper muscle is trained twice a week. The KB clean and press arrives on Upper B — the clean puts back the ballistic hip drive lost with the swings, so treat it as a hinge that finishes overhead. Core work is spread one item per session: the iron trident on Upper A, the KB Russian twist on Upper B, carries and sandbag work on Legs. Every working exercise is 2 sets with a flat 90-second rest; the volume comes from more movements, not more sets. Compounds lead each session and exercises are then grouped heaviest-first, so the adjustable dumbbell needs few changes and almost all of them go downward — the shrug and calf raise are the exceptions, both heavier than the isolation work around them.",
     "stats": [
       {
         "label": "Session length",
@@ -388,8 +388,8 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "kb-single-arm-overhead-press",
-            "name": "KB single-arm overhead press",
+            "slug": "kb-clean-and-press",
+            "name": "KB clean and press",
             "setsReps": "2 × 10 each arm",
             "dumbbells": 1
           },
@@ -612,8 +612,8 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "kb-single-arm-overhead-press",
-            "name": "KB single-arm overhead press",
+            "slug": "kb-clean-and-press",
+            "name": "KB clean and press",
             "setsReps": "2 × 8 each arm",
             "dumbbells": 1
           },
@@ -656,7 +656,7 @@ export const PHASES: Phase[] = [
     "tabName": "Mastery",
     "monthsLabel": "Months 10–12",
     "title": "Mastery",
-    "goal": "Same split and the same weights as Phase 3 — but every rep on strict tempo: 3 seconds lowering, 1-second pause, controlled lift. The slow eccentric is the added overload, so you don't add weight — and reps drop to 6 on the compounds, because a tempo rep takes roughly five seconds and the session has to stay under 50 minutes. Carries are the exception: they run at normal speed and get extra seconds instead. Take a deload week (50% weight, 2 sets) every 6 weeks.",
+    "goal": "Same split and the same weights as Phase 3 — but every rep on strict tempo: 3 seconds lowering, 1-second pause, controlled lift. The slow eccentric is the added overload, so you don't add weight — and reps drop to 6 on the compounds, because a tempo rep takes roughly five seconds and the session has to stay under 50 minutes. Carries and the clean are the exceptions: they run at normal speed and get extra seconds instead. Take a deload week (50% weight, 2 sets) every 6 weeks.",
     "stats": [
       {
         "label": "Session length",
@@ -694,7 +694,7 @@ export const PHASES: Phase[] = [
       }
     ],
     "workoutsLabel": "Workouts — Legs → Upper A → Upper B, strict tempo",
-    "rotationNote": "Tempo: 3 sec lowering · 1 sec pause at bottom · lift normally · weights held at Phase 3 level · carries run at normal speed",
+    "rotationNote": "Tempo: 3 sec lowering · 1 sec pause at bottom · lift normally · weights held at Phase 3 level · carries and the clean run at normal speed",
     "workouts": [
       {
         "id": "p4-legs",
@@ -836,8 +836,8 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "kb-single-arm-overhead-press",
-            "name": "KB single-arm overhead press (tempo)",
+            "slug": "kb-clean-and-press",
+            "name": "KB clean and press",
             "setsReps": "2 × 6 each arm",
             "dumbbells": 1
           },
