@@ -90,7 +90,7 @@ export const PHASES: Phase[] = [
           {
             "slug": "clamshell",
             "name": "Clamshell",
-            "setsReps": "1 × 12",
+            "setsReps": "2 × 12",
             "dumbbells": 0
           },
           {
@@ -284,7 +284,7 @@ export const PHASES: Phase[] = [
           {
             "slug": "clamshell",
             "name": "Clamshell",
-            "setsReps": "1 × 12",
+            "setsReps": "2 × 12",
             "dumbbells": 0
           },
           {
@@ -478,7 +478,7 @@ export const PHASES: Phase[] = [
           {
             "slug": "clamshell",
             "name": "Clamshell",
-            "setsReps": "1 × 12",
+            "setsReps": "2 × 12",
             "dumbbells": 0
           },
           {
@@ -672,7 +672,7 @@ export const PHASES: Phase[] = [
           {
             "slug": "clamshell",
             "name": "Clamshell",
-            "setsReps": "1 × 12",
+            "setsReps": "2 × 12",
             "dumbbells": 0
           },
           {
