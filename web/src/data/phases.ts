@@ -9,7 +9,7 @@ export interface WorkoutExercise {
   /** Display name as shown in the workout card (can differ from EXERCISE_DATA name). */
   name: string;
   setsReps: string;
-  /** Number of dumbbells used; 0 = bodyweight (or banded — see EXERCISE_DATA). */
+  /** Number of dumbbells/kettlebells held; 0 = bodyweight, banded or sandbag (see EXERCISE_DATA). */
   dumbbells: number;
 }
 
@@ -39,7 +39,7 @@ export const PHASES: Phase[] = [
     "tabName": "Foundation",
     "monthsLabel": "Months 1–3",
     "title": "Foundation",
-    "goal": "Learn the movements and build the habit. Each session is 7 lifts × 3 sets plus a core finisher — light enough to focus on form but enough volume to start adapting. Lower body and back take a beating; upper body stays controlled and conservative.",
+    "goal": "Learn the movements and build the habit. Each session is 7 lifts × 3 sets plus a core finisher — light enough to focus on form but enough volume to start adapting. The kettlebell work starts here: swings on Workout B teach the hip snap, and the alternating farmer's carry on Workout A teaches you to brace. Lower body and back take a beating; upper body stays controlled and conservative.",
     "stats": [
       {
         "label": "Session length",
@@ -127,10 +127,10 @@ export const PHASES: Phase[] = [
             "dumbbells": 1
           },
           {
-            "slug": "banded-pallof-press",
-            "name": "Banded Pallof press",
-            "setsReps": "2 × 8 each side",
-            "dumbbells": 0
+            "slug": "kb-farmers-carry",
+            "name": "Farmer's carry (alternating)",
+            "setsReps": "2 × 30 sec each side",
+            "dumbbells": 1
           }
         ]
       },
@@ -152,15 +152,15 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
+            "slug": "kb-swing",
+            "name": "KB swing",
+            "setsReps": "3 × 15",
+            "dumbbells": 1
+          },
+          {
             "slug": "db-overhead-press",
             "name": "DB overhead press",
             "setsReps": "3 × 8",
-            "dumbbells": 2
-          },
-          {
-            "slug": "db-front-raise",
-            "name": "DB front raise",
-            "setsReps": "3 × 10",
             "dumbbells": 2
           },
           {
@@ -182,9 +182,9 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "db-half-kneeling-woodchop",
-            "name": "DB half-kneeling woodchop",
-            "setsReps": "2 × 8 each side",
+            "slug": "kb-russian-twist",
+            "name": "KB Russian twist",
+            "setsReps": "2 × 15 each side",
             "dumbbells": 1
           }
         ]
@@ -196,7 +196,7 @@ export const PHASES: Phase[] = [
     "tabName": "Building",
     "monthsLabel": "Months 4–6",
     "title": "Building",
-    "goal": "Three sessions a week on a Legs / Upper A / Upper B split. Legs get one focused day and double as your core day (you run 3× a week too), while both upper days train chest, back, shoulders and arms — so every upper muscle is trained twice a week. Volume climbs where it was thin: chest, arms and hamstrings.",
+    "goal": "Three sessions a week on a Legs / Upper A / Upper B split. Legs get one focused day and double as your hinge and carry day (you run 3× a week too), while both upper days train chest, back, shoulders and arms — so every upper muscle is trained twice a week. Core work is spread one item per session: the iron trident on Upper A, the KB Russian twist on Upper B, carries and sandbag work on Legs. Volume climbs where it was thin: chest, arms and hamstrings.",
     "stats": [
       {
         "label": "Session length",
@@ -239,7 +239,7 @@ export const PHASES: Phase[] = [
       {
         "id": "p2-legs",
         "badge": "Legs",
-        "name": "Legs & core — quads, hamstrings, glutes, obliques",
+        "name": "Legs & core — squat, hinge, swing & carries",
         "exercises": [
           {
             "slug": "clamshell",
@@ -260,22 +260,28 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
+            "slug": "kb-swing",
+            "name": "KB swing",
+            "setsReps": "3 × 15",
+            "dumbbells": 1
+          },
+          {
             "slug": "db-side-lunge",
-            "name": "DB side lunge",
-            "setsReps": "1 × 11 each side",
+            "name": "KB side lunge",
+            "setsReps": "2 × 10 each side",
             "dumbbells": 1
           },
           {
-            "slug": "db-half-kneeling-woodchop",
-            "name": "DB half-kneeling woodchop",
-            "setsReps": "2 × 11 each side",
+            "slug": "kb-farmers-carry",
+            "name": "Farmer's carry (alternating)",
+            "setsReps": "2 × 30 sec each side",
             "dumbbells": 1
           },
           {
-            "slug": "db-half-kneeling-side-bend",
-            "name": "DB half-kneeling side bend",
-            "setsReps": "2 × 11 each side",
-            "dumbbells": 1
+            "slug": "sandbag-around-the-world",
+            "name": "Sandbag around the world",
+            "setsReps": "3 × 8 each direction",
+            "dumbbells": 0
           }
         ]
       },
@@ -325,6 +331,12 @@ export const PHASES: Phase[] = [
             "name": "DB rear delt fly",
             "setsReps": "3 × 13",
             "dumbbells": 2
+          },
+          {
+            "slug": "iron-trident",
+            "name": "Iron trident",
+            "setsReps": "2 × 10 each side",
+            "dumbbells": 0
           }
         ]
       },
@@ -346,10 +358,10 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "db-arnold-press",
-            "name": "DB Arnold press",
-            "setsReps": "3 × 10",
-            "dumbbells": 2
+            "slug": "kb-single-arm-overhead-press",
+            "name": "KB single-arm overhead press",
+            "setsReps": "3 × 10 each arm",
+            "dumbbells": 1
           },
           {
             "slug": "db-lateral-raise",
@@ -364,16 +376,22 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "tricep-kickback",
-            "name": "Tricep kickback",
+            "slug": "db-close-grip-floor-press",
+            "name": "DB close-grip floor press",
             "setsReps": "3 × 13",
             "dumbbells": 2
           },
           {
-            "slug": "banded-pallof-press",
-            "name": "Banded Pallof press",
-            "setsReps": "2 × 10 each side",
-            "dumbbells": 0
+            "slug": "kb-overhead-walk",
+            "name": "Overhead walk",
+            "setsReps": "4 × 20 steps (2 per arm)",
+            "dumbbells": 1
+          },
+          {
+            "slug": "kb-russian-twist",
+            "name": "KB Russian twist",
+            "setsReps": "2 × 15 each side",
+            "dumbbells": 1
           }
         ]
       }
@@ -384,7 +402,7 @@ export const PHASES: Phase[] = [
     "tabName": "Intensity",
     "monthsLabel": "Months 7–9",
     "title": "Intensity",
-    "goal": "Same Legs / Upper A / Upper B split, now heavier with full 2-minute rests. Push the weight up here via double progression (add reps, then load). Your strength-building block; upper muscles still trained twice a week.",
+    "goal": "Same Legs / Upper A / Upper B split, now heavier with full 2-minute rests. Push the weight up here via double progression (add reps, then load). The overhead kettlebell work tops out at 16kg — the heaviest bell you own that you can press strictly — so the single-arm press and overhead walk progress by reps and steps instead of load. Your strength-building block; upper muscles still trained twice a week.",
     "stats": [
       {
         "label": "Session length",
@@ -427,7 +445,7 @@ export const PHASES: Phase[] = [
       {
         "id": "p3-legs",
         "badge": "Legs",
-        "name": "Legs & core — quads, hamstrings, glutes, obliques",
+        "name": "Legs & core — squat, hinge, swing & carries",
         "exercises": [
           {
             "slug": "clamshell",
@@ -448,22 +466,28 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
+            "slug": "kb-swing",
+            "name": "KB swing",
+            "setsReps": "3 × 15",
+            "dumbbells": 1
+          },
+          {
             "slug": "db-side-lunge",
-            "name": "DB side lunge",
-            "setsReps": "1 × 10 each side",
-            "dumbbells": 1
-          },
-          {
-            "slug": "db-half-kneeling-woodchop",
-            "name": "DB half-kneeling woodchop",
+            "name": "KB side lunge",
             "setsReps": "2 × 10 each side",
             "dumbbells": 1
           },
           {
-            "slug": "db-half-kneeling-side-bend",
-            "name": "DB half-kneeling side bend",
-            "setsReps": "2 × 10 each side",
+            "slug": "kb-farmers-carry",
+            "name": "Farmer's carry (alternating)",
+            "setsReps": "2 × 40 sec each side",
             "dumbbells": 1
+          },
+          {
+            "slug": "sandbag-around-the-world",
+            "name": "Sandbag around the world",
+            "setsReps": "3 × 8 each direction",
+            "dumbbells": 0
           }
         ]
       },
@@ -513,6 +537,12 @@ export const PHASES: Phase[] = [
             "name": "DB rear delt fly",
             "setsReps": "3 × 10",
             "dumbbells": 2
+          },
+          {
+            "slug": "iron-trident",
+            "name": "Iron trident",
+            "setsReps": "2 × 12 each side",
+            "dumbbells": 0
           }
         ]
       },
@@ -534,10 +564,10 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "db-arnold-press",
-            "name": "DB Arnold press",
-            "setsReps": "3 × 8",
-            "dumbbells": 2
+            "slug": "kb-single-arm-overhead-press",
+            "name": "KB single-arm overhead press",
+            "setsReps": "3 × 8 each arm",
+            "dumbbells": 1
           },
           {
             "slug": "db-lateral-raise",
@@ -552,16 +582,22 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "tricep-kickback",
-            "name": "Tricep kickback",
+            "slug": "db-close-grip-floor-press",
+            "name": "DB close-grip floor press",
             "setsReps": "3 × 10",
             "dumbbells": 2
           },
           {
-            "slug": "banded-pallof-press",
-            "name": "Banded Pallof press",
-            "setsReps": "2 × 10 each side",
-            "dumbbells": 0
+            "slug": "kb-overhead-walk",
+            "name": "Overhead walk",
+            "setsReps": "4 × 25 steps (2 per arm)",
+            "dumbbells": 1
+          },
+          {
+            "slug": "kb-russian-twist",
+            "name": "KB Russian twist",
+            "setsReps": "2 × 15 each side",
+            "dumbbells": 1
           }
         ]
       }
@@ -572,7 +608,7 @@ export const PHASES: Phase[] = [
     "tabName": "Mastery",
     "monthsLabel": "Months 10–12",
     "title": "Mastery",
-    "goal": "Same split and the same weights as Phase 3 — but every rep on strict tempo: 3 seconds lowering, 1-second pause, controlled lift. The slow eccentric is the added overload, so you don't add weight. Take a deload week (50% weight, 2 sets) every 6 weeks.",
+    "goal": "Same split and the same weights as Phase 3 — but every rep on strict tempo: 3 seconds lowering, 1-second pause, controlled lift. The slow eccentric is the added overload, so you don't add weight. Swings and carries are the exception: they run at normal speed and get extra reps or seconds instead. Take a deload week (50% weight, 2 sets) every 6 weeks.",
     "stats": [
       {
         "label": "Session length",
@@ -610,12 +646,12 @@ export const PHASES: Phase[] = [
       }
     ],
     "workoutsLabel": "Workouts — Legs → Upper A → Upper B, strict tempo",
-    "rotationNote": "Tempo: 3 sec lowering · 1 sec pause at bottom · lift normally · weights held at Phase 3 level",
+    "rotationNote": "Tempo: 3 sec lowering · 1 sec pause at bottom · lift normally · weights held at Phase 3 level · swings and carries run at normal speed",
     "workouts": [
       {
         "id": "p4-legs",
         "badge": "Legs",
-        "name": "Legs & core — quads, hamstrings, glutes, obliques",
+        "name": "Legs & core — squat, hinge, swing & carries",
         "exercises": [
           {
             "slug": "clamshell",
@@ -636,22 +672,28 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
+            "slug": "kb-swing",
+            "name": "KB swing",
+            "setsReps": "3 × 20",
+            "dumbbells": 1
+          },
+          {
             "slug": "db-side-lunge",
-            "name": "DB side lunge (tempo)",
-            "setsReps": "1 × 10 each side",
-            "dumbbells": 1
-          },
-          {
-            "slug": "db-half-kneeling-woodchop",
-            "name": "DB half-kneeling woodchop (tempo)",
+            "name": "KB side lunge (tempo)",
             "setsReps": "2 × 10 each side",
             "dumbbells": 1
           },
           {
-            "slug": "db-half-kneeling-side-bend",
-            "name": "DB half-kneeling side bend (tempo)",
-            "setsReps": "2 × 10 each side",
+            "slug": "kb-farmers-carry",
+            "name": "Farmer's carry (alternating)",
+            "setsReps": "2 × 40 sec each side",
             "dumbbells": 1
+          },
+          {
+            "slug": "sandbag-around-the-world",
+            "name": "Sandbag around the world",
+            "setsReps": "3 × 10 each direction",
+            "dumbbells": 0
           }
         ]
       },
@@ -701,6 +743,12 @@ export const PHASES: Phase[] = [
             "name": "DB rear delt fly (tempo)",
             "setsReps": "3 × 10",
             "dumbbells": 2
+          },
+          {
+            "slug": "iron-trident",
+            "name": "Iron trident (tempo)",
+            "setsReps": "2 × 12 each side",
+            "dumbbells": 0
           }
         ]
       },
@@ -722,10 +770,10 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "db-arnold-press",
-            "name": "DB Arnold press (tempo)",
-            "setsReps": "3 × 8",
-            "dumbbells": 2
+            "slug": "kb-single-arm-overhead-press",
+            "name": "KB single-arm overhead press (tempo)",
+            "setsReps": "3 × 8 each arm",
+            "dumbbells": 1
           },
           {
             "slug": "db-lateral-raise-tempo",
@@ -740,16 +788,22 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "tricep-kickback",
-            "name": "Tricep kickback (tempo)",
+            "slug": "db-close-grip-floor-press",
+            "name": "DB close-grip floor press (tempo)",
             "setsReps": "3 × 10",
             "dumbbells": 2
           },
           {
-            "slug": "banded-pallof-press",
-            "name": "Banded Pallof press (tempo)",
-            "setsReps": "2 × 10 each side",
-            "dumbbells": 0
+            "slug": "kb-overhead-walk",
+            "name": "Overhead walk",
+            "setsReps": "4 × 25 steps (2 per arm)",
+            "dumbbells": 1
+          },
+          {
+            "slug": "kb-russian-twist",
+            "name": "KB Russian twist (tempo)",
+            "setsReps": "2 × 15 each side",
+            "dumbbells": 1
           }
         ]
       }
