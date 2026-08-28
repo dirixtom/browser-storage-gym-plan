@@ -912,6 +912,18 @@ export const EXERCISE_DATA = {
       16
     ]
   },
+  "kb-clean-and-press": {
+    "name": "KB clean and press",
+    "muscles": "Shoulders, triceps, hamstrings and glutes (the clean), core (anti-lateral flexion), grip",
+    "desc": "Stand the kettlebell between your feet. Hinge, grip the handle and pull it up close to your body, rolling your hand around the handle so the bell lands softly in the rack position — elbow tucked to the ribs, bell resting on the back of the forearm. Brace, press straight overhead until the elbow locks, then lower to the rack and back to the floor. Complete all reps, then switch arms.",
+    "tips": "The clean is a hip snap, not an arm pull — the bell should float up and settle, never crash onto your wrist. Keep it close to your body the whole way. This is your replacement for the swing's hip drive, so treat the clean as the point of the exercise rather than a way to get the bell up. In Phase 4 the clean runs at normal speed — only the press takes the tempo.",
+    "defaultWeights": [
+      12,
+      12,
+      16,
+      16
+    ]
+  },
   "kb-single-arm-overhead-press": {
     "name": "KB single-arm overhead press",
     "muscles": "Shoulders (all three deltoid heads), triceps, core (anti-lateral flexion)",
