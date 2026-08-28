@@ -39,7 +39,7 @@ export const PHASES: Phase[] = [
     "tabName": "Foundation",
     "monthsLabel": "Months 1–3",
     "title": "Foundation",
-    "goal": "Learn the movements and build the habit. Each session is 7 lifts × 3 sets plus a core finisher — light enough to focus on form but enough volume to start adapting. The kettlebell work starts here: swings on Workout B teach the hip snap, and the alternating farmer's carry on Workout A teaches you to brace. Lower body and back take a beating; upper body stays controlled and conservative.",
+    "goal": "Learn the movements and build the habit. Each session is 4 compounds × 3 sets, 2–3 isolation lifts × 2 sets and a core finisher — light enough to focus on form but enough volume to start adapting. The kettlebell work starts here: the alternating farmer's carry on Workout A teaches you to brace, the KB Russian twist on Workout B trains rotation under load. Lower body and back take a beating; upper body stays controlled and conservative.",
     "stats": [
       {
         "label": "Session length",
@@ -47,11 +47,11 @@ export const PHASES: Phase[] = [
       },
       {
         "label": "Rest between sets",
-        "value": "90 sec"
+        "value": "90 sec compounds · 60 sec isolation · 45 sec core"
       },
       {
         "label": "Rest between exercises",
-        "value": "90 sec"
+        "value": "Same as between sets"
       },
       {
         "label": "Tempo",
@@ -77,7 +77,7 @@ export const PHASES: Phase[] = [
       }
     ],
     "workoutsLabel": "Workouts — alternate A → B → A each week, then B → A → B the next",
-    "rotationNote": "Rotation: Week 1: A–B–A · Week 2: B–A–B · repeat",
+    "rotationNote": "Rotation: Week 1: A–B–A · Week 2: B–A–B · repeat · Run the sandbag and kettlebell finishers inside a dumbbell lift’s rest — different implement, so no weight change",
     "workouts": [
       {
         "id": "p1-a",
@@ -97,34 +97,34 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "db-floor-press",
-            "name": "DB floor press",
-            "setsReps": "3 × 8",
-            "dumbbells": 2
-          },
-          {
             "slug": "db-bent-over-row",
             "name": "DB bent-over row",
             "setsReps": "3 × 8",
             "dumbbells": 2
           },
           {
-            "slug": "db-lateral-raise",
-            "name": "DB lateral raise",
-            "setsReps": "3 × 10",
+            "slug": "db-floor-press",
+            "name": "DB floor press",
+            "setsReps": "3 × 8",
             "dumbbells": 2
           },
           {
             "slug": "db-curl",
             "name": "DB curl",
-            "setsReps": "3 × 8",
+            "setsReps": "2 × 10",
             "dumbbells": 2
           },
           {
             "slug": "db-tricep-overhead-extension",
             "name": "DB tricep overhead extension",
-            "setsReps": "3 × 8",
+            "setsReps": "2 × 10",
             "dumbbells": 1
+          },
+          {
+            "slug": "db-lateral-raise",
+            "name": "DB lateral raise",
+            "setsReps": "2 × 12",
+            "dumbbells": 2
           },
           {
             "slug": "kb-farmers-carry",
@@ -152,10 +152,16 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "kb-swing",
-            "name": "KB swing",
-            "setsReps": "3 × 15",
-            "dumbbells": 1
+            "slug": "db-bent-over-row",
+            "name": "DB bent-over row",
+            "setsReps": "3 × 8",
+            "dumbbells": 2
+          },
+          {
+            "slug": "db-shrug",
+            "name": "DB shrug",
+            "setsReps": "2 × 12",
+            "dumbbells": 2
           },
           {
             "slug": "db-overhead-press",
@@ -164,21 +170,9 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "db-shrug",
-            "name": "DB shrug",
-            "setsReps": "3 × 12",
-            "dumbbells": 2
-          },
-          {
             "slug": "hammer-curl",
             "name": "Hammer curl",
-            "setsReps": "3 × 8",
-            "dumbbells": 2
-          },
-          {
-            "slug": "db-bent-over-row",
-            "name": "DB bent-over row",
-            "setsReps": "3 × 8",
+            "setsReps": "2 × 10",
             "dumbbells": 2
           },
           {
@@ -196,19 +190,19 @@ export const PHASES: Phase[] = [
     "tabName": "Building",
     "monthsLabel": "Months 4–6",
     "title": "Building",
-    "goal": "Three sessions a week on a Legs / Upper A / Upper B split. Legs get one focused day and double as your hinge and carry day (you run 3× a week too), while both upper days train chest, back, shoulders and arms — so every upper muscle is trained twice a week. Core work is spread one item per session: the iron trident on Upper A, the KB Russian twist on Upper B, carries and sandbag work on Legs. Volume climbs where it was thin: chest, arms and hamstrings.",
+    "goal": "Three sessions a week on a Legs / Upper A / Upper B split. Legs get one focused day and double as your hinge and carry day (you run 3× a week too), while both upper days train chest, back, shoulders and arms — so every upper muscle is trained twice a week. Core work is spread one item per session: the iron trident on Upper A, the KB Russian twist on Upper B, carries and sandbag work on Legs. Compounds carry 3 sets and a full rest; isolation runs 2 sets on a short rest, which is where the session time is won back. Exercises are ordered heaviest-first so an adjustable dumbbell only ever gets lighter.",
     "stats": [
       {
         "label": "Session length",
-        "value": "30–40 min"
+        "value": "35–45 min"
       },
       {
         "label": "Rest between sets",
-        "value": "90 sec"
+        "value": "90 sec compounds · 60 sec isolation · 45 sec core"
       },
       {
         "label": "Rest between exercises",
-        "value": "90 sec"
+        "value": "Same as between sets"
       },
       {
         "label": "Tempo",
@@ -225,7 +219,7 @@ export const PHASES: Phase[] = [
         "desc": "Warm-up — include 1 light set of first exercise at 50% weight"
       },
       {
-        "time": "20–30 min",
+        "time": "25–35 min",
         "desc": "Main workout — 3–7 lifts × 3 sets, then the core finisher"
       },
       {
@@ -234,12 +228,12 @@ export const PHASES: Phase[] = [
       }
     ],
     "workoutsLabel": "Workouts — Legs → Upper A → Upper B each week",
-    "rotationNote": "Rotation: Legs → Upper A → Upper B · repeating cycle",
+    "rotationNote": "Rotation: Legs → Upper A → Upper B · repeating cycle · Run the sandbag and kettlebell finishers inside a dumbbell lift’s rest — different implement, so no weight change",
     "workouts": [
       {
         "id": "p2-legs",
         "badge": "Legs",
-        "name": "Legs & core — squat, hinge, swing & carries",
+        "name": "Legs & core — squat, hinge, lunge & carries",
         "exercises": [
           {
             "slug": "clamshell",
@@ -258,12 +252,6 @@ export const PHASES: Phase[] = [
             "name": "DB Romanian deadlift",
             "setsReps": "3 × 10",
             "dumbbells": 2
-          },
-          {
-            "slug": "kb-swing",
-            "name": "KB swing",
-            "setsReps": "3 × 15",
-            "dumbbells": 1
           },
           {
             "slug": "db-side-lunge",
@@ -291,14 +279,14 @@ export const PHASES: Phase[] = [
         "name": "Upper A — chest, back, shoulders, arms",
         "exercises": [
           {
-            "slug": "db-floor-press",
-            "name": "DB floor press",
+            "slug": "db-bent-over-row",
+            "name": "DB bent-over row",
             "setsReps": "3 × 10",
             "dumbbells": 2
           },
           {
-            "slug": "db-bent-over-row",
-            "name": "DB bent-over row",
+            "slug": "db-floor-press",
+            "name": "DB floor press",
             "setsReps": "3 × 10",
             "dumbbells": 2
           },
@@ -309,27 +297,27 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "db-lateral-raise",
-            "name": "DB lateral raise",
-            "setsReps": "3 × 13",
-            "dumbbells": 2
+            "slug": "db-tricep-overhead-extension",
+            "name": "DB tricep overhead extension",
+            "setsReps": "2 × 12",
+            "dumbbells": 1
           },
           {
             "slug": "db-curl",
             "name": "DB curl",
-            "setsReps": "3 × 13",
+            "setsReps": "2 × 12",
             "dumbbells": 2
           },
           {
-            "slug": "db-tricep-overhead-extension",
-            "name": "DB tricep overhead extension",
-            "setsReps": "3 × 13",
-            "dumbbells": 1
+            "slug": "db-lateral-raise",
+            "name": "DB lateral raise",
+            "setsReps": "2 × 12",
+            "dumbbells": 2
           },
           {
             "slug": "db-rear-delt-fly",
             "name": "DB rear delt fly",
-            "setsReps": "3 × 13",
+            "setsReps": "2 × 12",
             "dumbbells": 2
           },
           {
@@ -346,15 +334,21 @@ export const PHASES: Phase[] = [
         "name": "Upper B — chest, back, shoulders, arms",
         "exercises": [
           {
+            "slug": "db-bent-over-row",
+            "name": "DB bent-over row",
+            "setsReps": "3 × 10",
+            "dumbbells": 2
+          },
+          {
             "slug": "db-floor-press",
             "name": "DB floor press",
             "setsReps": "3 × 10",
             "dumbbells": 2
           },
           {
-            "slug": "db-bent-over-row",
-            "name": "DB bent-over row",
-            "setsReps": "3 × 10",
+            "slug": "db-close-grip-floor-press",
+            "name": "DB close-grip floor press",
+            "setsReps": "2 × 12",
             "dumbbells": 2
           },
           {
@@ -364,21 +358,15 @@ export const PHASES: Phase[] = [
             "dumbbells": 1
           },
           {
-            "slug": "db-lateral-raise",
-            "name": "DB lateral raise",
-            "setsReps": "3 × 13",
-            "dumbbells": 2
-          },
-          {
             "slug": "hammer-curl",
             "name": "Hammer curl",
-            "setsReps": "3 × 13",
+            "setsReps": "2 × 12",
             "dumbbells": 2
           },
           {
-            "slug": "db-close-grip-floor-press",
-            "name": "DB close-grip floor press",
-            "setsReps": "3 × 13",
+            "slug": "db-lateral-raise",
+            "name": "DB lateral raise",
+            "setsReps": "2 × 12",
             "dumbbells": 2
           },
           {
@@ -402,7 +390,7 @@ export const PHASES: Phase[] = [
     "tabName": "Intensity",
     "monthsLabel": "Months 7–9",
     "title": "Intensity",
-    "goal": "Same Legs / Upper A / Upper B split, now heavier with full 2-minute rests. Push the weight up here via double progression (add reps, then load). The overhead kettlebell work tops out at 16kg — the heaviest bell you own that you can press strictly — so the single-arm press and overhead walk progress by reps and steps instead of load. Your strength-building block; upper muscles still trained twice a week.",
+    "goal": "Same Legs / Upper A / Upper B split, now heavier — a full 2-minute rest on the compounds, 75 sec on isolation. Push the weight up here via double progression (add reps, then load). The overhead kettlebell work tops out at 16kg — the heaviest bell you own that you can press strictly — so the single-arm press and overhead walk progress by reps and steps instead of load. Your strength-building block; upper muscles still trained twice a week.",
     "stats": [
       {
         "label": "Session length",
@@ -410,11 +398,11 @@ export const PHASES: Phase[] = [
       },
       {
         "label": "Rest between sets",
-        "value": "2 min"
+        "value": "2 min compounds · 75 sec isolation · 45 sec core"
       },
       {
         "label": "Rest between exercises",
-        "value": "2 min"
+        "value": "Same as between sets"
       },
       {
         "label": "Tempo",
@@ -440,12 +428,12 @@ export const PHASES: Phase[] = [
       }
     ],
     "workoutsLabel": "Workouts — Legs → Upper A → Upper B, straight sets",
-    "rotationNote": "Rotation: Legs → Upper A → Upper B · heavier weight, 2 min rest between sets",
+    "rotationNote": "Rotation: Legs → Upper A → Upper B · heavier weight, 2 min rest on the compounds · Run the sandbag and kettlebell finishers inside a dumbbell lift’s rest — different implement, so no weight change",
     "workouts": [
       {
         "id": "p3-legs",
         "badge": "Legs",
-        "name": "Legs & core — squat, hinge, swing & carries",
+        "name": "Legs & core — squat, hinge, lunge & carries",
         "exercises": [
           {
             "slug": "clamshell",
@@ -464,12 +452,6 @@ export const PHASES: Phase[] = [
             "name": "DB Romanian deadlift",
             "setsReps": "3 × 8",
             "dumbbells": 2
-          },
-          {
-            "slug": "kb-swing",
-            "name": "KB swing",
-            "setsReps": "3 × 15",
-            "dumbbells": 1
           },
           {
             "slug": "db-side-lunge",
@@ -497,14 +479,14 @@ export const PHASES: Phase[] = [
         "name": "Upper A — chest, back, shoulders, arms",
         "exercises": [
           {
-            "slug": "db-floor-press",
-            "name": "DB floor press",
+            "slug": "db-bent-over-row",
+            "name": "DB bent-over row",
             "setsReps": "3 × 8",
             "dumbbells": 2
           },
           {
-            "slug": "db-bent-over-row",
-            "name": "DB bent-over row",
+            "slug": "db-floor-press",
+            "name": "DB floor press",
             "setsReps": "3 × 8",
             "dumbbells": 2
           },
@@ -515,27 +497,27 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "db-lateral-raise",
-            "name": "DB lateral raise",
-            "setsReps": "3 × 10",
-            "dumbbells": 2
+            "slug": "db-tricep-overhead-extension",
+            "name": "DB tricep overhead extension",
+            "setsReps": "2 × 10",
+            "dumbbells": 1
           },
           {
             "slug": "db-curl",
             "name": "DB curl",
-            "setsReps": "3 × 10",
+            "setsReps": "2 × 10",
             "dumbbells": 2
           },
           {
-            "slug": "db-tricep-overhead-extension",
-            "name": "DB tricep overhead extension",
-            "setsReps": "3 × 10",
-            "dumbbells": 1
+            "slug": "db-lateral-raise",
+            "name": "DB lateral raise",
+            "setsReps": "2 × 10",
+            "dumbbells": 2
           },
           {
             "slug": "db-rear-delt-fly",
             "name": "DB rear delt fly",
-            "setsReps": "3 × 10",
+            "setsReps": "2 × 10",
             "dumbbells": 2
           },
           {
@@ -552,15 +534,21 @@ export const PHASES: Phase[] = [
         "name": "Upper B — chest, back, shoulders, arms",
         "exercises": [
           {
+            "slug": "db-bent-over-row",
+            "name": "DB bent-over row",
+            "setsReps": "3 × 8",
+            "dumbbells": 2
+          },
+          {
             "slug": "db-floor-press",
             "name": "DB floor press",
             "setsReps": "3 × 8",
             "dumbbells": 2
           },
           {
-            "slug": "db-bent-over-row",
-            "name": "DB bent-over row",
-            "setsReps": "3 × 8",
+            "slug": "db-close-grip-floor-press",
+            "name": "DB close-grip floor press",
+            "setsReps": "2 × 10",
             "dumbbells": 2
           },
           {
@@ -570,21 +558,15 @@ export const PHASES: Phase[] = [
             "dumbbells": 1
           },
           {
-            "slug": "db-lateral-raise",
-            "name": "DB lateral raise",
-            "setsReps": "3 × 10",
-            "dumbbells": 2
-          },
-          {
             "slug": "hammer-curl",
             "name": "Hammer curl",
-            "setsReps": "3 × 10",
+            "setsReps": "2 × 10",
             "dumbbells": 2
           },
           {
-            "slug": "db-close-grip-floor-press",
-            "name": "DB close-grip floor press",
-            "setsReps": "3 × 10",
+            "slug": "db-lateral-raise",
+            "name": "DB lateral raise",
+            "setsReps": "2 × 10",
             "dumbbells": 2
           },
           {
@@ -608,7 +590,7 @@ export const PHASES: Phase[] = [
     "tabName": "Mastery",
     "monthsLabel": "Months 10–12",
     "title": "Mastery",
-    "goal": "Same split and the same weights as Phase 3 — but every rep on strict tempo: 3 seconds lowering, 1-second pause, controlled lift. The slow eccentric is the added overload, so you don't add weight. Swings and carries are the exception: they run at normal speed and get extra reps or seconds instead. Take a deload week (50% weight, 2 sets) every 6 weeks.",
+    "goal": "Same split and the same weights as Phase 3 — but every rep on strict tempo: 3 seconds lowering, 1-second pause, controlled lift. The slow eccentric is the added overload, so you don't add weight. Carries are the exception: they run at normal speed and get extra seconds instead. Take a deload week (50% weight, 2 sets) every 6 weeks.",
     "stats": [
       {
         "label": "Session length",
@@ -616,11 +598,11 @@ export const PHASES: Phase[] = [
       },
       {
         "label": "Rest between sets",
-        "value": "2 min"
+        "value": "2 min compounds · 75 sec isolation · 45 sec core"
       },
       {
         "label": "Rest between exercises",
-        "value": "2 min"
+        "value": "Same as between sets"
       },
       {
         "label": "Tempo",
@@ -646,12 +628,12 @@ export const PHASES: Phase[] = [
       }
     ],
     "workoutsLabel": "Workouts — Legs → Upper A → Upper B, strict tempo",
-    "rotationNote": "Tempo: 3 sec lowering · 1 sec pause at bottom · lift normally · weights held at Phase 3 level · swings and carries run at normal speed",
+    "rotationNote": "Tempo: 3 sec lowering · 1 sec pause at bottom · lift normally · weights held at Phase 3 level · carries run at normal speed · Run the sandbag and kettlebell finishers inside a dumbbell lift’s rest — different implement, so no weight change",
     "workouts": [
       {
         "id": "p4-legs",
         "badge": "Legs",
-        "name": "Legs & core — squat, hinge, swing & carries",
+        "name": "Legs & core — squat, hinge, lunge & carries",
         "exercises": [
           {
             "slug": "clamshell",
@@ -670,12 +652,6 @@ export const PHASES: Phase[] = [
             "name": "DB Romanian deadlift (tempo)",
             "setsReps": "3 × 8",
             "dumbbells": 2
-          },
-          {
-            "slug": "kb-swing",
-            "name": "KB swing",
-            "setsReps": "3 × 20",
-            "dumbbells": 1
           },
           {
             "slug": "db-side-lunge",
@@ -703,14 +679,14 @@ export const PHASES: Phase[] = [
         "name": "Upper A — chest, back, shoulders, arms",
         "exercises": [
           {
-            "slug": "db-floor-press-tempo",
-            "name": "DB floor press (tempo)",
+            "slug": "db-bent-over-row-tempo",
+            "name": "DB bent-over row (tempo)",
             "setsReps": "3 × 8",
             "dumbbells": 2
           },
           {
-            "slug": "db-bent-over-row-tempo",
-            "name": "DB bent-over row (tempo)",
+            "slug": "db-floor-press-tempo",
+            "name": "DB floor press (tempo)",
             "setsReps": "3 × 8",
             "dumbbells": 2
           },
@@ -721,27 +697,27 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "db-lateral-raise-tempo",
-            "name": "DB lateral raise (tempo)",
-            "setsReps": "3 × 10",
-            "dumbbells": 2
+            "slug": "db-tricep-overhead-extension-tempo",
+            "name": "DB tricep overhead extension (tempo)",
+            "setsReps": "2 × 10",
+            "dumbbells": 1
           },
           {
             "slug": "db-curl-tempo",
             "name": "DB curl (tempo)",
-            "setsReps": "3 × 10",
+            "setsReps": "2 × 10",
             "dumbbells": 2
           },
           {
-            "slug": "db-tricep-overhead-extension-tempo",
-            "name": "DB tricep overhead extension (tempo)",
-            "setsReps": "3 × 10",
-            "dumbbells": 1
+            "slug": "db-lateral-raise-tempo",
+            "name": "DB lateral raise (tempo)",
+            "setsReps": "2 × 10",
+            "dumbbells": 2
           },
           {
             "slug": "db-rear-delt-fly",
             "name": "DB rear delt fly (tempo)",
-            "setsReps": "3 × 10",
+            "setsReps": "2 × 10",
             "dumbbells": 2
           },
           {
@@ -758,15 +734,21 @@ export const PHASES: Phase[] = [
         "name": "Upper B — chest, back, shoulders, arms",
         "exercises": [
           {
+            "slug": "db-bent-over-row-tempo",
+            "name": "DB bent-over row (tempo)",
+            "setsReps": "3 × 8",
+            "dumbbells": 2
+          },
+          {
             "slug": "db-floor-press-tempo",
             "name": "DB floor press (tempo)",
             "setsReps": "3 × 8",
             "dumbbells": 2
           },
           {
-            "slug": "db-bent-over-row-tempo",
-            "name": "DB bent-over row (tempo)",
-            "setsReps": "3 × 8",
+            "slug": "db-close-grip-floor-press",
+            "name": "DB close-grip floor press (tempo)",
+            "setsReps": "2 × 10",
             "dumbbells": 2
           },
           {
@@ -776,21 +758,15 @@ export const PHASES: Phase[] = [
             "dumbbells": 1
           },
           {
+            "slug": "db-hammer-curl-tempo",
+            "name": "Hammer curl (tempo)",
+            "setsReps": "2 × 10",
+            "dumbbells": 2
+          },
+          {
             "slug": "db-lateral-raise-tempo",
             "name": "DB lateral raise (tempo)",
-            "setsReps": "3 × 10",
-            "dumbbells": 2
-          },
-          {
-            "slug": "db-hammer-curl-tempo",
-            "name": "DB hammer curl (tempo)",
-            "setsReps": "3 × 10",
-            "dumbbells": 2
-          },
-          {
-            "slug": "db-close-grip-floor-press",
-            "name": "DB close-grip floor press (tempo)",
-            "setsReps": "3 × 10",
+            "setsReps": "2 × 10",
             "dumbbells": 2
           },
           {
