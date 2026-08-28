@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react';
+import { FIRST_ACTIVE_PHASE } from '@/data/phases';
 import { getRaw, kvSet, LAST_PHASE_KEY } from '@/lib/storage';
 
 /**
  * Current phase index (0–3), restored from kilo_last_phase after mount.
+ *
+ * With nothing stored it opens on the first phase not marked completed, so a
+ * finished phase is never the landing tab on a fresh device.
  *
  * The initial restore reads WITHOUT writing so it doesn't bump the sync
  * timestamp (mirrors the legacy showPhase(i, false)); only explicit user
@@ -11,7 +15,7 @@ import { getRaw, kvSet, LAST_PHASE_KEY } from '@/lib/storage';
  * legacy refreshUI() which re-applied kilo_last_phase after a sync pull.
  */
 export function useLastPhase(): [number, (i: number) => void] {
-  const [phase, setPhaseState] = useState(0);
+  const [phase, setPhaseState] = useState(FIRST_ACTIVE_PHASE);
 
   useEffect(() => {
     const saved = getRaw(LAST_PHASE_KEY);
