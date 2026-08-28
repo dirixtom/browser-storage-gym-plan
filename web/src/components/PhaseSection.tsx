@@ -1,5 +1,6 @@
 import type { Phase, Workout, WorkoutExercise } from '@/data/phases';
 import { EFFORT_LEGEND } from '@/data/guide';
+import { cn } from '@/lib/utils';
 import { WorkoutCard } from './WorkoutCard';
 
 /** Best-effort port of the rotation note's orange <span> highlights. */
@@ -33,10 +34,20 @@ export function PhaseSection({
     <section>
       {/* Phase header */}
       <div className="mb-8 border-b border-border pb-6">
-        <div className="mt-1.5 font-mono text-[0.72rem] tracking-wider text-orange uppercase">
-          {phase.monthsLabel}
+        <div className="mt-1.5 flex items-center gap-2 font-mono text-[0.72rem] tracking-wider uppercase">
+          <span className={phase.completed ? 'text-muted' : 'text-orange'}>{phase.monthsLabel}</span>
+          {phase.completed && (
+            <span className="rounded border border-border px-1.5 py-0.5 text-muted normal-case">
+              ✓ Completed
+            </span>
+          )}
         </div>
-        <h1 className="text-[1.9rem] leading-tight font-semibold tracking-tight text-foreground">
+        <h1
+          className={cn(
+            'text-[1.9rem] leading-tight font-semibold tracking-tight',
+            phase.completed ? 'text-muted' : 'text-foreground',
+          )}
+        >
           {phase.title}
         </h1>
         <p className="mt-2.5 max-w-[540px] text-[0.9rem] leading-relaxed text-muted">{phase.goal}</p>

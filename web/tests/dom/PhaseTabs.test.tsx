@@ -18,4 +18,17 @@ describe('PhaseTabs', () => {
     fireEvent.click(screen.getAllByRole('button')[2]);
     expect(onSelect).toHaveBeenCalledWith(PHASES[2].index);
   });
+
+  it('marks completed phases so they can be rendered dimmed, and keeps them clickable', () => {
+    const onSelect = vi.fn();
+    render(<PhaseTabs current={1} onSelect={onSelect} />);
+    const tabs = screen.getAllByRole('button');
+    PHASES.forEach((phase, i) => {
+      expect(tabs[i].hasAttribute('data-completed')).toBe(!!phase.completed);
+    });
+    const doneIndex = PHASES.findIndex((p) => p.completed);
+    expect(doneIndex).toBeGreaterThanOrEqual(0);
+    fireEvent.click(tabs[doneIndex]);
+    expect(onSelect).toHaveBeenCalledWith(PHASES[doneIndex].index);
+  });
 });
