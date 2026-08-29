@@ -192,10 +192,16 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "db-shrug",
-            "name": "DB shrug",
-            "setsReps": "2 × 17",
-            "dumbbells": 2
+            "slug": "kb-high-pull",
+            "name": "KB high pull",
+            "setsReps": "2 × 12 each arm",
+            "dumbbells": 1
+          },
+          {
+            "slug": "kb-pullover",
+            "name": "KB pullover",
+            "setsReps": "2 × 15",
+            "dumbbells": 1
           },
           {
             "slug": "db-curl",
@@ -212,12 +218,6 @@ export const PHASES: Phase[] = [
           {
             "slug": "db-rear-delt-fly",
             "name": "DB rear delt fly",
-            "setsReps": "2 × 15",
-            "dumbbells": 2
-          },
-          {
-            "slug": "db-face-pull-floor",
-            "name": "DB face pull (floor)",
             "setsReps": "2 × 15",
             "dumbbells": 2
           },
@@ -386,10 +386,16 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "db-shrug",
-            "name": "DB shrug",
-            "setsReps": "2 × 14",
-            "dumbbells": 2
+            "slug": "kb-high-pull",
+            "name": "KB high pull",
+            "setsReps": "2 × 10 each arm",
+            "dumbbells": 1
+          },
+          {
+            "slug": "kb-pullover",
+            "name": "KB pullover",
+            "setsReps": "2 × 12",
+            "dumbbells": 1
           },
           {
             "slug": "db-curl",
@@ -406,12 +412,6 @@ export const PHASES: Phase[] = [
           {
             "slug": "db-rear-delt-fly",
             "name": "DB rear delt fly",
-            "setsReps": "2 × 12",
-            "dumbbells": 2
-          },
-          {
-            "slug": "db-face-pull-floor",
-            "name": "DB face pull (floor)",
             "setsReps": "2 × 12",
             "dumbbells": 2
           },
@@ -580,10 +580,16 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "db-shrug",
-            "name": "DB shrug",
-            "setsReps": "2 × 12",
-            "dumbbells": 2
+            "slug": "kb-high-pull",
+            "name": "KB high pull",
+            "setsReps": "2 × 8 each arm",
+            "dumbbells": 1
+          },
+          {
+            "slug": "kb-pullover",
+            "name": "KB pullover",
+            "setsReps": "2 × 10",
+            "dumbbells": 1
           },
           {
             "slug": "db-curl",
@@ -604,12 +610,6 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "db-face-pull-floor",
-            "name": "DB face pull (floor)",
-            "setsReps": "2 × 10",
-            "dumbbells": 2
-          },
-          {
             "slug": "db-reverse-curl",
             "name": "DB reverse curl",
             "setsReps": "2 × 10",
@@ -624,7 +624,7 @@ export const PHASES: Phase[] = [
     "tabName": "Mastery",
     "monthsLabel": "Months 10–12",
     "title": "Mastery",
-    "goal": "Same three days and the same weights as Phase 3, but every rep on strict tempo: 3 seconds lowering, 1-second pause, controlled lift. The slow eccentric is the added overload, so you don't add weight. The carries, the sandbag and the clean run at normal speed — none of them can be done slowly. Take a deload week (50% weight, 1 set) every 6 weeks.",
+    "goal": "Same three days and the same weights as Phase 3, but every rep on strict tempo: 3 seconds lowering, 1-second pause, controlled lift. The slow eccentric is the added overload, so you don't add weight. The carries, the sandbag, the clean and the high pull run at normal speed — none of them can be done slowly. Take a deload week (50% weight, 1 set) every 6 weeks.",
     "stats": [
       {
         "label": "Session length",
@@ -662,7 +662,7 @@ export const PHASES: Phase[] = [
       }
     ],
     "workoutsLabel": "Workouts — Legs → Push → Pull, one after the other each week",
-    "rotationNote": "Tempo: 3 sec lowering · 1 sec pause at bottom · lift normally · weights held at Phase 3 level · carries, sandbag and clean run at normal speed",
+    "rotationNote": "Tempo: 3 sec lowering · 1 sec pause at bottom · lift normally · weights held at Phase 3 level · carries, sandbag, clean and high pull run at normal speed",
     "workouts": [
       {
         "id": "p4-legs",
@@ -774,10 +774,16 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "db-shrug-tempo",
-            "name": "DB shrug (tempo)",
-            "setsReps": "2 × 12",
-            "dumbbells": 2
+            "slug": "kb-high-pull",
+            "name": "KB high pull",
+            "setsReps": "2 × 8 each arm",
+            "dumbbells": 1
+          },
+          {
+            "slug": "kb-pullover",
+            "name": "KB pullover (tempo)",
+            "setsReps": "2 × 10",
+            "dumbbells": 1
           },
           {
             "slug": "db-curl-tempo",
@@ -794,12 +800,6 @@ export const PHASES: Phase[] = [
           {
             "slug": "db-rear-delt-fly",
             "name": "DB rear delt fly (tempo)",
-            "setsReps": "2 × 10",
-            "dumbbells": 2
-          },
-          {
-            "slug": "db-face-pull-floor",
-            "name": "DB face pull (floor) (tempo)",
             "setsReps": "2 × 10",
             "dumbbells": 2
           },
