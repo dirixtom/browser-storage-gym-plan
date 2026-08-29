@@ -112,10 +112,10 @@ export const PHASES: Phase[] = [
             "dumbbells": 1
           },
           {
-            "slug": "db-glute-bridge",
-            "name": "DB single-leg glute bridge",
+            "slug": "iron-trident",
+            "name": "Iron trident",
             "setsReps": "2 × 15 each side",
-            "dumbbells": 1
+            "dumbbells": 0
           },
           {
             "slug": "kb-farmers-carry",
@@ -222,10 +222,10 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "iron-trident",
-            "name": "Iron trident",
-            "setsReps": "2 × 15 each side",
-            "dumbbells": 0
+            "slug": "db-reverse-curl",
+            "name": "DB reverse curl",
+            "setsReps": "2 × 15",
+            "dumbbells": 2
           }
         ]
       }
@@ -240,7 +240,7 @@ export const PHASES: Phase[] = [
     "stats": [
       {
         "label": "Session length",
-        "value": "40–45 min"
+        "value": "35–45 min"
       },
       {
         "label": "Rest between sets",
@@ -265,7 +265,7 @@ export const PHASES: Phase[] = [
         "desc": "Warm-up — include 1 light set of first exercise at 50% weight"
       },
       {
-        "time": "30–35 min",
+        "time": "25–35 min",
         "desc": "Main workout — 7 exercises × 2 sets"
       },
       {
@@ -306,10 +306,10 @@ export const PHASES: Phase[] = [
             "dumbbells": 1
           },
           {
-            "slug": "db-glute-bridge",
-            "name": "DB single-leg glute bridge",
+            "slug": "iron-trident",
+            "name": "Iron trident",
             "setsReps": "2 × 12 each side",
-            "dumbbells": 1
+            "dumbbells": 0
           },
           {
             "slug": "kb-farmers-carry",
@@ -416,10 +416,10 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "iron-trident",
-            "name": "Iron trident",
-            "setsReps": "2 × 12 each side",
-            "dumbbells": 0
+            "slug": "db-reverse-curl",
+            "name": "DB reverse curl",
+            "setsReps": "2 × 12",
+            "dumbbells": 2
           }
         ]
       }
@@ -500,10 +500,10 @@ export const PHASES: Phase[] = [
             "dumbbells": 1
           },
           {
-            "slug": "db-glute-bridge",
-            "name": "DB single-leg glute bridge",
+            "slug": "iron-trident",
+            "name": "Iron trident",
             "setsReps": "2 × 10 each side",
-            "dumbbells": 1
+            "dumbbells": 0
           },
           {
             "slug": "kb-farmers-carry",
@@ -610,10 +610,10 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "iron-trident",
-            "name": "Iron trident",
-            "setsReps": "2 × 10 each side",
-            "dumbbells": 0
+            "slug": "db-reverse-curl",
+            "name": "DB reverse curl",
+            "setsReps": "2 × 10",
+            "dumbbells": 2
           }
         ]
       }
@@ -694,10 +694,10 @@ export const PHASES: Phase[] = [
             "dumbbells": 1
           },
           {
-            "slug": "db-glute-bridge",
-            "name": "DB single-leg glute bridge (tempo)",
+            "slug": "iron-trident",
+            "name": "Iron trident (tempo)",
             "setsReps": "2 × 10 each side",
-            "dumbbells": 1
+            "dumbbells": 0
           },
           {
             "slug": "kb-farmers-carry",
@@ -804,10 +804,10 @@ export const PHASES: Phase[] = [
             "dumbbells": 2
           },
           {
-            "slug": "iron-trident",
-            "name": "Iron trident (tempo)",
-            "setsReps": "2 × 10 each side",
-            "dumbbells": 0
+            "slug": "db-reverse-curl",
+            "name": "DB reverse curl (tempo)",
+            "setsReps": "2 × 10",
+            "dumbbells": 2
           }
         ]
       }
