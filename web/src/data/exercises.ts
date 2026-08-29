@@ -912,6 +912,30 @@ export const EXERCISE_DATA = {
       16
     ]
   },
+  "kb-high-pull": {
+    "name": "KB high pull",
+    "muscles": "Upper traps, medial and rear deltoids, upper back, hamstrings and glutes (the drive), grip",
+    "desc": "Set the kettlebell a foot in front of you, feet a little wider than shoulder-width. Hinge, grip the handle in one hand and hike it back between your legs as in a swing. Snap your hips forward hard, and as the bell rises drive your elbow up and back, pulling the handle toward your chin with the bell close to your body. Let the arm extend and the bell fall back between your legs without pausing. Complete all reps, then switch arms.",
+    "tips": "The hips launch the bell; the arm only redirects it at the top. Lead with the elbow and keep it higher than your hand — if the elbow drops and the shoulder rolls forward it has become an upright row in the position that irritates shoulders. Stop the pull at chin height, no higher. This replaces the shrug: shoulder elevation is built into the pull, and it puts back the ballistic hip drive lost with the swings.",
+    "defaultWeights": [
+      12,
+      16,
+      24,
+      24
+    ]
+  },
+  "kb-pullover": {
+    "name": "KB pullover",
+    "muscles": "Lats (in the lengthened position), long head of the triceps, serratus, chest",
+    "desc": "Lie on your back, knees bent, feet flat. Hold one kettlebell by the horns with both hands, arms almost straight above your chest. Keeping the elbows softly locked, lower the bell back over your head toward the floor until you feel a strong stretch through the lats and ribs. Pull it back over your chest without bending the arms.",
+    "tips": "The only movement in the plan that loads the lats stretched, so the stretch at the bottom is the point — move into it slowly and don't rush out of it. The floor caps the range, the same trade-off as your floor press. Long levers mean this needs far less load than a row: if your lower back arches off the floor or your ribs flare, go lighter.",
+    "defaultWeights": [
+      12,
+      12,
+      16,
+      16
+    ]
+  },
   "kb-clean-and-press": {
     "name": "KB clean and press",
     "muscles": "Shoulders, triceps, hamstrings and glutes (the clean), core (anti-lateral flexion), grip",
