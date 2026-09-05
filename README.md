@@ -3,12 +3,12 @@
 A personal training plan: a 1-year, 3-sessions-per-week dumbbell/kettlebell
 programme (floor + two dumbbells, no bench), split into four progressive phases.
 
-This repo holds the **simple version**: `index.html`, one self-contained
-HTML file with inline CSS and JavaScript. No dependencies, no build step —
-open it in a browser and it works.
+This repo holds the **simple version**: one self-contained
+HTML file with inline CSS and JavaScript. No dependencies, no build step.
+Open it in a browser and it works.
 
 The richer app version (Astro + React frontend, optional Fastify + Postgres
-sync backend, Playwright e2e tests) lives in a separate private repo,
+sync backend, Playwright e2e tests) lives in a separate repo,
 [`dirixtom/gym-plan-app`](https://github.com/dirixtom/gym-plan-app). The two
 share no code: exercise and workout changes have to be made in both by hand.
 
