@@ -1,57 +1,33 @@
-# Kilo — 1 Year Training Plan
+# Kilo — 1 Year Training Plan (simple version)
 
-A personal training-plan app: a 1-year, 3-sessions-per-week dumbbell programme
-(floor + two dumbbells, no bench), split into four progressive phases.
+A personal training plan: a 1-year, 3-sessions-per-week dumbbell/kettlebell
+programme (floor + two dumbbells, no bench), split into four progressive phases.
 
-Built with [Astro](https://astro.build) + React islands, [TanStack Query](https://tanstack.com/query),
-[Tailwind CSS v4](https://tailwindcss.com), and [shadcn/ui](https://ui.shadcn.com)-style components.
+This repo holds the **simple version**: `simple/index.html`, one self-contained
+HTML file with inline CSS and JavaScript. No dependencies, no build step —
+open it in a browser and it works.
 
-## Layout
-
-- `web/` — the frontend app (Astro, static output)
-- `server/` — optional sync backend (Fastify + Postgres + GitHub OAuth); see `server/README.md`
-- `e2e/` — end-to-end tests (Playwright); see `e2e/README.md`
+The richer app version (Astro + React frontend, optional Fastify + Postgres
+sync backend, Playwright e2e tests) lives in a separate private repo,
+[`dirixtom/gym-plan-app`](https://github.com/dirixtom/gym-plan-app). The two
+share no code: exercise and workout changes have to be made in both by hand.
 
 ## Development
 
 ```bash
-cd web
-npm install
-npm run dev        # http://localhost:4321
+open simple/index.html    # or just double-click it
 ```
 
-`astro dev` proxies `/api` and `/auth` to a locally running sync server
-(`127.0.0.1:8787`). Without the server, the app runs in local-only mode.
+Edit the file directly. Workout rows are hand-written
+`<li class="exercise-item">` items; exercise descriptions live in the
+`EXERCISE_DATA` object in the inline `<script>`, keyed by the same slug as the
+row's `data-exercise`.
 
-## Build
+## Deployment
 
-```bash
-cd web
-npm run build      # → web/dist/
-```
-
-The build is fully static: serve `web/dist/` with the sync server
-(`cd server && npm start`) or host it anywhere static (e.g. GitHub Pages —
-sync is simply disabled when no backend is reachable).
-
-Other scripts: `npm run check` (types), `npm test` (unit + component tests, see
-Testing below), `npm run preview`.
-
-## Testing
-
-Three layers, each covering what the others can't:
-
-- `web/`: `npm test` runs `node --test` over pure logic (the sync/merge logic in
-  `lib/sync.ts`, the `localStorage` migrations in `lib/storage.ts`) plus Vitest +
-  React Testing Library + jsdom over hooks and components.
-- `server/`: `npm test` runs `node --test` against a real, disposable Postgres via
-  Fastify's `inject()` — including the `/api/sync` newer-wins upsert as actual SQL.
-  See `server/README.md` for the local test-database setup.
-- `e2e/`: `npx playwright test` drives a real browser against the real built app,
-  the real server, and a real Postgres — weight persistence, phase persistence, and
-  cross-device sync convergence. See `e2e/README.md`.
-
-All three run in CI on every pull request (`.github/workflows/test.yml`).
+Pushing a change to `simple/index.html` on `main` deploys it over SSH/rsync
+(`.github/workflows/deploy-ssh.yml`); the workflow can also be triggered
+manually.
 
 ## Usage
 
@@ -62,10 +38,8 @@ All three run in CI on every pull request (`.github/workflows/test.yml`).
 
 ## Weights
 
-Custom weights you enter are saved in the browser's `localStorage` under the same
-keys the app has always used, so data from the previous version carries over. They
-persist on the same browser/device and are cleared if you clear site data. Exercises
-without a saved value fall back to the built-in default for that phase.
-
-Signed in (via the optional backend), weights sync across devices with per-item
-timestamps (newer wins).
+Custom weights you enter are saved in the browser's `localStorage` under
+`kilo_weight_*` keys (one per exercise and phase). They persist on the same
+browser/device and are cleared if you clear site data. Exercises without a
+saved value fall back to the built-in default for that phase. The key format is
+shared with the app version, so data carries over between the two.
