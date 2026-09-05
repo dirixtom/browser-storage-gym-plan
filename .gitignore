@@ -13,3 +13,6 @@ Thumbs.db
 .vscode/
 .idea/
 *.swp
+
+# Deploy staging folder built by the SSH deploy workflow
+deploy/
