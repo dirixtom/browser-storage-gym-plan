@@ -499,8 +499,8 @@
   "db-face-pull-floor": {
     "name": "DB face pull (floor)",
     "muscles": "Rear deltoids, external rotators, upper back",
-    "desc": "Lie face down on the floor. Hold light dumbbells with elbows wide. Pull the dumbbells toward your face as if doing a face pull on a cable machine — elbows stay higher than the dumbbells. Squeeze the rear delts at the top.",
-    "tips": "This is a corrective exercise as much as a strength one — it helps counteract all the forward-pressing movements. Go very light.",
+    "desc": "Lie face down on the floor holding light dumbbells, arms out to the sides at roughly shoulder height with the elbows bent. Lift the elbows clear of the floor and pull them back until your shoulder blades pinch, then keep going — rotate the forearms upward until your hands finish higher than your elbows. Hold for a second at the top and lower under control.",
+    "tips": "The rotation at the end is the half that matters, and it only happens if the elbows come off the floor first — leave them down and the forearms have nowhere to travel, and this collapses into a rear delt raise. This is the only external rotation work in the plan and the counterweight to everything you press on Push, so run it light and strict: 6.5kg in the last phases is plenty.",
     "defaultWeights": [0, 4, 6.5, 6.5]
   },
   "kb-swing": {
@@ -572,5 +572,12 @@
     "desc": "Sit on the floor with knees bent and lean back to about 45°. Hold the kettlebell by the horns with both hands at chest height. Rotate your torso to one side until the bell is beside your hip, then rotate to the other side. From Phase 3, raise your heels off the floor.",
     "tips": "The rotation comes from the ribcage, not the arms — keep the bell close to your body and let your torso turn it. Don't let the lower back round. 12kg is the lightest kettlebell in your set and it's a heavy twist: if your lower back complains in the first weeks, run this with a light dumbbell instead and come back to the bell later.",
     "defaultWeights": [12, 12, 12, 12]
+  },
+  "banded-wrist-curl": {
+    "name": "Banded wrist curl",
+    "muscles": "Wrist flexors, forearms, grip",
+    "desc": "Stand on the middle of a resistance band with both feet, a handle in each hand, arms hanging at your sides and palms facing forward. Keeping your elbows pinned to your ribs and your upper arms still, curl the handles up by bending at the wrists only. Squeeze at the top, then let the wrists extend back down against the band's pull.",
+    "tips": "The band is what makes this work where the dumbbell version doesn't: the handle stays in a closed fist through the whole range, so nothing rolls into open fingers to be re-gripped at the bottom. Only the wrists move — if the elbows or shoulders join in, the band is too strong. The number shown is the band's resistance at the top of the rep; progress by standing on a shorter length of band rather than by pulling harder.",
+    "defaultWeights": [3, 4, 5, 5]
   }
 }
