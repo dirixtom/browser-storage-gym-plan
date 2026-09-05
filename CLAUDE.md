@@ -4,44 +4,30 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project overview
 
-Kilo is a personal 1-year dumbbell training-plan app. The repo has **three
-independent parts** — know which one you're being asked to change:
+Kilo is a personal 1-year dumbbell/kettlebell training plan. This repo holds
+exactly one thing that matters: **`simple/index.html`** — a self-contained,
+single-file HTML build of the plan, with inline `<style>` and inline
+`<script>`, no dependencies and no build step. Edit it directly; there is
+nothing to compile, install, or generate.
 
-- `web/` — the actively developed frontend: Astro (static output) + a single
-  React "island", TanStack Query, Tailwind v4, shadcn/ui-style components.
-  This is where almost all feature work happens.
-- `server/` — an optional Fastify + Postgres backend that adds cross-device
-  sync (GitHub OAuth, single allowed user) on top of the same localStorage
-  data model. The app is fully functional without it (local-only mode).
-- `simple/index.html` — a separate, self-contained single-file HTML build of
-  the same training plan. It is **not generated from `web/`** and shares no
-  code with it — workout/exercise content edits made in `web/src/data/*.ts`
-  do not propagate here and vice versa. It auto-deploys via SSH/rsync
-  (`.github/workflows/deploy-ssh.yml`) whenever `simple/index.html` changes
-  on `main`. If a task is about "the gym plan page" without specifying which,
-  check which of `web/` or `simple/index.html` (or both) the user actually
-  means before editing.
+### The app version lives in another repo
 
-**Whenever exercises or workouts change, update both `web/` and
-`simple/index.html`.** There is no build step keeping them in sync (the old
-`extract-data.mjs` migration script is stale and non-functional — see below)
-so any addition, removal, or edit to exercise data (`web/src/data/exercises.ts`
-and the matching `EXERCISE_DATA` object inside `simple/index.html`'s inline
-`<script>`) or workout/phase content (`web/src/data/phases.ts` and the
-hand-written `<li class="exercise-item">` rows inside `simple/index.html`)
-must be applied to both places by hand. The two files' actual workout
-programs have already drifted independently (e.g. their "Legs" days list
-different exercises) — don't assume a diff from one transfers verbatim to
-the other; port the intent (same exercise, same phase/day, same sets/reps
-convention) rather than copy-pasting.
+A richer version of the same plan — an Astro + React frontend, an optional
+Fastify + Postgres sync backend, and Playwright e2e tests — lives in
+**`dirixtom/gym-plan-app`** (private). It shares no code with this file and is
+not generated from it.
 
-(`e2e/` is a fourth, test-only directory — Playwright tests over the full
-`web` + `server` + Postgres stack; see Testing.)
-
-There used to be a root `index.html` ("the legacy app") that was mechanically
-extracted into `web/src/data/{exercises,phases}.ts` via
-`web/scripts/extract-data.mjs`, then removed. Comments like "ported from the
-legacy app" refer to that removed file, not to `simple/index.html`.
+**Whenever exercises or workouts change here, the same change has to be made
+by hand in that repo** — the `EXERCISE_DATA` object in this file's inline
+`<script>` ↔ `web/src/data/exercises.ts` there, and the hand-written
+`<li class="exercise-item">` rows ↔ `web/src/data/phases.ts`. There is no
+build step or sync tooling between the two repos. The two workout programs
+have already drifted independently (e.g. their "Legs" days list different
+exercises) — don't assume a diff from one transfers verbatim to the other;
+port the intent (same exercise, same phase/day, same sets/reps convention)
+rather than copy-pasting. If a task is about "the gym plan page" without
+specifying which, check which of the two apps the user actually means before
+editing.
 
 ## Training constraints (the plan's single user)
 
@@ -60,94 +46,41 @@ Respect these whenever you add, swap, or reorder exercises:
   which is expected — no need to cap the load, just don't design a movement
   whose limiting factor is bare-handed grip endurance.
 
-## Commands
+## Inside `simple/index.html`
 
-All frontend commands run from `web/`:
+The file is one document: inline `<style>` first, then the markup for all
+phases, then one inline `<script>` holding the data and all behaviour.
 
-```bash
-npm install
-npm run dev       # astro dev at http://localhost:4321, proxies /api and /auth to 127.0.0.1:8787
-npm run build     # -> web/dist/ (static)
-npm run check     # astro/type check
-npm test          # test:unit (node --test) + test:dom (vitest run)
-npm run preview   # serve the production build locally
-```
-
-Single test file: `node --import tsx/esm --test tests/unit/sync.test.ts`
-(unit) or `npx vitest run tests/dom/PhaseTabs.test.tsx` (dom), from `web/`.
-
-Server commands run from `server/` (needs `web/dist/` built first):
-
-```bash
-npm install
-npm run init-db   # applies schema.sql to Postgres
-npm start         # node --env-file=.env server.js, listens on 127.0.0.1:8787
-```
+- **Workout rows** are hand-written list items:
+  `<li class="exercise-item clickable" data-exercise="<slug>" data-phase="<n>">`
+  with spans for the number, the name, a `data-weight-badge` default weight,
+  and the sets/reps text. Adding an exercise means writing the row by hand.
+- **`EXERCISE_DATA`** (top of the inline `<script>`) holds per-exercise
+  description, tips and category, keyed by the same slug as the row's
+  `data-exercise`. A row without a matching entry breaks its detail modal and
+  the exercise library, so always add both.
+- **Weights** live in `localStorage` under `kilo_weight_<slug>_phase<n>` (see
+  `storageKey()`), plus `kilo_last_phase` for the selected tab. This key
+  format is shared verbatim with the app repo and its Postgres sync table —
+  never change the transform or the prefixes; doing so orphans saved data.
+- Behaviour beyond that: phase tabs, a per-exercise modal with an editable
+  weight, a fullscreen "tap to train" view, and a searchable exercise library
+  panel with category chips.
 
 ## Testing
 
-- `web/`: `npm test` runs `node --test` (`tests/unit/`, pure logic) + Vitest+RTL+jsdom (`tests/dom/`, hooks/components).
-- `server/`: `npm test` = `node --test` via Fastify `inject()`, against a real Postgres (`TEST_DATABASE_URL`) — see `server/README.md`.
-- `e2e/`: `npx playwright test` — real browser + real server + real Postgres (`E2E_DATABASE_URL`). Real GitHub OAuth can't run in tests, so a session is seeded in Postgres with a matching signed cookie (`e2e/tests/support/session.ts`). Set `PLAYWRIGHT_CHROMIUM_PATH` if the sandbox's pre-installed browser doesn't match what Playwright expects.
-- CI: `.github/workflows/test.yml` runs all three on PRs/push to `main`.
+There is no test suite and no build step here — check a change by opening
+`simple/index.html` in a browser. (The unit, server and e2e suites live in the
+app repo.)
 
-## Architecture
+## Deployment
 
-### Frontend (`web/`)
-
-- Astro (`output: 'static'`) mounts one React tree (`src/components/App.tsx`)
-  on `src/pages/index.astro`; nearly all interactivity lives inside that tree
-  rather than being spread across separate Astro components.
-- `astro dev` proxies `/api` and `/auth` to `127.0.0.1:8787` (`astro.config.mjs`)
-  so cloud sync works end-to-end in development if the server is running.
-- Path alias `@/*` → `src/*` (`tsconfig.json`); shadcn/ui components
-  (`components.json`, style `new-york`) live under `src/components/ui/`.
-- Content is data-as-code: `src/data/{exercises,phases,categories,library,guide}.ts`
-  are hand-maintained TS literals (no CMS/fetch), edited directly now that the
-  legacy HTML `extract-data.mjs` was generating from is gone.
-
-### Storage and sync (the most important/subtle part)
-
-- `src/lib/storage.ts` is the localStorage persistence layer and defines the
-  **wire format**: keys `kilo_weight_*` (via `storageKey()`, one per
-  exercise+phase) and `kilo_last_phase`, each with a `kilo_meta_*` sidecar
-  (`{updated_at, deleted}`) used for newer-wins conflict resolution and
-  tombstones. **This format is locked** — it's shared verbatim with the
-  Postgres `kv_item` table (`server/schema.sql`) and is asserted byte-for-byte
-  by `web/tests/unit/storage-keys.test.mjs`. Never change `storageKey()`'s
-  transform or the key prefixes; doing so would orphan every existing user's
-  data and every synced row.
-- `src/lib/sync.ts` holds the newer-wins merge/reconcile logic as plain,
-  framework-free functions (kept testable independent of React). It registers
-  a queue callback into `storage.ts` (`registerSyncQueue`) rather than
-  importing it directly, to avoid a circular import, and debounces pushes by
-  800ms while logged in.
-- `src/hooks/useSync.ts` (TanStack Query) decides *when* sync runs (on mount,
-  on window focus) and toggles push-on-edit via login state.
-  `src/hooks/useWeight.ts` is the per-exercise read/write hook, using
-  `useSyncExternalStore` over `storage.ts` so every UI instance of a given
-  key re-renders on any edit anywhere.
-- The app must always work fully offline/local-only. All sync calls fail
-  silently (not with errors) when no backend is reachable, e.g. on a static
-  host like GitHub Pages.
-
-### Backend (`server/`)
-
-- One module (`server.js`) exporting `buildApp({ pool, config })` — tests
-  build the app without a full `.env` or a real `listen()`. Single-user gate:
-  only `ALLOWED_GITHUB_ID` (a numeric GitHub id) may log in via GitHub OAuth;
-  everyone else gets `403` and nothing is persisted for them.
-- Sessions are random ids in a signed, `HttpOnly; Secure` cookie, backed by a
-  Postgres `session` table (revocable, expiring).
-- `/api/sync`: GET pulls, POST pushes with **newer-wins enforced in SQL**
-  (`WHERE EXCLUDED.updated_at > kv_item.updated_at` in the upsert) — the same
-  invariant `lib/sync.ts` implements client-side.
-- Serves `web/dist/` as the static app so the whole thing runs from one
-  HTTPS origin (no CORS, cookie works cleanly); only `DIST_DIR` is exposed,
-  never `.env`/`.git`. Route registration order matters: API/auth routes are
-  registered before the static handler so they can never be shadowed; the
-  404 handler falls back to `index.html` for any unmatched GET outside
-  `/api`/`/auth` so client-side routing survives a hard refresh.
+`simple/index.html` auto-deploys via SSH/rsync
+(`.github/workflows/deploy-ssh.yml`) whenever it changes on `main`: the file is
+copied to `deploy/index.html` and rsynced to the server's target directory.
+The workflow can also be run by hand (`workflow_dispatch`). It reads the
+`SSH_PRIVATE_KEY`, `SSH_HOST`, `SSH_USERNAME`, `SSH_PORT` and `SSH_TARGET_DIR`
+repository secrets.
 
 ## PR workflow
 
@@ -158,4 +91,4 @@ npm start         # node --env-file=.env server.js, listens on 127.0.0.1:8787
   plan (the task/issue the PR is meant to satisfy) to confirm nothing from
   that plan is missing.
 - Never merge a PR unless the user explicitly says to merge it, even after
-  marking it ready for review and even if CI is green.
+  marking ready for review and even if CI is green.
