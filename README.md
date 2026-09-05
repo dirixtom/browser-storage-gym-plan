@@ -3,31 +3,58 @@
 A personal training plan: a 1-year, 3-sessions-per-week dumbbell/kettlebell
 programme (floor + two dumbbells, no bench), split into four progressive phases.
 
-This repo holds the **simple version**: one self-contained
-HTML file with inline CSS and JavaScript. No dependencies, no build step.
-Open it in a browser and it works.
+This repo holds the **simple version**: a static page with no dependencies and
+no build step. Edit the files and reload.
 
 The richer app version (Astro + React frontend, optional Fastify + Postgres
 sync backend, Playwright e2e tests) lives in a separate repo,
 [`dirixtom/gym-plan-app`](https://github.com/dirixtom/gym-plan-app). The two
 share no code: exercise and workout changes have to be made in both by hand.
 
-## Development
+## Layout
 
-```bash
-open index.html    # or just double-click it
+```
+index.html              markup only — the workout rows for all four phases
+assets/css/styles.css   every style rule
+assets/js/              behaviour, one plain script per concern:
+  ui-state.js             scroll position shared between the overlays
+  data.js                 loads exercises.json; category grouping
+  storage.js              saved weights in localStorage
+  phases.js               phase tabs and drawer
+  guide.js                training guide panel
+  modal.js                per-exercise slide-out
+  fullscreen.js           "tap to train" view
+  library.js              searchable exercise library
+  app.js                  bootstrap, loaded last
+data/exercises.json     the exercise catalogue (description, tips, weights)
 ```
 
-Edit the file directly. Workout rows are hand-written
-`<li class="exercise-item">` items; exercise descriptions live in the
-`EXERCISE_DATA` object in the inline `<script>`, keyed by the same slug as the
-row's `data-exercise`.
+The scripts are plain (non-module) scripts loaded in dependency order at the
+end of `index.html`, so the functions the markup calls from `onclick` handlers
+stay global. `images/` lives on the server only — the deploy never deletes it.
+
+## Development
+
+The page fetches `data/exercises.json`, which a browser blocks over `file://`.
+Serve the folder instead:
+
+```bash
+python3 -m http.server 8000   # then open http://localhost:8000/
+```
+
+Opening `index.html` directly still renders the plan, but exercise details, the
+library and the fullscreen view come up empty and the page says so.
+
+Adding an exercise means two edits: a hand-written
+`<li class="exercise-item" data-exercise="<slug>" data-phase="<n>">` row in
+`index.html`, and a matching entry under the same slug in
+`data/exercises.json`.
 
 ## Deployment
 
-Pushing a change to `index.html` on `main` deploys it over SSH/rsync
-(`.github/workflows/deploy-ssh.yml`); the workflow can also be triggered
-manually.
+Any push to `main` that touches a site file deploys the whole site over
+SSH/rsync (`.github/workflows/deploy-ssh.yml`); docs and CI config are ignored.
+The workflow can also be triggered manually.
 
 ## Usage
 

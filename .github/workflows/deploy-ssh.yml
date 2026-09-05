@@ -1,11 +1,21 @@
-name: Deploy index.html via SSH
+name: Deploy site via SSH
 
+# Every change to a file that is part of the site redeploys it. Repo-only files
+# (docs, CI config, editor settings) are ignored here and excluded from the
+# upload below — keep the two lists in step.
 on:
   push:
     branches: [main]
-    paths:
-      - "index.html"
+    paths-ignore:
+      - "README.md"
+      - "CLAUDE.md"
+      - ".claude/**"
+      - ".gitignore"
   workflow_dispatch: {}
+
+concurrency:
+  group: deploy-ssh
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -14,11 +24,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Prepare deploy folder
+      - name: Assemble deploy folder
         run: |
+          rm -rf deploy
           mkdir -p deploy
-          cp index.html deploy/index.html
+          rsync -a \
+            --exclude '.git/' \
+            --exclude '.github/' \
+            --exclude '.claude/' \
+            --exclude '.gitignore' \
+            --exclude 'README.md' \
+            --exclude 'CLAUDE.md' \
+            --exclude 'deploy/' \
+            ./ deploy/
+          echo "Files to upload:"
+          find deploy -type f | sort
 
+      # No --delete: files that only live on the server (images/) must survive.
       - name: Upload via rsync over SSH
         uses: easingthemes/ssh-deploy@v6.0.3
         env:
