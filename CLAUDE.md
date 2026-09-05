@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Project overview
 
 Kilo is a personal 1-year dumbbell/kettlebell training plan. This repo holds
-exactly one thing that matters: **`simple/index.html`** — a self-contained,
+exactly one thing that matters: **`index.html`** — a self-contained,
 single-file HTML build of the plan, with inline `<style>` and inline
 `<script>`, no dependencies and no build step. Edit it directly; there is
 nothing to compile, install, or generate.
@@ -46,7 +46,7 @@ Respect these whenever you add, swap, or reorder exercises:
   which is expected — no need to cap the load, just don't design a movement
   whose limiting factor is bare-handed grip endurance.
 
-## Inside `simple/index.html`
+## Inside `index.html`
 
 The file is one document: inline `<style>` first, then the markup for all
 phases, then one inline `<script>` holding the data and all behaviour.
@@ -70,12 +70,12 @@ phases, then one inline `<script>` holding the data and all behaviour.
 ## Testing
 
 There is no test suite and no build step here — check a change by opening
-`simple/index.html` in a browser. (The unit, server and e2e suites live in the
+`index.html` in a browser. (The unit, server and e2e suites live in the
 app repo.)
 
 ## Deployment
 
-`simple/index.html` auto-deploys via SSH/rsync
+`index.html` auto-deploys via SSH/rsync
 (`.github/workflows/deploy-ssh.yml`) whenever it changes on `main`: the file is
 copied to `deploy/index.html` and rsynced to the server's target directory.
 The workflow can also be run by hand (`workflow_dispatch`). It reads the

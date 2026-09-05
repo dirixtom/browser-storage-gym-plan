@@ -3,7 +3,7 @@
 A personal training plan: a 1-year, 3-sessions-per-week dumbbell/kettlebell
 programme (floor + two dumbbells, no bench), split into four progressive phases.
 
-This repo holds the **simple version**: `simple/index.html`, one self-contained
+This repo holds the **simple version**: `index.html`, one self-contained
 HTML file with inline CSS and JavaScript. No dependencies, no build step —
 open it in a browser and it works.
 
@@ -15,7 +15,7 @@ share no code: exercise and workout changes have to be made in both by hand.
 ## Development
 
 ```bash
-open simple/index.html    # or just double-click it
+open index.html    # or just double-click it
 ```
 
 Edit the file directly. Workout rows are hand-written
@@ -25,7 +25,7 @@ row's `data-exercise`.
 
 ## Deployment
 
-Pushing a change to `simple/index.html` on `main` deploys it over SSH/rsync
+Pushing a change to `index.html` on `main` deploys it over SSH/rsync
 (`.github/workflows/deploy-ssh.yml`); the workflow can also be triggered
 manually.
 
