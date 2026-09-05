@@ -15,7 +15,7 @@ share no code: exercise and workout changes have to be made in both by hand.
 ## Development
 
 ```bash
-open simple/index.html    # or just double-click it
+open index.html    # or just double-click it
 ```
 
 Edit the file directly. Workout rows are hand-written
@@ -25,7 +25,7 @@ row's `data-exercise`.
 
 ## Deployment
 
-Pushing a change to `simple/index.html` on `main` deploys it over SSH/rsync
+Pushing a change to `index.html` on `main` deploys it over SSH/rsync
 (`.github/workflows/deploy-ssh.yml`); the workflow can also be triggered
 manually.
 
